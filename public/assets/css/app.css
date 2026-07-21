@@ -237,6 +237,25 @@ body.portal-body {
     top: 1.5rem;
 }
 
+.impressum-fullpage {
+    position: relative;
+    width: 100%;
+    min-height: calc(100vh - 8rem);
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: #0b1728;
+}
+
+.impressum-fullpage__image {
+    display: block;
+    width: 100%;
+    height: calc(100vh - 8rem);
+    min-height: 70vh;
+    object-fit: cover;
+    object-position: center;
+}
+
 @media (max-width: 991.98px) {
     .portal-header-cta {
         width: 100%;
@@ -245,5 +264,11 @@ body.portal-body {
     .portal-nav {
         flex-wrap: wrap;
         gap: 0.35rem;
+    }
+
+    .impressum-fullpage,
+    .impressum-fullpage__image {
+        min-height: calc(100vh - 10rem);
+        height: calc(100vh - 10rem);
     }
 }

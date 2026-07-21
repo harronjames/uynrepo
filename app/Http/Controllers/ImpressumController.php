@@ -15,12 +15,8 @@ class ImpressumController extends Controller
         $seo = SeoPayload::forPage($page);
 
         $html = $view_factory->make('impressum.index', [
-            'page'        => $page,
-            'seo'         => $seo,
-            'breadcrumbs' => [
-                ['label' => 'Startseite', 'url' => route('main.index')],
-                ['label' => $page->title, 'url' => null],
-            ],
+            'page' => $page,
+            'seo'  => $seo,
         ])->render();
 
         return response($html, 200)
