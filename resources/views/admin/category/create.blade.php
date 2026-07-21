@@ -1,41 +1,17 @@
-@extends('layouts.wrapper-admin', ['title' => 'Category'])
+@extends('layouts.wrapper-admin', ['title' => 'Add category'])
 
 @section('content')
-    <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <div class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1 class="m-0">Добавление категории</h1>
-                    </div><!-- /.col -->
-                </div><!-- /.row -->
-            </div><!-- /.container-fluid -->
-        </div>
-        <!-- /.content-header -->
+    <h1 class="mb-3">Add category</h1>
 
-        <!-- Main content -->
-        <section class="content">
-            <div class="container-fluid">
-                <row>
-                    <div class="w-25">
-                        <form method="post" action="{{ route('admin.category.store') }}">
-                            @csrf
-                            <div class="card-body pl-0">
-                                <div class="form-group">
-                                    <label>Название категории</label>
-                                    <input type="text" class="form-control" name="title"
-                                           placeholder="Название категории">
-                                    @error('title')
-                                    <div class="text-danger">Это поле необходимо заполнить</div>
-                                    @enderror
-                                </div>
-                            </div>
-                            <input type="submit" class="btn btn-primary" value="Добавить">
-                        </form>
-                    </div>
-                </row>
-            </div>
-        </section>
-    </div>
+    <form method="post" action="{{ route('admin.category.store') }}" class="w-50">
+        @csrf
+        <div class="mb-3">
+            <label class="form-label">Category title</label>
+            <input type="text" class="form-control" name="title" placeholder="Category title" value="{{ old('title') }}">
+            @error('title')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
+        </div>
+        <button type="submit" class="btn btn-primary">Add</button>
+    </form>
 @endsection

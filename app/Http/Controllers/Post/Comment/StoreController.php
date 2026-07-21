@@ -19,6 +19,6 @@ class StoreController extends Controller
         /** @phpstan-ignore-next-line */
         Comment::create($data);
 
-        return redirect()->route('post.show', $post->id);
+        return redirect()->route('post.show', $post);
     }
 }

@@ -2,7 +2,7 @@
     <div class="offcanvas-md offcanvas-end bg-body-tertiary" tabindex="-1" id="sidebarMenu"
          aria-labelledby="sidebarMenuLabel">
         <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="sidebarMenuLabel">Company name</h5>
+            <h5 class="offcanvas-title" id="sidebarMenuLabel">Umzugland Admin</h5>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu"
                     aria-label="Close"></button>
         </div>
@@ -35,19 +35,19 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center gap-2" href="{{ route('admin.user.index') }}">
-                        <svg class="bi">
-                            <use xlink:href="#people"/>
-                        </svg>
-                        Users
-                    </a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link d-flex align-items-center gap-2" href="{{ route('admin.tag.index') }}">
                         <svg class="bi">
                             <use xlink:href="#tags"/>
                         </svg>
                         Tags
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center gap-2" href="{{ route('admin.page.impressum.edit') }}">
+                        <svg class="bi">
+                            <use xlink:href="#file-earmark-text"/>
+                        </svg>
+                        Impressum
                     </a>
                 </li>
             </ul>

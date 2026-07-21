@@ -1,56 +1,26 @@
-<div class="container">
-    <header class="border-bottom lh-1 py-3">
-        <div class="row flex-nowrap justify-content-between align-items-center">
-            <div class="col-4"></div>
-            <div class="col-4 text-center">
-                <a class="blog-header-logo text-body-emphasis text-decoration-none" href="{{ route('main.index') }}"
-                    style="font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.95rem;">
-                    My Personal Blog
+<div class="container-xl">
+    <header class="portal-header border-bottom">
+        <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 py-4">
+            <div>
+                <a class="portal-brand text-decoration-none" href="{{ route('main.index') }}">
+                    <span class="portal-brand-kicker">Ratgeber für Wien &amp; Österreich</span>
+                    <span class="portal-brand-title">Umzugland.at</span>
+                </a>
+                <p class="portal-brand-subtitle mb-0">Umzug, Räumung, Entrümpelung &amp; Leben in Wien</p>
+            </div>
+
+            <div class="portal-header-cta text-md-end">
+                <a href="{{ route('contact.index') }}" class="btn btn-primary rounded-pill px-4">
+                    Beratung anfragen
                 </a>
             </div>
-            <div class="col-4 d-flex justify-content-end align-items-center">
-                @auth
-                    <div class="dropdown">
-                        <a class="btn btn-sm btn-outline-primary dropdown-toggle gap-2 rounded-pill px-4 d-flex align-items-center"
-                            href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-person-circle"></i>
-                            {{ Auth::user()->name }}
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end shadow-lg rounded-3">
-                            <li>
-                                <a class="dropdown-item d-flex align-items-center gap-2"
-                                    href="{{ route('personal.main.index') }}">
-                                    <i class="bi bi-person"></i> Profile
-                                </a>
-                            </li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li>
-                                <form method="POST" action="{{ route('logout') }}">
-                                    @csrf
-                                    <button type="submit" class="dropdown-item d-flex align-items-center gap-2">
-                                        <i class="bi bi-box-arrow-right"></i> Logout
-                                    </button>
-                                </form>
-                            </li>
-                        </ul>
-                    </div>
-                @else
-                    <a class="btn btn-sm bg-primary text-white gap-2 rounded-pill px-4 d-flex align-items-center"
-                        href="{{ route('login') }}">
-                        <i class="bi bi-box-arrow-in-right"></i> Log in
-                    </a>
-                @endauth
-            </div>
         </div>
-    </header>
 
-    <div class="nav-scroller py-1 mb-3 border-bottom">
-        <nav class="nav nav-underline justify-content-between">
-            <a class="nav-item nav-link link-body-emphasis" href="{{ route('main.index') }}">Home</a>
-            <a class="nav-item nav-link link-body-emphasis" href="{{ route('about.index') }}">About author</a>
-            <a class="nav-item nav-link link-body-emphasis" href="{{ route('contact.index') }}">Contact</a>
+        <nav class="portal-nav nav border-top pt-3 pb-3" aria-label="Hauptnavigation">
+            <a class="nav-link {{ request()->routeIs('main.index') ? 'active' : '' }}" href="{{ route('main.index') }}">Startseite</a>
+            <a class="nav-link {{ request()->routeIs('category.*') ? 'active' : '' }}" href="{{ route('category.index') }}">Themen</a>
+            <a class="nav-link {{ request()->routeIs('about.index') ? 'active' : '' }}" href="{{ route('about.index') }}">Über uns</a>
+            <a class="nav-link {{ request()->routeIs('contact.index') ? 'active' : '' }}" href="{{ route('contact.index') }}">Kontakt</a>
         </nav>
-    </div>
+    </header>
 </div>

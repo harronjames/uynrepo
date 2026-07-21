@@ -6,7 +6,7 @@
     <form method="post" action="{{ route('admin.post.store') }}" enctype="multipart/form-data">
         @csrf
         <div class="card-body pl-0">
-            <div class="form-group w-25">
+            <div class="form-group w-25 mb-3">
                 <label>Post title</label>
                 <input type="text" class="form-control" name="title"
                        placeholder="Post title" value="{{ old('title') }}">
@@ -14,36 +14,28 @@
                 <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
-            <div class="form-group">
-                <label>Текст поста</label>
+            <div class="form-group mb-3">
+                <label>Text</label>
                 <textarea class="form-control" name="content" rows="6">{{ old('content') }}</textarea>
                 @error('content')
                 <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
-            <div class="form-group w-50">
-                <label>Preview image</label>
-                <div class="input-group">
-                    <div class="custom-file">
-                        <input type="file" class="custom-file-input" name="preview_image">
-                    </div>
-                </div>
+            <div class="form-group w-50 mb-3">
+                <label>Preview image <span class="text-muted">(optional, WebP only)</span></label>
+                <input type="file" class="form-control" name="preview_image" accept="{{ \App\Support\WebpImage::ACCEPT }}">
                 @error('preview_image')
                 <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
-            <div class="form-group w-50">
-                <label>Main image</label>
-                <div class="input-group">
-                    <div class="custom-file">
-                        <input type="file" class="custom-file-input" name="main_image">
-                    </div>
-                </div>
+            <div class="form-group w-50 mb-3">
+                <label>Main image <span class="text-muted">(optional, WebP only)</span></label>
+                <input type="file" class="form-control" name="main_image" accept="{{ \App\Support\WebpImage::ACCEPT }}">
                 @error('main_image')
                 <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
-            <div class="form-group w-25">
+            <div class="form-group w-25 mb-3">
                 <label>Select category</label>
                 <select class="form-control" name="category_id">
                     @foreach($categories as $category)
@@ -57,7 +49,7 @@
                 <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
-            <div class="col-12 col-sm-6">
+            <div class="col-12 col-sm-6 mb-3">
                 <div class="form-group">
                     <label>Select tags</label>
                     <div class="select2-purple">

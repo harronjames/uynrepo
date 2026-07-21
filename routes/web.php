@@ -1,6 +1,11 @@
 <?php
 
+use App\Http\Controllers\Seo\RobotsController;
+use App\Http\Controllers\Seo\SitemapController;
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\ImpressumController;
+use App\Http\Controllers\Admin\Page\EditImpressumController;
+use App\Http\Controllers\Admin\Page\UpdateImpressumController;
 use App\Http\Controllers\Admin\Category\CreateController as AdminCategoryCreateController;
 use App\Http\Controllers\Admin\Category\DeleteController as AdminCategoryDeleteController;
 use App\Http\Controllers\Admin\Category\EditController as AdminCategoryEditController;
@@ -23,13 +28,6 @@ use App\Http\Controllers\Admin\Tag\IndexController as AdminTagIndexController;
 use App\Http\Controllers\Admin\Tag\ShowController as AdminTagShowController;
 use App\Http\Controllers\Admin\Tag\StoreController as AdminTagStoreController;
 use App\Http\Controllers\Admin\Tag\UpdateController as AdminTagUpdateController;
-use App\Http\Controllers\Admin\User\CreateController as AdminUserCreateController;
-use App\Http\Controllers\Admin\User\DeleteController as AdminUserDeleteController;
-use App\Http\Controllers\Admin\User\EditController as AdminUserEditController;
-use App\Http\Controllers\Admin\User\IndexController as AdminUserIndexController;
-use App\Http\Controllers\Admin\User\ShowController as AdminUserShowController;
-use App\Http\Controllers\Admin\User\StoreController as AdminUserStoreController;
-use App\Http\Controllers\Admin\User\UpdateController as AdminUserUpdateController;
 use App\Http\Controllers\Category\IndexController as CategoryIndexController;
 use App\Http\Controllers\Category\Post\IndexController as CategoryPostIndexController;
 use App\Http\Controllers\ContactsController;
@@ -60,12 +58,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PostController::class, 'showHomepage'])->name('main.index');
 
+Route::get('/sitemap.xml', SitemapController::class)->name('seo.sitemap');
+Route::get('/robots.txt', RobotsController::class)->name('seo.robots');
+
 // Placeholder image generation
 Route::get('/placeholder/{width}/{height}', [PlaceholderController::class, 'generate'])
     ->where(['width' => '[0-9]+', 'height' => '[0-9]+'])
     ->name('placeholder.generate');
 
-Auth::routes(['verify' => false]);
+Auth::routes(['verify' => false, 'register' => false, 'reset' => false]);
 
 Route::prefix('contacts')->group(function () {
     Route::get('/', [ContactsController::class, 'showContacts'])
@@ -77,21 +78,20 @@ Route::prefix('about')->group(function () {
         ->name('about.index');
 });
 
-Route::prefix('category')->group(function () {
+Route::get('/impressum', ImpressumController::class)->name('impressum.index');
+Route::get('/impressum/media', [ImpressumController::class, 'image'])->name('impressum.image');
+
+Route::prefix('themen')->group(function () {
     Route::get('/', CategoryIndexController::class)->name('category.index');
-    Route::prefix('{category}/posts')->group(function () {
-        Route::get('/', CategoryPostIndexController::class)->name('category.post.index');
-    });
+    Route::get('/{category:slug}', CategoryPostIndexController::class)->name('category.post.index');
 });
 
-Route::prefix('post')->group(function () {
-    Route::get('/{post}', [PostController::class, 'show'])->name('post.show');
+Route::prefix('blog')->group(function () {
+    Route::get('/{post:slug}', [PostController::class, 'show'])->name('post.show');
 
-    Route::prefix('{post}/comments')->group(function () {
-        Route::post('/', PostCommentStoreController::class)->name('post.comments.store');
-    });
-    Route::prefix('{post}/likes')->group(function () {
-        Route::post('/', PostLikeStoreController::class)->name('post.likes.store');
+    Route::prefix('{post:slug}')->group(function () {
+        Route::post('/comments', PostCommentStoreController::class)->name('post.comments.store');
+        Route::post('/likes', PostLikeStoreController::class)->name('post.likes.store');
     });
 });
 
@@ -133,6 +133,10 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
         Route::patch('/{tag}', AdminTagUpdateController::class)->name('admin.tag.update');
         Route::delete('/{tag}', AdminTagDeleteController::class)->name('admin.tag.delete');
     });
+    Route::prefix('page')->group(function () {
+        Route::get('/impressum', EditImpressumController::class)->name('admin.page.impressum.edit');
+        Route::patch('/impressum', UpdateImpressumController::class)->name('admin.page.impressum.update');
+    });
     Route::prefix('post')->group(function () {
         Route::get('/', AdminPostIndexController::class)->name('admin.post.index');
         Route::get('/create', AdminPostCreateController::class)->name('admin.post.create');
@@ -141,14 +145,5 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
         Route::get('/{post}/edit', AdminPostEditController::class)->name('admin.post.edit');
         Route::patch('/{post}', AdminPostUpdateController::class)->name('admin.post.update');
         Route::delete('/{post}', AdminPostDeleteController::class)->name('admin.post.delete');
-    });
-    Route::prefix('user')->group(function () {
-        Route::get('/', AdminUserIndexController::class)->name('admin.user.index');
-        Route::get('/create', AdminUserCreateController::class)->name('admin.user.create');
-        Route::post('/', AdminUserStoreController::class)->name('admin.user.store');
-        Route::get('/{user}', AdminUserShowController::class)->name('admin.user.show');
-        Route::get('/{user}/edit', AdminUserEditController::class)->name('admin.user.edit');
-        Route::patch('/{user}', AdminUserUpdateController::class)->name('admin.user.update');
-        Route::delete('/{user}', AdminUserDeleteController::class)->name('admin.user.delete');
     });
 });

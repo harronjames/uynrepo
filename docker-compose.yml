@@ -10,8 +10,14 @@ services:
         container_name: laravel-blog-app
         restart: unless-stopped
         working_dir: /var/www/
+        env_file:
+            - .env.local
+        depends_on:
+            db:
+                condition: service_healthy
         volumes:
             - ./:/var/www
+            - vendor:/var/www/vendor
         networks:
             - app-network
 
@@ -19,17 +25,25 @@ services:
         image: mysql:9.1
         container_name: laravel-blog-db
         restart: unless-stopped
+        env_file:
+            - .env.local
         environment:
-            MYSQL_DATABASE: ${DB_DATABASE}
-            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
-            MYSQL_PASSWORD: ${DB_PASSWORD}
-            MYSQL_USER: ${DB_USERNAME}
+            MYSQL_DATABASE: ${DB_DATABASE:-laravel_blog}
+            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-password}
+            MYSQL_PASSWORD: ${DB_PASSWORD:-password}
+            MYSQL_USER: ${DB_USERNAME:-laravel_blog_user}
             SERVICE_TAGS: dev
             SERVICE_NAME: mysql
+        healthcheck:
+            test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -u$$MYSQL_USER -p$$MYSQL_PASSWORD --silent"]
+            interval: 5s
+            timeout: 5s
+            retries: 20
         ports:
             - "3306:3306"
         volumes:
             - ./docker-compose/mysql:/docker-entrypoint-initdb.d
+            - dbdata:/var/lib/mysql
         networks:
             - app-network
 
@@ -37,6 +51,8 @@ services:
         image: nginx:1.27-alpine
         container_name: laravel-blog-nginx
         restart: unless-stopped
+        depends_on:
+            - app
         ports:
             - "8000:80"
         volumes:
@@ -44,6 +60,10 @@ services:
             - ./docker-compose/nginx:/etc/nginx/conf.d
         networks:
             - app-network
+
+volumes:
+    dbdata:
+    vendor:
 
 networks:
     app-network:

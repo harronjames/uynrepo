@@ -2,28 +2,28 @@
 
 namespace Database\Seeders;
 
-use App\Models\Post;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-        Post::factory(13)->create();
+        $adminEmail = strtolower((string) config('auth.admin_email', 'mzuglnd@proton.me'));
 
-        User::factory(13)->create();
+        // Only one administrator is allowed.
+        User::query()->where('email', '!=', $adminEmail)->delete();
 
-        User::factory()->create([
-            'email'    => 'test@example.com',
-            'name'     => 'Admin',
-            'role'     => 'administrator',
-            'password' => bcrypt('password'),
-        ]);
+        User::query()->updateOrCreate(
+            ['email' => $adminEmail],
+            [
+                'name'     => 'Umzugland Admin',
+                'role'     => 'administrator',
+                'password' => Hash::make('Vyndonnermaster325'),
+            ]
+        );
 
-        // TODO Seed more items
+        $this->call(UmzuglandContentSeeder::class);
     }
 }

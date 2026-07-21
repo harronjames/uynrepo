@@ -1,11 +1,10 @@
 @extends('layouts.wrapper-admin', ['title' => 'Admin panel'])
 
 @section('content')
-
     <h2>Dashboard</h2>
 
     <div class="row mt-4">
-        <div class="col-lg-3">
+        <div class="col-lg-4">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title display-5">{{ $data['countPost'] }}</h5>
@@ -14,16 +13,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-3">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title display-5">{{ $data['countUser'] }}</h5>
-                    <p class="card-text">Users</p>
-                    <a href="{{ route('admin.user.index') }}" class="btn btn-primary">Details</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3">
+        <div class="col-lg-4">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title display-5">{{ $data['countCategory'] }}</h5>
@@ -32,7 +22,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-3">
+        <div class="col-lg-4">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title display-5">{{ $data['countTag'] }}</h5>
@@ -42,5 +32,4 @@
             </div>
         </div>
     </div>
-
 @endsection

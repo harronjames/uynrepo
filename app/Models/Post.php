@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\HasSeoMeta;
+use App\Models\Concerns\HasUniqueSlug;
 use Carbon\Carbon;
 use Database\Factories\PostFactory;
 use Illuminate\Database\Eloquent\Builder;
@@ -11,22 +13,25 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 
 /**
  * @property int         $id
  * @property string      $title
  * @property string      $slug
+ * @property string|null $meta_title
+ * @property string|null $meta_description
+ * @property string|null $meta_keywords
  * @property string      $content
  * @property string|null $preview_image
  * @property string|null $main_image
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property string|null $deleted_at
+ * @property Carbon|null $deleted_at
  * @property-read Collection<int, Category> $categories
  * @property-read int|null $categories_count
  * @property-read string $human_read_time
- * @property-read User $user
  * @property-read Collection<int, Comment> $comments
  * @property-read int|null $comments_count
  * @property-read Collection<int, User> $likedUsers
@@ -38,29 +43,28 @@ use Illuminate\Support\Str;
  * @method static Builder|Post newModelQuery()
  * @method static Builder|Post newQuery()
  * @method static Builder|Post query()
- * @method static Builder|Post whereActive($value)
- * @method static Builder|Post whereBody($value)
+ * @method static Builder|Post whereContent($value)
  * @method static Builder|Post whereCreatedAt($value)
+ * @method static Builder|Post whereDeletedAt($value)
  * @method static Builder|Post whereId($value)
+ * @method static Builder|Post whereMainImage($value)
  * @method static Builder|Post whereMetaDescription($value)
+ * @method static Builder|Post whereMetaKeywords($value)
  * @method static Builder|Post whereMetaTitle($value)
- * @method static Builder|Post wherePublishedAt($value)
+ * @method static Builder|Post wherePreviewImage($value)
  * @method static Builder|Post whereSlug($value)
- * @method static Builder|Post whereThumbnail($value)
  * @method static Builder|Post whereTitle($value)
  * @method static Builder|Post whereUpdatedAt($value)
- * @method static Builder|Post whereUserId($value)
  * @method static Builder|Post onlyTrashed()
- * @method static Builder|Post whereContent($value)
- * @method static Builder|Post whereDeletedAt($value)
- * @method static Builder|Post whereMainImage($value)
- * @method static Builder|Post wherePreviewImage($value)
  * @method static Builder|Post withTrashed()
  * @method static Builder|Post withoutTrashed()
  */
 class Post extends Model
 {
     use HasFactory;
+    use HasSeoMeta;
+    use HasUniqueSlug;
+    use SoftDeletes;
 
     protected $table = 'posts';
 
@@ -94,7 +98,7 @@ class Post extends Model
         return $this->belongsToMany(Category::class);
     }
 
-    public function shortBody($words = 20): string
+    public function shortBody(int $words = 20): string
     {
         return Str::words(strip_tags((string) $this->content), $words);
     }
@@ -104,12 +108,11 @@ class Post extends Model
         return $this->created_at->format('F jS Y');
     }
 
-    // todo Use on post page
     public function humanReadTime(): Attribute
     {
         return new Attribute(
             get: function ($value, $attributes): string {
-                $words   = Str::wordCount(strip_tags((string) $attributes['body']));
+                $words   = Str::wordCount(strip_tags((string) $attributes['content']));
                 $minutes = ceil($words / 200);
 
                 return $minutes . ' ' . str('min')->plural($minutes) . ', '

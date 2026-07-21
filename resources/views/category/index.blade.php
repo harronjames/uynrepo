@@ -1,22 +1,36 @@
-@extends('layouts.wrapper', ['title' => 'Категории'])
+@extends('layouts.with-sidebar')
 
-@section('content')
-    <main class="blog">
-        <div class="container mb-5">
-            <h1 class="edica-page-title" data-aos="fade-up">Категории</h1>
-            <section class="featured-posts-section">
-                <ul class="list-group">
-                    @foreach($categories as $category)
-                        <li class="list-group-item list-group-item-action">
-                            <a href="{{ route('category.post.index', $category->id) }}"
-                               class="text-dark text-decoration-none">
-                                <h5>{{ $category->title }}</h5>
+@section('page-content')
+    <section>
+        <h1 class="portal-post-title display-6 mb-4">Alle Themen</h1>
+        <p class="text-muted mb-4">
+            Entdecken Sie Ratgeber zu Umzug, Räumung, Entrümpelung und Leben in Wien – sortiert nach Themen.
+        </p>
+
+        <div class="row g-3">
+            @forelse($categories as $category)
+                <div class="col-md-6">
+                    <article class="portal-card h-100">
+                        <h2 class="h5 portal-post-title mb-2">
+                            <a href="{{ route('category.post.index', $category) }}" class="text-decoration-none">
+                                {{ $category->title }}
                             </a>
-                        </li>
-                    @endforeach
-                </ul>
-            </section>
+                        </h2>
+                        <p class="text-muted small mb-3">
+                            {{ $category->seoDescription() }}
+                        </p>
+                        <a href="{{ route('category.post.index', $category) }}" class="portal-inline-link">
+                            Artikel in dieser Kategorie <i class="bi bi-arrow-right-short"></i>
+                        </a>
+                    </article>
+                </div>
+            @empty
+                <div class="col-12">
+                    <div class="portal-card text-center py-5 text-muted">
+                        Noch keine Kategorien vorhanden.
+                    </div>
+                </div>
+            @endforelse
         </div>
-    </main>
-
+    </section>
 @endsection

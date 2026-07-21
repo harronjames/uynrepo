@@ -30,7 +30,7 @@
                                 <td class="align-middle py-4">
                                     <div class="d-flex gap-2">
                                         <!-- View Button -->
-                                        <a href="{{ route('post.show', $post->id) }}"
+                                        <a href="{{ route('post.show', $post) }}"
                                             class="btn btn-sm btn-outline-primary gap-2 rounded-pill px-4 d-flex align-items-center">
                                             <i class="bi bi-eye"></i> View
                                         </a>

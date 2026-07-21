@@ -2,129 +2,85 @@
     /** @var \App\Models\Post $post */
 @endphp
 
-<div class="justify-content">
-    @if($posts->isNotEmpty())
-        @php
-            $featuredPost = $posts->first();
-            $otherPosts = $posts->slice(1);
-        @endphp
+@if($posts->isNotEmpty())
+    @php
+        $featuredPost = $posts->first();
+        $otherPosts = $posts->slice(1);
+    @endphp
 
-        <!-- Featured Post -->
-        <div class="p-4 p-md-5 mb-4 rounded text-body-emphasis bg-body-secondary">
-            <div class="col-lg-6 px-0">
-                <h1 class="fst-italic">
-                    <a class="blog-header-logo text-body-emphasis text-decoration-none"
-                        href="{{ route('post.show', $featuredPost->id) }}"
-                        style="font-family: 'Playfair Display', serif; font-weight: 700; font-size: 2.8rem;">
+    <section class="portal-hero mb-4">
+        <div class="row align-items-center g-4">
+            <div class="col-lg-7">
+                <p class="text-uppercase small mb-2 opacity-75">Top-Ratgeber</p>
+                <h1 class="mb-3">
+                    <a href="{{ route('post.show', $featuredPost) }}" class="text-white text-decoration-none">
                         {{ $featuredPost->title }}
                     </a>
                 </h1>
-                <p class="lead my-3">{{ $featuredPost->shortBody() }}</p>
-                <p class="lead mb-0">
-                    <a href="{{ route('post.show', $featuredPost->id) }}" class="btn btn-outline-secondary rounded-pill">
-                        Continue reading...
-                    </a>
-                </p>
+                <p class="mb-4 lead opacity-90">{{ $featuredPost->shortBody(28) }}</p>
+                <a href="{{ route('post.show', $featuredPost) }}" class="btn btn-light rounded-pill px-4">
+                    Artikel lesen
+                </a>
             </div>
+            @if($featuredPost->preview_image)
+                <div class="col-lg-5">
+                    <img src="{{ $featuredPost->preview_image }}" alt="{{ $featuredPost->title }}" class="img-fluid rounded-4 shadow">
+                </div>
+            @endif
+        </div>
+    </section>
+
+    <section aria-label="Weitere Artikel">
+        <div class="d-flex justify-content-between align-items-end mb-3">
+            <h2 class="h4 portal-post-title mb-0">Aktuelle Ratgeber</h2>
+            <a href="{{ route('category.index') }}" class="portal-inline-link">Alle Themen</a>
         </div>
 
-        <!-- Other Posts Grid -->
-        <div class="row mb-2 g-4">
+        <div class="row g-4">
             @foreach($otherPosts as $post)
                 <div class="col-md-6">
-                    <div class="row g-0 border rounded overflow-hidden flex-md-row shadow-sm h-md-100">
-                        <!-- Image Column -->
-                        <div class="col-12 col-md-5">
-                            <div class="h-100 overflow-hidden">
-                                <img src="{{ $post->preview_image }}" class="img-fluid h-100 object-fit-cover"
-                                    alt="{{ $post->title }}" loading="lazy">
-                            </div>
-                        </div>
-
-                        <!-- Content Column -->
-                        <div class="col-12 col-md-7 p-4 d-flex flex-column position-static">
-                            <div class="mb-3">
-                                <span class="badge bg-primary rounded-pill">
-                                    {{ $post->category->name ?? 'Uncategorized' }}
-                                </span>
+                    <article class="portal-post-card d-flex flex-column">
+                        @if($post->preview_image)
+                            <a href="{{ route('post.show', $post) }}">
+                                <img src="{{ $post->preview_image }}" alt="{{ $post->title }}" loading="lazy">
+                            </a>
+                        @endif
+                        <div class="card-body d-flex flex-column flex-grow-1">
+                            <div class="mb-2 d-flex flex-wrap gap-2">
+                                @foreach($post->categories as $category)
+                                    <a href="{{ route('category.post.index', $category) }}" class="portal-chip">
+                                        {{ $category->title }}
+                                    </a>
+                                @endforeach
                             </div>
 
-                            <h3 class="mb-3" style="font-family: 'Playfair Display', serif;">
-                                <a href="{{ route('post.show', $post->id) }}" class="text-dark text-decoration-none">
-                                    {{ $post->title }}
-                                </a>
+                            <h3 class="h5 portal-post-title">
+                                <a href="{{ route('post.show', $post) }}">{{ $post->title }}</a>
                             </h3>
 
-                            <div class="mb-3 text-muted small">
-                                <i class="bi bi-calendar me-1"></i>
-                                {{ $post->created_at->format('M j, Y') }}
-                            </div>
+                            <p class="portal-meta mb-2">
+                                <i class="bi bi-calendar3 me-1"></i>
+                                {{ $post->created_at->translatedFormat('d. F Y') }}
+                            </p>
 
-                            <p class="card-text mb-auto">{{ $post->shortBody() }}</p>
+                            <p class="mb-3">{{ $post->shortBody(22) }}</p>
 
-                            <a href="{{ route('post.show', $post->id) }}" class="mt-3 align-self-start text-decoration-none">
-                                Continue reading →
+                            <a href="{{ route('post.show', $post) }}" class="portal-inline-link mt-auto">
+                                Weiterlesen <i class="bi bi-arrow-right-short"></i>
                             </a>
                         </div>
-                    </div>
+                    </article>
                 </div>
             @endforeach
         </div>
+    </section>
 
-        <!-- Pagination -->
-        <div class="row mt-4">
-            <div class="d-flex justify-content-center">
-                {{ $posts->links() }}
-            </div>
-        </div>
-
-    @else
-        <div class="text-center py-5">
-            <h2 class="text-muted">No posts available</h2>
-        </div>
-    @endif
-</div>
-
-<style>
-    .object-fit-cover {
-        object-fit: cover;
-        width: 100%;
-        height: 100%;
-    }
-
-    .shadow-sm {
-        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1) !important;
-        transition: transform 0.2s ease-in-out;
-    }
-
-    .shadow-sm:hover {
-        transform: translateY(-3px);
-    }
-
-    .pagination .page-item .page-link {
-        border-radius: 50px;
-        padding: 0.5rem 1rem;
-        color: var(--bs-primary);
-        border: 1px solid var(--bs-primary);
-        transition: all 0.3s;
-    }
-
-    .pagination .page-item.active .page-link {
-        background-color: var(--bs-primary);
-        color: #fff;
-        border-color: var(--bs-primary);
-    }
-
-    .pagination .page-item .page-link:hover {
-        background-color: var(--bs-primary);
-        color: #fff;
-    }
-
-    .pagination .page-item {
-        margin-right: 8px;
-    }
-    
-    .pagination .page-item:last-child {
-        margin-right: 0;
-    }
-</style>
+    <div class="d-flex justify-content-center mt-4">
+        {{ $posts->links() }}
+    </div>
+@else
+    <div class="portal-card text-center py-5">
+        <h2 class="h4 text-muted">Noch keine Artikel verfügbar</h2>
+        <p class="text-muted mb-0">Bald finden Sie hier Ratgeber zu Umzug und Räumung in Wien.</p>
+    </div>
+@endif

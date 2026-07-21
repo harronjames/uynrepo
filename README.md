@@ -43,39 +43,15 @@ Copy the environment settings:
 cp .env.local .env
 ```
 
-Build the `laravel-blog` image with the following command:
+Build and start the `laravel-blog` environment with:
 
 ```bash
-docker compose build --no-cache
-```
-
->This command might take a few minutes to complete.
-
-When the build is finished, you can run the environment in background mode with:
-
-```bash
-docker compose up -d
-```
-
-We’ll now run `composer install` to install the application dependencies:
-
-```bash
-docker compose exec app composer install
-```
-
-Set encryption key with the `artisan` Laravel command-line tool:
-
-```bash
-docker compose exec app ./artisan key:generate --ansi
-```
-
-Migrate DB & seed fake data:
-
-```bash
-docker compose exec app ./artisan migrate:fresh --seed
+docker compose up -d --build
 ```
 
 And open http://127.0.0.1:8000 in your favorite browser. Happy using Laravel Blog!
+
+>On first start the app container will automatically install Composer dependencies, ensure the Laravel `.env` exists, generate the application key, and run database migrations.
 
 ## How to get inside the container?
 

@@ -1,45 +1,25 @@
-@extends('layouts.wrapper', ['title' => 'Contacts'])
+@extends('layouts.with-sidebar')
 
-@section('content')
-    <div class="container-lg mt-5">
+@section('page-content')
+    <section class="portal-article-content">
+        <h1 class="portal-post-title display-6 mb-3">Kontakt</h1>
+        <p class="text-muted mb-4">
+            Sie haben Fragen zu Umzug, Räumung oder Entrümpelung in Wien? Wir freuen uns auf Ihre Nachricht.
+        </p>
 
-        <!-- Contact Info Card -->
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <div class="p-3 p-md-3 rounded text-body-emphasis bg-body-secondary">
-                    <div class="card-body p-5">
-                        <!-- Header -->
-                        <div class="text-center mb-5">
-                            <h2 style="font-family: 'Playfair Display', serif;">Contacts</h2>
-                        </div>
-
-                        <!-- Email -->
-                        <div class="d-flex align-items-center gap-3 mb-4">
-                            <i class="bi bi-envelope fs-4 text-muted"></i>
-                            <p class="mb-0"><a href="mailto:mail@gmail.com" class="text-decoration-none">mail@gmail.com</a>
-                            </p>
-                        </div>
-
-                        <!-- Telegram -->
-                        <div class="d-flex align-items-center gap-3 mb-4">
-                            <i class="bi bi-telegram fs-4 text-muted"></i>
-                            <p class="mb-0"><a href="#" class="text-decoration-none">Telegram</a></p>
-                        </div>
-
-                        <!-- VK -->
-                        <div class="d-flex align-items-center gap-3 mb-4">
-                            <i class="bi bi-people fs-4 text-muted"></i>
-                            <p class="mb-0"><a href="#" class="text-decoration-none">VK</a></p>
-                        </div>
-
-                        <!-- WhatsApp -->
-                        <div class="d-flex align-items-center gap-3 mb-4">
-                            <i class="bi bi-whatsapp fs-4 text-muted"></i>
-                            <p class="mb-0"><a href="#" class="text-decoration-none">WhatsApp</a></p>
-                        </div>
-                    </div>
+        <div class="row g-4">
+            <div class="col-md-6">
+                <div class="portal-card h-100">
+                    <h2 class="h6 text-uppercase text-muted mb-3">E-Mail</h2>
+                    <a href="mailto:info@umzugland.at" class="portal-inline-link">info@umzugland.at</a>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="portal-card h-100">
+                    <h2 class="h6 text-uppercase text-muted mb-3">Servicegebiet</h2>
+                    <p class="mb-0">Wien, Niederösterreich und ganz Österreich.</p>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 @endsection

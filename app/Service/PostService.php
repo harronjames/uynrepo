@@ -4,6 +4,7 @@ namespace App\Service;
 
 use App\Models\Post;
 use Exception;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -19,22 +20,36 @@ class PostService
         try {
             DB::beginTransaction();
 
+            $tagIds = null;
             if (isset($data['tag_ids'])) {
                 $tagIds = $data['tag_ids'];
                 unset($data['tag_ids']);
             }
-            if (isset($data['preview_image'])) {
-                $data['preview_image'] = Storage::disk('public')->put('/images', $data['preview_image']);
+
+            unset($data['remove_preview_image'], $data['remove_main_image']);
+
+            $categoryId = $data['category_id'] ?? null;
+            unset($data['category_id']);
+
+            $data['preview_image'] = $this->storeWebp($data['preview_image'] ?? null);
+            $data['main_image'] = $this->storeWebp($data['main_image'] ?? null);
+
+            // Drop empty image keys so nullable columns stay null.
+            if ($data['preview_image'] === null) {
+                unset($data['preview_image']);
             }
-            if (isset($data['main_image'])) {
-                $data['main_image'] = Storage::disk('public')->put('/images', $data['main_image']);
+            if ($data['main_image'] === null) {
+                unset($data['main_image']);
             }
 
-            // todo No needs to fix this
             /** @phpstan-ignore-next-line */
             $post = Post::firstOrCreate($data);
 
-            if (isset($tagIds)) {
+            if ($categoryId) {
+                $post->categories()->sync([(int) $categoryId]);
+            }
+
+            if ($tagIds) {
                 $post->tags()->attach($tagIds);
             }
             DB::commit();
@@ -48,20 +63,47 @@ class PostService
     {
         try {
             DB::beginTransaction();
+
+            $tagIds = null;
             if (isset($data['tag_ids'])) {
                 $tagIds = $data['tag_ids'];
                 unset($data['tag_ids']);
             }
-            if (isset($data['preview_image'])) {
-                $data['preview_image'] = Storage::disk('public')->put('/images', $data['preview_image']);
+
+            $categoryId = $data['category_id'] ?? null;
+            unset($data['category_id']);
+
+            $removePreview = (bool) ($data['remove_preview_image'] ?? false);
+            $removeMain = (bool) ($data['remove_main_image'] ?? false);
+            unset($data['remove_preview_image'], $data['remove_main_image']);
+
+            if ($removePreview) {
+                $this->deleteStoredFile($post->preview_image);
+                $data['preview_image'] = null;
+            } elseif (! empty($data['preview_image']) && $data['preview_image'] instanceof UploadedFile) {
+                $this->deleteStoredFile($post->preview_image);
+                $data['preview_image'] = $this->storeWebp($data['preview_image']);
+            } else {
+                unset($data['preview_image']);
             }
-            if (isset($data['main_image'])) {
-                $data['main_image'] = Storage::disk('public')->put('/images', $data['main_image']);
+
+            if ($removeMain) {
+                $this->deleteStoredFile($post->main_image);
+                $data['main_image'] = null;
+            } elseif (! empty($data['main_image']) && $data['main_image'] instanceof UploadedFile) {
+                $this->deleteStoredFile($post->main_image);
+                $data['main_image'] = $this->storeWebp($data['main_image']);
+            } else {
+                unset($data['main_image']);
             }
 
             $post->update($data);
 
-            if (isset($tagIds)) {
+            if ($categoryId) {
+                $post->categories()->sync([(int) $categoryId]);
+            }
+
+            if ($tagIds !== null) {
                 $post->tags()->sync($tagIds);
             }
             DB::commit();
@@ -71,5 +113,36 @@ class PostService
         }
 
         return $post;
+    }
+
+    private function storeWebp(mixed $file): ?string
+    {
+        if (! $file instanceof UploadedFile) {
+            return null;
+        }
+
+        $path = $file->store('images', 'public');
+
+        return $path ? '/storage/' . ltrim($path, '/') : null;
+    }
+
+    private function deleteStoredFile(?string $url): void
+    {
+        if (! $url) {
+            return;
+        }
+
+        $prefix = '/storage/';
+        $path = str_starts_with($url, $prefix)
+            ? substr($url, strlen($prefix))
+            : ltrim(parse_url($url, PHP_URL_PATH) ?: '', '/');
+
+        if (str_starts_with($path, 'storage/')) {
+            $path = substr($path, strlen('storage/'));
+        }
+
+        if ($path !== '' && Storage::disk('public')->exists($path)) {
+            Storage::disk('public')->delete($path);
+        }
     }
 }

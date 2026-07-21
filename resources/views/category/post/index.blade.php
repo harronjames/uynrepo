@@ -1,53 +1,42 @@
-@extends('layouts.wrapper', ['title' => $category->title])
+@extends('layouts.with-sidebar')
 
-@section('content')
+@section('page-content')
+    <section>
+        <h1 class="portal-post-title display-6 mb-2">{{ $category->title }}</h1>
+        <p class="text-muted mb-4">{{ $category->seoDescription() }}</p>
 
-    <main class="blog" style="margin-top: -100px;">
-        <div class="container">
-            <h1 class="edica-page-title" data-aos="fade-up">Категория: {{ $category->title }}</h1>
-            <section class="featured-posts-section">
-                <div class="row">
-                    @foreach($posts as $post)
-                        <div class="col-md-4 fetured-post blog-post" data-aos="fade-right">
-                            <div class="blog-post-thumbnail-wrapper">
-                                <img src="{{ $post->preview_image }}" alt="blog post">
-                            </div>
-                            <div class="d-flex justify-content-between">
-                                <p class="blog-post-category">TODO Show categories</p>
-                                @auth()
-                                    <form action="{{ route('post.likes.store', $post->id) }}" method="post">
-                                        @csrf
-                                        <span>{{ $post->liked_users_count }}</span>
-                                        <button type="submit" class="border-0 bg-transparent">
-                                            @if(auth()->user()->likedPosts->contains($post->id))
-                                                <i class="fas fa-heart"></i>
-                                            @else
-                                                <i class="far fa-heart"></i>
-                                            @endif
-                                        </button>
-                                    </form>
-                                @endauth
-                                @guest()
-                                    <div>
-                                        <span>{{ $post->liked_users_count }}</span>
-                                        <i class="far fa-heart"></i>
-                                    </div>
-                                @endguest
-                            </div>
-                            <a href="{{ route('post.show', $post->id) }}" class="blog-post-permalink">
-                                <h6 class="blog-post-title">{{ $post->title }}</h6>
+        <div class="row g-4">
+            @forelse($posts as $post)
+                <div class="col-md-6">
+                    <article class="portal-post-card h-100 d-flex flex-column">
+                        @if($post->preview_image)
+                            <a href="{{ route('post.show', $post) }}">
+                                <img src="{{ $post->preview_image }}" alt="{{ $post->title }}" loading="lazy">
+                            </a>
+                        @endif
+                        <div class="card-body d-flex flex-column">
+                            <h2 class="h5 portal-post-title">
+                                <a href="{{ route('post.show', $post) }}">{{ $post->title }}</a>
+                            </h2>
+                            <p class="portal-meta mb-2">{{ $post->created_at->translatedFormat('d. F Y') }}</p>
+                            <p class="mb-3">{{ $post->shortBody(20) }}</p>
+                            <a href="{{ route('post.show', $post) }}" class="portal-inline-link mt-auto">
+                                Zum Artikel <i class="bi bi-arrow-right-short"></i>
                             </a>
                         </div>
-                    @endforeach
+                    </article>
                 </div>
-                <div class="row">
-                    <div class="mx-auto" style="margin-top: -100px;">
-                        {{ $posts->links() }}
+            @empty
+                <div class="col-12">
+                    <div class="portal-card text-center py-5 text-muted">
+                        In dieser Kategorie sind noch keine Artikel veröffentlicht.
                     </div>
                 </div>
-            </section>
+            @endforelse
         </div>
 
-    </main>
-
+        <div class="d-flex justify-content-center mt-4">
+            {{ $posts->links() }}
+        </div>
+    </section>
 @endsection

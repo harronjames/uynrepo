@@ -2,61 +2,34 @@
     /** @var \App\Models\Post $likedPost */
 @endphp
 
-<div class="justify-content">
-    <!-- Liked Posts Header -->
-    <div class="row mb-4 mt-5">
-        <div class="col">
-            <h3 class="mb-3 text-center fst-italic" style="font-family: 'Playfair Display', serif;">
-                Liked Posts
-            </h3>
+@if($likedPosts->isNotEmpty())
+    <section class="mt-5" aria-label="Beliebte Ratgeber">
+        <div class="d-flex justify-content-between align-items-end mb-3">
+            <h2 class="h4 portal-post-title mb-0">Beliebte Ratgeber</h2>
+            <a href="{{ route('category.index') }}" class="portal-inline-link">Mehr Themen</a>
         </div>
-    </div>
 
-    <!-- Liked Posts Grid -->
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-        @foreach($likedPosts as $likedPost)
-            <div class="col">
-                <div class="card h-100 shadow-sm border rounded overflow-hidden">
-                    <img src="{{ $likedPost->preview_image }}" class="card-img-top" alt="...">
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title mb-3" style="font-family: 'Playfair Display', serif;">
-                            <a class="text-dark text-decoration-none" href="{{ route('post.show', $likedPost->id) }}">
-                                {{ $likedPost->title }}
+        <div class="row g-4">
+            @foreach($likedPosts as $likedPost)
+                <div class="col-md-4">
+                    <article class="portal-post-card h-100 d-flex flex-column">
+                        @if($likedPost->preview_image)
+                            <a href="{{ route('post.show', $likedPost) }}">
+                                <img src="{{ $likedPost->preview_image }}" alt="{{ $likedPost->title }}" loading="lazy">
                             </a>
-                        </h5>
-                        <p class="card-text text-muted mb-3">{{ $likedPost->shortBody() }}</p>
-                        <a href="{{ route('post.show', $likedPost->id) }}"
-                            class="btn btn-outline-primary rounded-pill mt-auto">
-                            Continue reading →
-                        </a>
-                    </div>
+                        @endif
+                        <div class="card-body d-flex flex-column">
+                            <h3 class="h6 portal-post-title">
+                                <a href="{{ route('post.show', $likedPost) }}">{{ $likedPost->title }}</a>
+                            </h3>
+                            <p class="text-muted small mb-3">{{ $likedPost->shortBody(18) }}</p>
+                            <a href="{{ route('post.show', $likedPost) }}" class="portal-inline-link mt-auto">
+                                Artikel öffnen
+                            </a>
+                        </div>
+                    </article>
                 </div>
-            </div>
-        @endforeach
-    </div>
-</div>
-
-<style>
-    .card-img-top {
-        height: 200px;
-        object-fit: cover;
-    }
-
-    .card-body {
-        padding: 1.25rem;
-    }
-
-    .btn-outline-primary {
-        transition: background-color 0.3s ease, color 0.3s ease;
-    }
-
-    .btn-outline-primary:hover {
-        background-color: #007bff;
-        color: #fff;
-    }
-
-    .card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
-</style>
+            @endforeach
+        </div>
+    </section>
+@endif

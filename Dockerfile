@@ -28,15 +28,21 @@ RUN docker-php-ext-install pdo_mysql mbstring exif intl pcntl bcmath gd zip
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Create symlink for Composer
-RUN ln -s /usr/bin/composer /usr/bin/c
+# Copy the application source and install dependencies during build
+COPY . /var/www
+WORKDIR /var/www
+RUN composer install --no-interaction --prefer-dist
+
+# Copy container entrypoint
+COPY docker-compose/app/entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
 
 # Create system user to run Composer and Artisan Commands
 RUN useradd -G www-data,root -u $uid -d /home/$user $user
 RUN mkdir -p /home/$user/.composer && \
     chown -R $user:$user /home/$user
 
-# Set working directory
-WORKDIR /var/www
-
 USER $user
+
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+CMD ["php-fpm"]
