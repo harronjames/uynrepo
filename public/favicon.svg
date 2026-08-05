@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Umzugland.at">
+  <rect width="64" height="64" rx="14" fill="#0F4C81"/>
+  <path fill="#FFFFFF" d="M18 14h9.2v24.2c0 3.4 2.2 5.6 5.8 5.6s5.8-2.2 5.8-5.6V14H48v24.6c0 8.4-5.8 13.8-15 13.8S18 47 18 38.6V14z"/>
+  <rect x="24" y="48.2" width="16" height="4.2" rx="2.1" fill="#F4A261"/>
+</svg>

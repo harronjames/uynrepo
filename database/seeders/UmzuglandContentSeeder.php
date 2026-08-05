@@ -62,6 +62,16 @@ class UmzuglandContentSeeder extends Seeder
             'Umzug Parken',
             'Halteverbot beantragen',
             'Umzug Wien Tipps',
+            'Küche umziehen',
+            'Küchentransport Wien',
+            'Wohnungsübergabe Wien',
+            'Kaution Wien',
+            'Mietrecht Österreich',
+            'Möbeltransport Wien',
+            'Sprinter mieten Wien',
+            'Sperrmüll Wien',
+            'MA 48',
+            'Alte Möbel entsorgen',
         ];
 
         foreach ($titles as $title) {
@@ -126,13 +136,6 @@ HTML,
 
     private function seedBlogPosts(): void
     {
-        // Remove previous demo/lorem posts so the homepage shows launch content only.
-        \Illuminate\Support\Facades\DB::table('comments')->delete();
-        \Illuminate\Support\Facades\DB::table('likes')->delete();
-        \Illuminate\Support\Facades\DB::table('post_tags')->delete();
-        \Illuminate\Support\Facades\DB::table('category_post')->delete();
-        Post::withTrashed()->forceDelete();
-
         $umzug = Category::query()->where('title', 'Umzug Wien')->firstOrFail();
         $entruempelung = Category::query()->where('title', 'Entrümpelung Wien')->firstOrFail();
 
@@ -347,6 +350,309 @@ HTML,
 
 <h2>Fazit</h2>
 <p>Die Halteverbotszone ist in Wien oft der unterschätzte Erfolgsfaktor für den Umzug. Rechtzeitig über die MA 46 beantragen, Schilder korrekt und fristgerecht aufstellen, Bereich freihält – dann steht der Lkw dort, wo Sie ihn brauchen. Mit klarer Vorbereitung wird aus dem Parkplatzproblem eine planbare Routine.</p>
+HTML,
+            ],
+            [
+                'title'            => 'Küche umziehen in Wien: Demontage, Transport & Einbau richtig planen',
+                'meta_title'       => 'Küche umziehen Wien: Demontage, Transport & Einbau | Umzugland.at',
+                'meta_description' => 'Küche umziehen in Wien: So planen Sie Demontage, Transport und Einbau – inkl. Maß-Check, Halteverbotszone, Geräte und typischen Fehlern.',
+                'meta_keywords'    => 'Küche umziehen Wien, Küche demontieren, Küchentransport Wien, Einbauküche umziehen, Küche einbauen',
+                'categories'       => [$umzug->id],
+                'tags'             => ['Umzug Wien', 'Küche umziehen', 'Küchentransport Wien', 'Umzug planen', 'Privatumzug'],
+                'content'          => <<<'HTML'
+<p>Eine Einbauküche ist beim Umzug in Wien oft das teuerste und empfindlichste Möbelstück – und gleichzeitig das, das am häufigsten unterschätzt wird. Wer Schränke einfach „irgendwie“ löst, riskiert beschädigte Arbeitsplatten, gerissene Wasseranschlüsse und am neuen Standort eine Küche, die nicht mehr passt. Mit klarer Planung von Demontage, Transport und Einbau bleibt die Küche nutzbar – und der Umzugstag überschaubar.</p>
+
+<h2>Zuerst klären: Lohnt sich der Umzug der Küche?</h2>
+<p>Nicht jede Küche sollte mitziehen. Maßgefertigte Zeilen aus Altbauwohnungen passen in Neubauten oft nicht mehr: andere Nischen, andere Fensterbänke, andere Anschlüsse. Prüfen Sie vor der Entscheidung:</p>
+<ul>
+<li>Länge und Höhe der Zeile im Vergleich zur neuen Küche</li>
+<li>Lage von Wasser, Abfluss, Strom und – falls vorhanden – Gas</li>
+<li>Zustand von Scharnieren, Korpus und Arbeitsplatte</li>
+<li>Kosten für Demontage + Transport + Anpassung versus eine günstigere neue Küche</li>
+</ul>
+<p>Grundlagen zum Wohnungswechsel und zur Organisation finden Sie auch im Überblick zum <a href="https://de.wikipedia.org/wiki/Umzug_(Wohnungswechsel)" target="_blank" rel="noopener noreferrer">Umzug (Wohnungswechsel)</a> sowie auf den Wohnseiten der Stadt Wien unter <a href="https://www.wien.gv.at/wohnen/" target="_blank" rel="noopener noreferrer">wien.gv.at/wohnen</a>.</p>
+
+<h2>Demontage: Reihenfolge entscheidet über Schäden</h2>
+<h3>Geräte und Anschlüsse zuerst</h3>
+<p>Herd, Geschirrspüler, Kühlschrank und Dunstabzug gehören vor den Schränken raus. Strom abschalten, Wasserhähne schließen, Schläuche entleeren. Gasanschlüsse dürfen in Österreich nur von befugten Fachkräften gelöst und wieder angeschlossen werden – das ist keine DIY-Aufgabe.</p>
+<h3>Oberschränke vor Unterschränken</h3>
+<p>So bleibt die Arbeitsplatte länger stabil und niemand arbeitet unter hängenden, gelösten Korpussen. Jede Schraube, jeder Beschlag und jede Distanzleiste kommt in beschriftete Beutel – pro Schrank ein Beutel, Klebeband mit Nummer auf Korpus und Tür.</p>
+<h3>Arbeitsplatte und Spüle extra sichern</h3>
+<p>Naturstein und Quarzkomposit brechen leicht bei Verdrehen. Platten flach transportieren, nicht hochkant „wackeln“ lassen. Silikonfugen vorher sauber trennen, sonst reißt die Platte oder die Spüle.</p>
+
+<h2>Transport durch Wien: Maße, Lift, Halteverbot</h2>
+<p>Wiener Gründerzeithäuser haben oft enge Stiegenhäuser und kleine Aufzüge. Messen Sie Korpusstiefe, Plattenlänge und Türdurchgänge <strong>bevor</strong> Sie demontieren. Was nicht durch die Wohnungstür passt, muss am Gang oder im Hof weiter zerlegt werden.</p>
+<p>Für den Ladeplatz gilt dasselbe wie beim gesamten Umzug: In vielen Bezirken brauchen Sie eine temporäre Halteverbotszone. Zuständig ist die <a href="https://www.wien.gv.at/amtshelfer/verkehr/parken/sonstiges/halteverbot.html" target="_blank" rel="noopener noreferrer">MA 46 – Halteverbot beantragen</a>. Ohne freien Standplatz steigen Tragwege – und damit das Bruchrisiko für Arbeitsplatten enorm.</p>
+<p>Offizielle Infos zu Wohnen, Verträgen und Behördenwegen rund um den Umzug bündelt auch <a href="https://www.oesterreich.gv.at/themen/bauen_wohnen_und_umwelt/wohnen.html" target="_blank" rel="noopener noreferrer">oesterreich.gv.at zum Thema Wohnen</a>.</p>
+
+<h2>Einbau in der neuen Wohnung</h2>
+<h3>Anschlüsse vor dem Aufstellen prüfen</h3>
+<p>Wasserhahn und Abfluss sitzen selten millimetergenau wie zuvor. Planen Sie Ausgleich mit Sockeln, Distanzstücken oder einer angepassten Arbeitsplatte ein. Elektroherd und Spülmaschine brauchen passende Absicherung – im Zweifel Elektriker:in beauftragen.</p>
+<h3>Ausrichten, dann festschrauben</h3>
+<p>Erst die Unterschränke in der Flucht ausrichten, dann Arbeitsplatte, dann Oberschränke. Wer zu früh festschraubt, kämpft später mit schiefen Türen und sichtbaren Fugen.</p>
+<ul>
+<li>Wasserwaage an Vorderkante und Arbeitsplatte</li>
+<li>Wandunebenheiten mit Unterlagen ausgleichen</li>
+<li>Türen erst ganz am Schluss einstellen</li>
+<li>Silikon an Spüle und Wandabschluss erst nach dem Probelauf von Wasser</li>
+</ul>
+
+<h2>Typische Fehler beim Küchenumzug in Wien</h2>
+<ul>
+<li>Küche als „ein großes Möbel“ behandelt statt in logische Module zu zerlegen</li>
+<li>Keine Fotos vor der Demontage – der Wiederaufbau wird zum Puzzle</li>
+<li>Platten hochkant durch enge Höfe getragen</li>
+<li>Halteverbot vergessen, Team wartet auf der Straße</li>
+<li>Gas oder Starkstrom selbst angeschlossen</li>
+</ul>
+
+<h2>Checkliste: Küche umziehen</h2>
+<ol>
+<li>Neue Küche ausmessen (Nische, Höhe, Anschlüsse, Fenster)</li>
+<li>Entscheidung: mitnehmen, verkaufen oder entsorgen</li>
+<li>Fachkräfte für Gas/Starkstrom terminieren</li>
+<li>Halteverbotszone und Zufahrt klären</li>
+<li>Demontage mit Nummerierung und Fotodoku</li>
+<li>Transport mit Kantenschutz und Platten liegend</li>
+<li>Einbau, Dichtheit prüfen, kleine Anpassungen</li>
+</ol>
+
+<h2>Fazit</h2>
+<p>Eine Küche umzuziehen ist in Wien planbar – wenn Maße, Anschlüsse und Transportwege vor der ersten Schraube klar sind. Wer Demontage, Sicherung und Einbau als eigenen Projektblock behandelt, spart Reparaturen und Nerven.</p>
+<p><strong>Küche professionell umziehen lassen?</strong> Umzugland.at plant Demontage, Transport und – auf Wunsch – die Abstimmung mit Einbau und Entsorgung alter Teile. <a href="/contacts">Jetzt unverbindlich anfragen</a> – Fixpreis, pünktlich, ohne versteckte Zuschläge.</p>
+HTML,
+            ],
+            [
+                'title'            => 'Wohnungsübergabe an den Vermieter in Wien: Worauf muss man achten? (Mängel & Kaution)',
+                'meta_title'       => 'Wohnungsübergabe Wien: Mängel, Protokoll & Kaution | Umzugland.at',
+                'meta_description' => 'Wohnungsübergabe in Wien richtig machen: Protokoll, Mängel, Schönheitsreparaturen und Kaution – worauf Mieter:innen achten sollten.',
+                'meta_keywords'    => 'Wohnungsübergabe Wien, Kaution zurück, Mängel Protokoll, Mietrecht Österreich, Auszug Vermieter',
+                'categories'       => [$umzug->id],
+                'tags'             => ['Wohnungsübergabe Wien', 'Kaution Wien', 'Mietrecht Österreich', 'Umzug Wien', 'Wohnungswechsel Wien'],
+                'content'          => <<<'HTML'
+<p>Die Wohnungsübergabe entscheidet oft darüber, ob die Kaution zeitnah zurückkommt – oder ob wochenlange Diskussionen über Kratzer, Bohrlöcher und „nicht besenreine“ Ecken beginnen. In Wien gilt: Was schriftlich und mit Fotos festgehalten ist, zählt. Was nur mündlich „schon okay“ war, wird schnell zum Streitpunkt.</p>
+
+<h2>Was „ordnungsgemäße Rückgabe“ typischerweise bedeutet</h2>
+<p>Ihr Mietvertrag und das österreichische Mietrecht stecken den Rahmen. Einen verständlichen Einstieg zu Miete und Wohnen bietet <a href="https://www.oesterreich.gv.at/themen/bauen_wohnen_und_umwelt/wohnen.html" target="_blank" rel="noopener noreferrer">oesterreich.gv.at – Wohnen</a>. Rechtliche Grundlagen finden sich im <a href="https://www.ris.bka.gv.at/GeltendeFassung.wxe?Abfrage=Bundesnormen&amp;Gesetzesnummer=10002531" target="_blank" rel="noopener noreferrer">Mietrechtsgesetz (MRG) im RIS</a>. Ergänzend erklärt die Übersicht zum <a href="https://de.wikipedia.org/wiki/Mietrecht_(%C3%96sterreich)" target="_blank" rel="noopener noreferrer">österreichischen Mietrecht</a> Begriffe wie Hauptmiete, Kategoriemiete und Kündigung.</p>
+<p>Praktisch erwarten Vermieter:innen in Wien meist:</p>
+<ul>
+<li>geräumte Wohnung inklusive Keller, Dachbodenabteil und Parkplatz (falls mitgemietet)</li>
+<li>besenreiner Zustand – nicht zwingend Malerarbeiten „wie neu“, sofern der Vertrag das nicht ausdrücklich verlangt</li>
+<li>alle übergebenen Schlüssel, Chipkarten und Briefkastenschlüssel</li>
+<li>Zählerstände für Strom, Gas und Wärme</li>
+</ul>
+<p>Was normale Abnützung ist und was ein Mangel, hängt vom Zustand bei Einzug und von der Wohndauer ab. Abgenutztes Parkett nach vielen Jahren ist etwas anderes als ein frisches Brandloch im Laminat.</p>
+
+<h2>Das Übergabeprotokoll: Ihr wichtigstes Dokument</h2>
+<h3>Vor dem Termin vorbereiten</h3>
+<ul>
+<li>Einzugsprotokoll und Übergabefotos von damals heraussuchen</li>
+<li>Wohnung leer und gereinigt übergeben – volle Räume verdecken Mängel und führen zu Nachforderungen</li>
+<li>Alle Schlüssel zählen und mit der Liste im Vertrag abgleichen</li>
+<li>Zähler fotografieren (Übersicht + Nahaufnahme der Zahlen)</li>
+</ul>
+<h3>Beim Termin selbst</h3>
+<p>Gehen Sie Raum für Raum. Lassen Sie sich nicht hetzen. Jeder Punkt, den die Vermietung als Mangel sieht, gehört ins Protokoll – inklusive Ihrer Gegenposition, wenn Sie anderer Meinung sind. Unterschreiben Sie kein leeres oder unvollständiges Formular.</p>
+<ul>
+<li>Mängel klar beschreiben („Kratzer 15 cm Wohnzimmertür Innenseite“ statt „Tür beschädigt“)</li>
+<li>Fotos mit Datum machen, am besten beide Seiten dieselben Motive</li>
+<li>Vereinbarungen schriftlich: Wer beseitigt was bis wann?</li>
+<li>Kopie des unterschriebenen Protokolls sofort mitnehmen oder als Scan schicken lassen</li>
+</ul>
+
+<h2>Mängel: Was dürfen Vermieter:innen verlangen?</h2>
+<p>Zulässig sind in der Regel Schäden, die über normale Abnützung hinausgehen und die Sie verursacht haben. Nicht automatisch zulässig sind pauschale Renovierungspakete („komplett neu ausmalen, sonst keine Kaution“), wenn der Vertrag und die Abnützung das nicht hergeben.</p>
+<p>Typische Streitthemen in Wien:</p>
+<ul>
+<li>Dübel- und Bohrlöcher: wenige, fachgerecht verschlossene Löcher sind oft Abnützung; ganze Wände voller Dübel eher nicht</li>
+<li>Raucherwohnungen: Verfärbungen können teuer werden, wenn Nichtraucher-Nutzung vereinbart war</li>
+<li>Einbauküche und Böden: Kratzer, Wasserflecken, abgeplatzte Kanten dokumentieren</li>
+<li>Feuchtigkeit und Schimmel: Ursache klären – baulich oder nutzungsbedingt?</li>
+</ul>
+<p>Bei Unsicherheit hilft unabhängige Beratung, etwa über die <a href="https://www.wien.gv.at/wohnen/" target="_blank" rel="noopener noreferrer">Wohninformationen der Stadt Wien</a> oder Mieterorganisationen. Zur Kaution selbst bietet <a href="https://de.wikipedia.org/wiki/Mietkaution" target="_blank" rel="noopener noreferrer">Wikipedia – Mietkaution</a> eine gute Begriffsklärung; die Details stehen immer im Vertrag und im geltenden Recht.</p>
+
+<h2>Kaution: Ablauf nach der Übergabe</h2>
+<p>Nach korrekter Rückgabe ist die Kaution – abzüglich nachgewiesener, berechtigter Forderungen – zurückzustellen. Lassen Sie sich den Empfang der Schlüssel und den Übergabetermin schriftlich bestätigen. Offene Betriebskostenabrechnungen können Teile der Kaution zeitweise binden; pauschales „wir behalten alles“ ohne Aufstellung sollten Sie nicht akzeptieren.</p>
+<ol>
+<li>Protokoll + Fotos + Schlüsselübergabe dokumentieren</li>
+<li>Schriftlich um Kautionsrückzahlung bitten (Konto, Frist freundlich setzen)</li>
+<li>Falls Abzüge: detaillierte Kostenaufstellung verlangen</li>
+<li>Bei Streit: Beratung einholen, Fristen und Schriftverkehr sammeln</li>
+</ol>
+
+<h2>Checkliste Wohnungsübergabe Wien</h2>
+<ul>
+<li>Wohnung, Keller und Abstellräume leer und gereinigt</li>
+<li>Kleinreparaturen erledigt, die eindeutig Sie betreffen</li>
+<li>Einzugsprotokoll zum Vergleich dabei</li>
+<li>Zählerstände notiert und fotografiert</li>
+<li>Alle Schlüssel vollständig</li>
+<li>Protokoll unterschrieben, Kopie gesichert</li>
+<li>Nachsendeauftrag und <a href="https://www.oesterreich.gv.at/themen/dokumente_und_recht/anmeldung_am_wohnort.html" target="_blank" rel="noopener noreferrer">Ummeldung des Wohnsitzes</a> nicht vergessen</li>
+</ul>
+
+<h2>Fazit</h2>
+<p>Eine saubere Wohnungsübergabe in Wien ist vor allem Dokumentation: leer übergeben, alles schriftlich festhalten, Mängel konkret benennen und die Kaution aktiv nachverfolgen. Wer vorbereitet in den Termin geht, steht deutlich besser da.</p>
+<p><strong>Vor der Übergabe noch räumen oder entrümpeln?</strong> Umzugland.at holt Restmöbel, Kellerkram und Sperriges raus – damit Sie besenrein und stressfrei übergeben können. <a href="/contacts">Kontakt aufnehmen</a> und Termin sichern.</p>
+HTML,
+            ],
+            [
+                'title'            => 'Möbeltransport in Wien: Günstige Firmen, Sprinter-Miete oder Eigenregie?',
+                'meta_title'       => 'Möbeltransport Wien: Firma, Sprinter oder selbst? | Umzugland.at',
+                'meta_description' => 'Möbeltransport in Wien vergleichen: Umzugsfirma, Sprinter mieten oder selbst tragen – Kostenfaktoren, Halteverbot, Risiken und Entscheidungshilfe.',
+                'meta_keywords'    => 'Möbeltransport Wien, Sprinter mieten Wien, günstige Umzugsfirma Wien, Möbel selbst transportieren, Umzug Kleintransporter',
+                'categories'       => [$umzug->id],
+                'tags'             => ['Möbeltransport Wien', 'Sprinter mieten Wien', 'Umzug Wien', 'Privatumzug', 'Umzug Wien Tipps'],
+                'content'          => <<<'HTML'
+<p>Couch, Kasten, Waschmaschine: In Wien stellt sich schnell die Frage, ob sich eine Firma lohnt, ein Sprinter reicht – oder ob Freunde plus Transporter die günstigste Lösung sind. Die ehrliche Antwort hängt nicht nur vom Preis pro Stunde ab, sondern von Etagen, Zufahrt, Zeitdruck und Bruchrisiko.</p>
+
+<h2>Option 1: Professioneller Möbeltransport</h2>
+<p>Umzugsunternehmen bringen Personal, Gurte, Decken, Sackkarren und Erfahrung mit engen Wiener Stiegenhäusern. Sie versichern in der Regel den Transport und kennen den Ablauf mit Halteverbotszonen. Sinnvoll ist das vor allem bei:</p>
+<ul>
+<li>vollständiger Wohnungseinrichtung</li>
+<li>schweren oder empfindlichen Möbeln (Massivholz, Glas, Klavier, große Elektrogeräte)</li>
+<li>keinen Helfer:innen oder wenig Zeitfenster (Schlüsselübergabe am selben Tag)</li>
+<li>höheren Stockwerken ohne Lastenaufzug</li>
+</ul>
+<p>Achten Sie auf Fixpreis nach Besichtigung statt offener Stundenrechnung. Was „günstig“ wirkt, wird teuer, wenn das Team zwei Stunden nach einem Parkplatz sucht. Hintergrundwissen zum Ablauf eines Wohnungswechsels liefert <a href="https://de.wikipedia.org/wiki/Umzug_(Wohnungswechsel)" target="_blank" rel="noopener noreferrer">Wikipedia zum Umzug</a>, organisatorische Wohn-Themen bündelt <a href="https://www.oesterreich.gv.at/themen/bauen_wohnen_und_umwelt/wohnen.html" target="_blank" rel="noopener noreferrer">oesterreich.gv.at</a>.</p>
+
+<h2>Option 2: Sprinter oder Transporter mieten</h2>
+<p>Für Student:innen, kleine Wohnungen oder einzelne Möbelstücke kann die Miete eines Kleintransporters passen. Kalkulieren Sie ehrlich alle Posten:</p>
+<ul>
+<li>Tagesmiete plus Kilometer und Treibstoff</li>
+<li>Kaution und mögliche Selbstbehalte bei Schäden am Fahrzeug</li>
+<li>Zweitfahrt, wenn Volumen unterschätzt wurde</li>
+<li>Parken und Laden in der Kurzparkzone oder mit Halteverbot</li>
+<li>Ihre Arbeitszeit und die der Helfer:innen</li>
+</ul>
+<p>Ohne Erfahrung mit Spanngurten rutschen Kästen in der Kurve – und die Ersparnis ist weg. Für den Standplatz am Haus beantragen Sie bei Bedarf ein temporäres Halteverbot über die <a href="https://www.wien.gv.at/amtshelfer/verkehr/parken/sonstiges/halteverbot.html" target="_blank" rel="noopener noreferrer">MA 46 der Stadt Wien</a>. Infos zu Parken und Verkehr in der Stadt finden Sie auch im Bereich <a href="https://www.wien.gv.at/verkehr/" target="_blank" rel="noopener noreferrer">Verkehr auf wien.gv.at</a>.</p>
+
+<h2>Option 3: Komplett in Eigenregie (Pkw, Anhänger, Freunde)</h2>
+<p>Das funktioniert bei wenigen, leichten Stücken und kurzen Distanzen innerhalb Wiens. Grenzen sind schnell erreicht: Anhängerführerschein, Nachtparkverbot, überladene Kofferräume, keine Versicherung für fremde Helfer:innen bei Verletzungen. Was offiziell zur Güterbeförderung und gewerblichen Transporten gilt, ist strenger als der private Umzug – wer regelmäßig gegen Entgelt fährt, bewegt sich schnell in Richtung Gewerbe; Orientierung bietet die <a href="https://www.wko.at/" target="_blank" rel="noopener noreferrer">Wirtschaftskammer Österreich (WKO)</a>.</p>
+
+<h2>Kostenvergleich: nicht nur den Stundensatz sehen</h2>
+<table class="table">
+<thead>
+<tr>
+<th>Variante</th>
+<th>Stärken</th>
+<th>Schwächen</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Firma</td>
+<td>Tempo, Schutz, Versicherung, weniger Stress</td>
+<td>Höherer sichtbarer Preis</td>
+</tr>
+<tr>
+<td>Sprinter-Miete</td>
+<td>Flexibel, oft günstiger bei kleinem Volumen</td>
+<td>Sie tragen, parken, haften mit</td>
+</tr>
+<tr>
+<td>Eigenregie</td>
+<td>Günstigste Barauslagen</td>
+<td>Zeit, Risiko, mehrere Fahrten</td>
+</tr>
+</tbody>
+</table>
+<p>Rechenbeispiel grob: Drei Helfer:innen à einen ganzen Samstag plus Sprinter können „umsonst“ wirken – bis ein Massivholztisch die Ecke im Stiegenhaus nicht schafft und ersetzt werden muss.</p>
+
+<h2>Wiener Besonderheiten, die den Preis ändern</h2>
+<ul>
+<li><strong>Bezirke und Einbahnen:</strong> Innere Bezirke brauchen oft kleinere Fahrzeuge und mehr Laufwege.</li>
+<li><strong>Höfe und Schwellen:</strong> Ohne Rampe wird jedes Sofa zur Kraftübung.</li>
+<li><strong>Zeitfenster:</strong> Schlüssel erst um 14 Uhr, alte Wohnung bis 12 Uhr leer – dann zählt professionelle Crew.</li>
+<li><strong>Kombinierter Auftrag:</strong> Was nicht mitkommt, gleich als Entrümpelung mitnehmen statt extra Sperrmülltour.</li>
+</ul>
+
+<h2>Entscheidungshilfe in 5 Fragen</h2>
+<ol>
+<li>Passt alles in <strong>eine</strong> Transporterladung?</li>
+<li>Gibt es Stücke über 80 kg oder sehr empfindliche Oberflächen?</li>
+<li>Ist ein Lastenaufzug vorhanden?</li>
+<li>Können Sie legal nah am Eingang halten?</li>
+<li>Was kostet Sie ein beschädigtes Möbelstück im Vergleich zur Firma?</li>
+</ol>
+<p>Zwei- bis dreimal „nein“ oder „unsicher“: Professioneller Transport ist meist die günstigere Gesamtentscheidung.</p>
+
+<h2>Fazit</h2>
+<p>Günstiger Möbeltransport in Wien heißt nicht automatisch Sprinter-Miete. Firma, Miete und Eigenregie haben klare Einsatzgebiete. Wer Volumen, Zugang und Risiko ehrlich bewertet, spart am Ende Geld – nicht nur am Angebotstext.</p>
+<p><strong>Möbel in Wien sicher transportieren lassen?</strong> Umzugland.at holt einzelne Stücke oder die ganze Wohnung – mit Fixpreis und Wiener Streckenkenntnis. <a href="/contacts">Angebot anfragen</a> und Variante gemeinsam festlegen.</p>
+HTML,
+            ],
+            [
+                'title'            => 'Sperrmüllentsorgung in Wien: Wo und wie entsorgt man alte Möbel richtig?',
+                'meta_title'       => 'Sperrmüll Wien: Alte Möbel richtig entsorgen (MA 48) | Umzugland.at',
+                'meta_description' => 'Sperrmüllentsorgung in Wien: Mistplätze der MA 48, was erlaubt ist, wie alte Möbel entsorgt werden – und wann eine Abholung sinnvoll ist.',
+                'meta_keywords'    => 'Sperrmüll Wien, MA 48, Mistplatz Wien, alte Möbel entsorgen, Sperrmüllabfuhr Wien',
+                'categories'       => [$entruempelung->id],
+                'tags'             => ['Sperrmüll Wien', 'MA 48', 'Alte Möbel entsorgen', 'Entrümpelung Wien', 'Wohnungsräumung'],
+                'content'          => <<<'HTML'
+<p>Altes Sofa, Sperrholzkasten, kaputte Matratze: Beim Auszug in Wien stapelt sich Sperrmüll schneller als Kartons. Falsch abgestellt wird er teuer – und ist illegal. Richtig entsorgt entlastet er die neue und die alte Wohnung und hält die Übergabe sauber. Zuständig für Abfall und Mistplätze ist in Wien die <strong>MA 48</strong>.</p>
+
+<h2>Was zählt als Sperrmüll – und was nicht?</h2>
+<p>Sperrmüll sind grob gesagt große, sperrige Haushaltsgegenstände, die nicht in die Restmülltonne passen: Möbel, Matratzen, große Kunststoffteile, Teppiche. Elektrogeräte, Problemstoffe, Bauschutt und Reifen gehören in andere Fraktionen. Einen Überblick zum Begriff gibt <a href="https://de.wikipedia.org/wiki/Sperrm%C3%BCll" target="_blank" rel="noopener noreferrer">Wikipedia – Sperrmüll</a>; verbindlich sind die Wiener Regeln der MA 48.</p>
+<p>Offizielle Informationen und Standorte finden Sie direkt bei der Stadt:</p>
+<ul>
+<li><a href="https://www.wien.gv.at/umwelt/ma48/" target="_blank" rel="noopener noreferrer">MA 48 – Abfallwirtschaft, Straßenreinigung und Fuhrpark</a></li>
+<li><a href="https://www.wien.gv.at/umwelt/ma48/entsorgung/mistplatz/" target="_blank" rel="noopener noreferrer">Mistplätze in Wien</a></li>
+<li><a href="https://www.wien.gv.at/umwelt/ma48/beratung/muelltrennung/" target="_blank" rel="noopener noreferrer">Mülltrennung – Beratung der MA 48</a></li>
+</ul>
+<p>Ergänzend erklärt das Portal <a href="https://www.oesterreich.gv.at/themen/bauen_wohnen_und_umwelt/abfall.html" target="_blank" rel="noopener noreferrer">oesterreich.gv.at zum Thema Abfall</a> die bundesweiten Grundsätze der Trennung und Vermeidung.</p>
+
+<h2>Option 1: Selbst zum Mistplatz bringen</h2>
+<p>Wer einen Transporter oder ein großes Auto hat, fährt Möbel zerlegt zum Mistplatz. Vorteile: niedrige oder keine Gebühren im Rahmen der privaten Mengen, direkte Trennung vor Ort. Nachteile: Zeit, Benzin, körperliche Arbeit, Öffnungszeiten und Wartezeiten am Samstag.</p>
+<h3>Tipps für den Mistplatz-Besuch</h3>
+<ul>
+<li>Möbel vorab zerlegen – spart Platz und Wege</li>
+<li>Holz, Metall, Elektro und Rest getrennt halten, wenn möglich</li>
+<li>Ausweis / Meldezettel-Logik der aktuellen MA-48-Regeln beachten (private Anlieferung)</li>
+<li>Matratzen und Polstermöbel komplett trocken transportieren</li>
+</ul>
+
+<h2>Option 2: Abholung durch ein Unternehmen</h2>
+<p>Bei Kellerentrümpelung, Wohnungsauflösung oder wenn kein Fahrzeug da ist, holt ein Räumungs- oder Umzugsteam den Sperrmüll ab. Das kostet mehr als die Eigenanlieferung, spart aber mehrere Fahrten und das Problem „Wohin mit dem Kasten ohne Aufzug?“. Seriöse Anbieter trennen und führen der Verwertung zu, statt alles in einen gemischten Haufen zu kippen.</p>
+<p>Klären Sie schriftlich:</p>
+<ul>
+<li>Ist Entsorgung im Preis inkl. oder extra?</li>
+<li>Welche Fraktionen sind dabei (nur Möbel oder auch E-Geräte)?</li>
+<li>Wird die Wohnung / der Keller besenrein übergeben?</li>
+<li>Braucht das Fahrzeug ein Halteverbot vor der Tür?</li>
+</ul>
+
+<h2>Was Sie keinesfalls tun sollten</h2>
+<ul>
+<li>Möbel neben die Tonne oder auf den Gehsteig stellen („wird schon wer mitnehmen“)</li>
+<li>Sperrmüll in fremde Mistkübel oder Baustellencontainer werfen</li>
+<li>Elektrogeräte mit dem Restmüll mischen</li>
+<li>Lacke, Spraydosen und Chemikalien zwischen Polstermöbeln verstecken</li>
+</ul>
+<p>Illegale Ablagerung wird angezeigt und kann hohe Strafen nach sich ziehen. Außerdem blockiert sie Gehwege und brandlastet Höfe – Nachbarschaft und Hausverwaltung reagieren verständlicherweise empfindlich, besonders vor einer Wohnungsübergabe.</p>
+
+<h2>Alte Möbel sinnvoller nutzen als entsorgen</h2>
+<p>Bevor der Kasten zum Mistplatz fährt, lohnt ein kurzer Check:</p>
+<ul>
+<li>Verkauf (online, lokal) bei gutem Zustand</li>
+<li>Verschenk-Plattformen und soziale Einrichtungen</li>
+<li>Teile als Ersatzholz / Schubladen weitergeben</li>
+</ul>
+<p>Was niemand will, gehört in den geordneten Entsorgungsweg – nicht in den Keller der nächsten Mieter:innen.</p>
+
+<h2>Ablaufempfehlung beim Auszug</h2>
+<ol>
+<li>Inventar in drei Stapel: mitnehmen, verkaufen/verschenken, entsorgen</li>
+<li>Elektrogeräte separat stellen (eigenes Recycling)</li>
+<li>Termin Mistplatz <strong>oder</strong> Abholung legen – nicht auf den letzten Abend</li>
+<li>Zerlegen, tragen, laden</li>
+<li>Wohnung für die Übergabe frei und besenrein machen</li>
+</ol>
+<p>Wer Umzug und Sperrmüll in einem Zug plant, spart Doppelarbeit: Derselbe Transporter, der die letzte Ladung ins neue Zuhause bringt, kann Entsorgungsstücke direkt mitnehmen – sofern das Angebot das vorsieht.</p>
+
+<h2>Fazit</h2>
+<p>Sperrmüll in Wien richtig zu entsorgen heißt: MA-48-Wege nutzen, trennen, nicht illegal abstellen. Selbst zum Mistplatz ist günstig bei kleinem Volumen; bei vollen Kellern und Zeitdruck ist die Abholung die sauberere Lösung – auch für die Kaution bei der Wohnungsübergabe.</p>
+<p><strong>Alte Möbel in Wien abholen lassen?</strong> Umzugland.at räumt Wohnung und Keller, entsorgt Sperrmüll fachgerecht und hinterlässt besenreine Flächen. <a href="/contacts">Jetzt Termin anfragen</a> – transparenter Fixpreis, ohne Chaos vor der Tür.</p>
 HTML,
             ],
         ];
