@@ -32,12 +32,22 @@ class ImpressumController extends Controller
             abort(404);
         }
 
-        $relative = ltrim((string) parse_url($page->image, PHP_URL_PATH), '/');
-        if (str_starts_with($relative, 'storage/')) {
-            $relative = substr($relative, strlen('storage/'));
+        // $page->image genelde "/storage/..." olarak saklanıyor; bazen de tam URL olabiliyor.
+        // parse_url() relative path için null döndürebileceğinden daha güvenli normalize ediyoruz.
+        $stored = (string) $page->image;
+        $path = $stored;
+
+        if (str_starts_with($path, 'http://') || str_starts_with($path, 'https://')) {
+            $path = (string) (parse_url($path, PHP_URL_PATH) ?? '');
         }
 
-        $absolute = storage_path('app/public/' . $relative);
+        $path = ltrim($path, '/'); // storage/... şekline getir
+
+        if (str_starts_with($path, 'storage/')) {
+            $path = substr($path, strlen('storage/'));
+        }
+
+        $absolute = storage_path('app/public/' . $path);
 
         if (! is_file($absolute)) {
             abort(404);
