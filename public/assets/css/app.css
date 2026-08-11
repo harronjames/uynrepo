@@ -245,14 +245,18 @@ body.portal-body {
     padding: 0;
     overflow: hidden;
     background: #0b1728;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .impressum-fullpage__image {
     display: block;
     width: 100%;
-    height: calc(100vh - 8rem);
-    min-height: 70vh;
-    object-fit: cover;
+    max-width: 980px;
+    height: auto;
+    max-height: calc(100vh - 12rem);
+    object-fit: contain;
     object-position: center;
 }
 
@@ -269,6 +273,5 @@ body.portal-body {
     .impressum-fullpage,
     .impressum-fullpage__image {
         min-height: calc(100vh - 10rem);
-        height: calc(100vh - 10rem);
     }
 }

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Page;
 use App\Support\SeoPayload;
 use Illuminate\Contracts\View\Factory as ViewFactory;
-use Illuminate\Http\Response;
+use Symfony\Component\HttpFoundation\Response;
 
 class ImpressumController extends Controller
 {
