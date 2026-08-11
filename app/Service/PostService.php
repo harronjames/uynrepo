@@ -97,7 +97,15 @@ class PostService
                 unset($data['main_image']);
             }
 
-            $post->update($data);
+            // Force attribute assignment so null image removals are persisted.
+            $post->fill($data);
+            if (array_key_exists('preview_image', $data)) {
+                $post->preview_image = $data['preview_image'];
+            }
+            if (array_key_exists('main_image', $data)) {
+                $post->main_image = $data['main_image'];
+            }
+            $post->save();
 
             if ($categoryId) {
                 $post->categories()->sync([(int) $categoryId]);
@@ -132,10 +140,13 @@ class PostService
             return;
         }
 
-        $prefix = '/storage/';
-        $path = str_starts_with($url, $prefix)
-            ? substr($url, strlen($prefix))
-            : ltrim(parse_url($url, PHP_URL_PATH) ?: '', '/');
+        $path = $url;
+
+        if (str_starts_with($path, 'http://') || str_starts_with($path, 'https://')) {
+            $path = (string) (parse_url($path, PHP_URL_PATH) ?? '');
+        }
+
+        $path = ltrim($path, '/');
 
         if (str_starts_with($path, 'storage/')) {
             $path = substr($path, strlen('storage/'));

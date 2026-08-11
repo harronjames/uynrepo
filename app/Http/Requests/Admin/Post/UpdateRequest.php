@@ -12,6 +12,15 @@ class UpdateRequest extends FormRequest
         return true;
     }
 
+    protected function prepareForValidation(): void
+    {
+        // HTML checkboxes are absent when unchecked; normalize to real booleans.
+        $this->merge([
+            'remove_preview_image' => $this->boolean('remove_preview_image'),
+            'remove_main_image'    => $this->boolean('remove_main_image'),
+        ]);
+    }
+
     public function rules(): array
     {
         return [
@@ -23,8 +32,8 @@ class UpdateRequest extends FormRequest
             'category_id'          => 'nullable|integer|exists:categories,id',
             'preview_image'        => WebpImage::RULE,
             'main_image'           => WebpImage::RULE,
-            'remove_preview_image' => 'nullable|boolean',
-            'remove_main_image'    => 'nullable|boolean',
+            'remove_preview_image' => 'sometimes|boolean',
+            'remove_main_image'    => 'sometimes|boolean',
             'tag_ids'              => 'nullable|array',
             'tag_ids.*'            => 'nullable|integer|exists:tags,id',
         ];

@@ -3,6 +3,10 @@
 @section('content')
     <h1>Edit post</h1>
 
+    @if(session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
+
     <form method="post" action="{{ route('admin.post.update', $post->id) }}" enctype="multipart/form-data">
         @csrf
         @method('patch')
@@ -30,7 +34,9 @@
                     </div>
                     <div class="form-check mb-2">
                         <input class="form-check-input" type="checkbox" name="remove_preview_image" value="1" id="remove_preview_image">
-                        <label class="form-check-label" for="remove_preview_image">Bild entfernen</label>
+                        <label class="form-check-label text-danger" for="remove_preview_image">
+                            Remove preview image
+                        </label>
                     </div>
                 @endif
                 <input type="file" class="form-control" name="preview_image" accept="{{ \App\Support\WebpImage::ACCEPT }}">
@@ -46,7 +52,9 @@
                     </div>
                     <div class="form-check mb-2">
                         <input class="form-check-input" type="checkbox" name="remove_main_image" value="1" id="remove_main_image">
-                        <label class="form-check-label" for="remove_main_image">Bild entfernen</label>
+                        <label class="form-check-label text-danger" for="remove_main_image">
+                            Remove main image
+                        </label>
                     </div>
                 @endif
                 <input type="file" class="form-control" name="main_image" accept="{{ \App\Support\WebpImage::ACCEPT }}">
