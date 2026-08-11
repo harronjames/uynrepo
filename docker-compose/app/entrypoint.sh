@@ -7,6 +7,16 @@ if [ ! -f .env ] && [ -f .env.local ]; then
     cp .env.local .env
 fi
 
+# Laravel key:generate bazen .env.local'a yazar (dosya var ise).
+# Docker bind-mount yüzünden izinler yanlış gelebilir, bu yüzden
+# .env ve .env.local dosyalarını yazılabilir yapıyoruz.
+if [ -f .env ]; then
+    chmod u+rw .env 2>/dev/null || true
+fi
+if [ -f .env.local ]; then
+    chmod u+rw .env.local 2>/dev/null || true
+fi
+
 mkdir -p storage/framework/cache storage/framework/sessions storage/framework/views bootstrap/cache
 chmod -R ug+rw storage bootstrap/cache 2>/dev/null || true
 
