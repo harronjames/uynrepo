@@ -22,7 +22,6 @@ class RobotsController extends Controller
             'Disallow: /blog/*/comments',
             'Disallow: /blog/*/likes',
             'Disallow: /placeholder',
-            'Disallow: /impressum',
             '',
             'Sitemap: ' . $sitemapUrl,
         ];

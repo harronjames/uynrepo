@@ -61,9 +61,9 @@ class SeoPayload
         }
 
         return [
-            'title'       => 'Über uns – Umzugland.at Ratgeber',
-            'description' => 'Erfahren Sie mehr über den Umzugland.at Ratgeber für Umzug, Räumung und Leben in Wien.',
-            'keywords'    => 'Umzugland, Umzug Wien, Räumung Ratgeber, Über uns',
+            'title'       => 'Über uns – Umzugland.at | Unabhängiger Ratgeber',
+            'description' => 'Umzugland.at ist ein unabhängiges Informationsportal zu Umzug, Entrümpelung und Leben in Wien – ohne Verkauf oder Dienstleistungsangebot.',
+            'keywords'    => 'Umzugland, Ratgeber Wien, Über uns, Umzug Tipps',
             'canonical'   => route('about.index'),
         ];
     }
@@ -79,7 +79,6 @@ class SeoPayload
         $payload = $page->toSeoPayload($canonical);
 
         if ($page->slug === 'impressum') {
-            $payload['robots'] = 'noindex, nofollow';
             $payload['image'] = null; // do not expose impressum image in OG/schema
         }
 
@@ -90,8 +89,8 @@ class SeoPayload
     {
         return [
             'title'       => 'Kontakt – Umzugland.at',
-            'description' => 'Kontaktieren Sie das Umzugland.at Team für Fragen zu Umzug, Räumung und Entrümpelung in Wien.',
-            'keywords'    => 'Kontakt Umzug Wien, Umzugland Kontakt, Räumung Anfrage',
+            'description' => 'Fragen zu unseren Ratgebern? Schreiben Sie an info@umzugland.at. Umzugland.at ist ein Informationsportal ohne Verkauf oder Dienstleistungen.',
+            'keywords'    => 'Kontakt Umzugland, info@umzugland.at, Ratgeber Wien Fragen',
             'canonical'   => route('contact.index'),
         ];
     }

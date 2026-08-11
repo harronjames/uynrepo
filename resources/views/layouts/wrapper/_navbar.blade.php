@@ -3,15 +3,15 @@
         <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 py-4">
             <div>
                 <a class="portal-brand text-decoration-none" href="{{ route('main.index') }}">
-                    <span class="portal-brand-kicker">Ratgeber für Wien &amp; Österreich</span>
+                    <span class="portal-brand-kicker">Unabhängiger Ratgeber</span>
                     <span class="portal-brand-title">Umzugland.at</span>
                 </a>
                 <p class="portal-brand-subtitle mb-0">Umzug, Räumung, Entrümpelung &amp; Leben in Wien</p>
             </div>
 
             <div class="portal-header-cta text-md-end">
-                <a href="{{ route('contact.index') }}" class="btn btn-primary rounded-pill px-4">
-                    Beratung anfragen
+                <a href="mailto:info@umzugland.at" class="btn btn-primary rounded-pill px-4">
+                    Fragen an info@umzugland.at
                 </a>
             </div>
         </div>

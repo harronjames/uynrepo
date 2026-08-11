@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Page;
 use App\Support\SeoPayload;
-use Illuminate\Contracts\View\Factory as ViewFactory;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Contracts\View\Factory as ViewFactory;
 
 class ImpressumController extends Controller
 {
@@ -15,12 +15,15 @@ class ImpressumController extends Controller
         $seo = SeoPayload::forPage($page);
 
         $html = $view_factory->make('impressum.index', [
-            'page' => $page,
-            'seo'  => $seo,
+            'page'        => $page,
+            'seo'         => $seo,
+            'breadcrumbs' => [
+                ['label' => 'Startseite', 'url' => route('main.index')],
+                ['label' => $page->title, 'url' => null],
+            ],
         ])->render();
 
         return response($html, 200)
-            ->header('X-Robots-Tag', 'noindex, nofollow')
             ->header('Content-Type', 'text/html; charset=UTF-8');
     }
 

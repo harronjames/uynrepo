@@ -8,7 +8,7 @@ return [
     'organization' => [
         'name'        => 'Umzugland.at',
         'email'       => 'info@umzugland.at',
-        'description' => 'Ratgeber für Umzug, Räumung, Entrümpelung und Leben in Wien und Österreich.',
+            'description' => 'Unabhängiger Ratgeber für Umzug, Räumung, Entrümpelung und Leben in Wien und Österreich. Rein informativ – ohne Verkauf oder Dienstleistungsangebot.',
         'locale'      => 'de-AT',
     ],
 ];

@@ -2,7 +2,10 @@
 
 @section('content')
     <h1>Impressum</h1>
-    <p class="text-muted">One optional WebP image only. This page is noindex (not indexed by search engines).</p>
+    <p class="text-muted">
+        Legal page (Medieninhaber + Disclaimer) is shown on the public site.
+        Optional WebP image only.
+    </p>
 
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
@@ -21,7 +24,7 @@
         </div>
 
         <div class="mb-3 w-50">
-            <label class="form-label">Image (optional, WebP only)</label>
+            <label class="form-label">Optional image (WebP only)</label>
             @if($page->image)
                 <div class="mb-2">
                     <img src="{{ route('impressum.image') }}" alt="" class="img-fluid rounded border" style="max-width: 320px;">

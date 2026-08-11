@@ -85,34 +85,29 @@ class UmzuglandContentSeeder extends Seeder
             ['slug' => 'about'],
             [
                 'title'            => 'Über uns',
-                'meta_title'       => 'Über uns – Umzugland.at | Umzug & Entrümpelung Wien',
-                'meta_description' => 'Umzugland.at: Ihr Partner für Umzug und Entrümpelung in Wien. Transparenz, Pünktlichkeit und Fixpreise ohne versteckte Gebühren.',
-                'meta_keywords'    => 'Umzugland, Umzug Wien, Entrümpelung Wien, Über uns, Fixpreis',
+                'meta_title'       => 'Über uns – Umzugland.at | Unabhängiger Ratgeber',
+                'meta_description' => 'Umzugland.at ist ein unabhängiges Informationsportal zu Umzug, Entrümpelung und Leben in Wien – ohne Verkauf oder Dienstleistungsangebot.',
+                'meta_keywords'    => 'Umzugland, Ratgeber Wien, Über uns, Umzug Tipps, Entrümpelung Infos',
                 'content'          => <<<'HTML'
-<p class="lead text-muted">Premium-Service für Umzug und Entrümpelung in Wien – transparent, pünktlich, ohne versteckte Kosten.</p>
+<p class="lead text-muted">Unabhängiger Ratgeber für Umzug, Entrümpelung und Alltag in Wien – rein informativ.</p>
 
 <h2>Über Umzugland.at</h2>
-<p>Wer umzieht oder entrümpelt, braucht mehr als Muskelkraft: Verlässlichkeit, klare Preise und Partner, die halten, was sie versprechen. Genau dafür steht Umzugland.at – Ihr Umzugs- und Entrümpelungspartner aus Wien. Wir planen jeden Auftrag mit Ruhe und Präzision, damit Sie den Wohnungswechsel oder die Räumung ohne böse Überraschungen hinter sich bringen.</p>
-<p>Transparenz ist bei uns kein Werbeslogan, sondern Arbeitsprinzip. Vor dem ersten Karton besprechen wir Umfang, Zeitfenster und Ablauf – und Sie erhalten einen Fixpreis ohne versteckte Zuschläge. Pünktlichkeit gehört dazu: Unsere Teams erscheinen zum vereinbarten Termin, kommunizieren verständlich und arbeiten so, dass Wohnung, Büro und Nachbarn respektiert bleiben.</p>
-<p>Ob Privatumzug in Wien und Umgebung, Firmenumzug oder Entrümpelung von Wohnung, Keller und Dachboden: Wir liefern Premium-Service zum fairen Preis. Mit Umzugland.at entscheiden Sie sich für ein Team, das Ihre Zeit ernst nimmt – und für ein Angebot, bei dem Sie von Anfang an wissen, woran Sie sind.</p>
+<p>Umzugland.at ist ein redaktionelles Informationsportal. Wir erklären Themen rund um Wohnungswechsel, Entrümpelung, Sperrmüll und praktische Fragen des Lebens in Wien und Österreich – verständlich, strukturiert und mit lokalem Fokus.</p>
+<p>Wir verkaufen keine Dienstleistungen und nehmen keine Aufträge entgegen. Unser Ziel ist Orientierung: Checklisten, Kostenfaktoren, Behördenwege und typische Fallstricke, damit Sie fundierte Entscheidungen treffen können.</p>
+<p>Haben Sie Rückfragen zu einem Artikel? Schreiben Sie an <a href="mailto:info@umzugland.at">info@umzugland.at</a>.</p>
 
-<h2>Unsere Leistungen</h2>
-<h3>Privatumzug</h3>
-<p>Wir übernehmen Ihren privaten Wohnungswechsel in Wien und Umgebung – von der Planung bis zum letzten Karton. Mit Fixpreis, erfahrenem Team und schonendem Transport kommen Sie stressfrei in Ihr neues Zuhause.</p>
-<h3>Firmenumzug</h3>
-<p>Büro- und Betriebsumzüge planen wir so, dass Ausfallzeiten möglichst gering bleiben. Möbel, IT und Akten werden fachgerecht verpackt, etikettiert und termingenau am neuen Standort aufgebaut.</p>
-<h3>Entrümpelung &amp; Räumung</h3>
-<p>Wohnung, Keller, Dachboden oder Garage: Wir räumen gründlich, entsorgen ordnungsgemäß und hinterlassen besenreine Flächen. Ideal bei Auszug, Nachlass oder wenn Platz endlich wieder nutzbar werden soll.</p>
-<h3>Verpackungsservice</h3>
-<p>Auf Wunsch verpacken wir Ihre Einrichtung professionell – mit geeignetem Material und klarer Kennzeichnung. So bleibt Zerbrechliches geschützt und der Neuaufbau am Zielort deutlich schneller.</p>
-
-<h2>Warum wir</h2>
+<h2>Was Sie hier finden</h2>
 <ul>
-<li><strong>Fixpreisgarantie</strong> – Der vereinbarte Preis gilt. Keine versteckten Gebühren, keine Nachforderungen am Umzugstag.</li>
-<li><strong>Kostenlose Besichtigung</strong> – Wir schauen vor Ort (oder digital), bewerten den Aufwand realistisch und erstellen ein klares Angebot.</li>
-<li><strong>Pünktliche Teams</strong> – Termine werden eingehalten. Sie wissen, wann wir starten – und wann Sie wieder durchatmen können.</li>
-<li><strong>Alles aus einer Hand</strong> – Umzug, Entrümpelung, Verpackung und fachgerechte Entsorgung – abgestimmt, ohne Koordinationschaos.</li>
-<li><strong>Wien-Erfahrung</strong> – Lokales Know-how zu Zufahrt, Parken und Halteverbotszonen, damit der Lkw dort steht, wo er gebraucht wird.</li>
+<li><strong>Umzug in Wien</strong> – Planung, Checklisten, Halteverbotszone und Tipps zum Wohnungswechsel</li>
+<li><strong>Entrümpelung &amp; Räumung</strong> – Ablauf, Preisfaktoren und worauf Sie achten sollten</li>
+<li><strong>Praktische Alltagsthemen</strong> – Sperrmüll, Wohnungsübergabe, Möbeltransport und mehr</li>
+</ul>
+
+<h2>Unser Anspruch</h2>
+<ul>
+<li><strong>Neutral &amp; unabhängig</strong> – keine Verkaufsseite, keine Auftragsvermittlung</li>
+<li><strong>Lokal relevant</strong> – Fokus auf Wien und Österreich</li>
+<li><strong>Klar formuliert</strong> – praxisnahe Informationen statt Werbesprache</li>
 </ul>
 HTML,
             ]
@@ -128,8 +123,8 @@ HTML,
                 'content'          => '',
                 'image'            => null,
                 'meta_title'       => 'Impressum – Umzugland.at',
-                'meta_description' => 'Impressum von Umzugland.at',
-                'meta_keywords'    => 'Impressum, Umzugland.at',
+                'meta_description' => 'Impressum und Haftungsausschluss von Umzugland.at – Medieninhaber Mesut Duman, Wien.',
+                'meta_keywords'    => 'Impressum, Umzugland.at, Haftungsausschluss',
             ]
         );
     }
@@ -204,7 +199,7 @@ HTML,
 </ul>
 
 <h2>Fazit</h2>
-<p>Ein stressfreier Umzug in Wien entsteht selten spontan – er entsteht durch Planung. Mit Timeline, Fixpreis-Angebot und rechtzeitiger Halteverbotszone wird aus dem Chaos ein kontrollierter Ablauf. Wenn Sie Unterstützung brauchen, übernimmt Umzugland.at Planung, Transport und auf Wunsch auch Entrümpelung und Verpackung – transparent und pünktlich.</p>
+<p>Ein stressfreier Umzug in Wien entsteht selten spontan – er entsteht durch Planung. Mit Timeline, klaren Angeboten und rechtzeitiger Halteverbotszone wird aus dem Chaos ein kontrollierter Ablauf. Weitere Tipps finden Sie in unseren Ratgebern auf Umzugland.at.</p>
 HTML,
             ],
             [
@@ -246,7 +241,7 @@ HTML,
 <li>klarer Leistungsliste (was ist inklusive?)</li>
 <li>Fixpreis oder klarer Stundenrahmen <strong>mit</strong> Entsorgungskosten</li>
 </ul>
-<p>Bei Umzugland.at setzen wir auf <strong>Fixpreis nach Einschätzung</strong> – damit Sie vor dem Start wissen, was Sie zahlen. Keine Überraschungen am Ende, weil „noch zwei Fahrten“ oder „Entsorgung extra“ plötzlich auftauchen.</p>
+<p>Bei der Wahl eines Anbieters achten viele Wiener Haushalte auf einen <strong>klaren Fixpreis nach Einschätzung</strong> – damit vor dem Start klar ist, was anfällt. Achten Sie darauf, dass Entsorgung und Zuschläge schriftlich geregelt sind.</p>
 
 <h2>Typische Kostenfallen – und wie Sie sie vermeiden</h2>
 <ul>
@@ -265,7 +260,7 @@ HTML,
 </ol>
 
 <h2>Fazit</h2>
-<p>Die Kosten einer Entrümpelung in Wien entstehen aus Volumen, Zugang und Entsorgung – nicht aus Glück. Wer Preisfaktoren kennt und auf Fixpreis mit klarer Leistung setzt, vermeidet Fallen. Umzugland.at berät transparent, kalkuliert realistisch und räumt so, dass Sie am Ende wissen: Preis und Ergebnis passen zusammen.</p>
+<p>Die Kosten einer Entrümpelung in Wien entstehen aus Volumen, Zugang und Entsorgung – nicht aus Glück. Wer Preisfaktoren kennt und auf Fixpreis mit klarer Leistung setzt, vermeidet Fallen. Mehr Orientierung finden Sie in den Ratgebern auf Umzugland.at.</p>
 HTML,
             ],
             [
@@ -345,8 +340,8 @@ HTML,
 <li><strong>Privat organisieren ohne Abstimmung</strong> – mit dem Umzugsteam Zeitfenster und Lkw-Größe abstimmen</li>
 </ul>
 
-<h2>Was Umzugland.at für Sie übernimmt</h2>
-<p>Wir kennen die Wiener Realität: enge Gassen, volle Parkspuren, Zeitdruck am Umzugstag. Auf Wunsch unterstützen wir Sie bei der Planung rund um Zufahrt und Halteverbotszone – und koordinieren den Ablauf so, dass Beladen und Entladen dort passiert, wo es erlaubt und effizient ist. Transparent, pünktlich, ohne Chaos am Straßenrand.</p>
+<h2>Praxis-Tipp für Wien</h2>
+<p>Wir kennen die Wiener Realität: enge Gassen, volle Parkspuren, Zeitdruck am Umzugstag. Eine gute Vorbereitung rund um Zufahrt und Halteverbotszone sorgt dafür, dass Beladen und Entladen dort passiert, wo es erlaubt und effizient ist.</p>
 
 <h2>Fazit</h2>
 <p>Die Halteverbotszone ist in Wien oft der unterschätzte Erfolgsfaktor für den Umzug. Rechtzeitig über die MA 46 beantragen, Schilder korrekt und fristgerecht aufstellen, Bereich freihält – dann steht der Lkw dort, wo Sie ihn brauchen. Mit klarer Vorbereitung wird aus dem Parkplatzproblem eine planbare Routine.</p>
@@ -419,7 +414,7 @@ HTML,
 
 <h2>Fazit</h2>
 <p>Eine Küche umzuziehen ist in Wien planbar – wenn Maße, Anschlüsse und Transportwege vor der ersten Schraube klar sind. Wer Demontage, Sicherung und Einbau als eigenen Projektblock behandelt, spart Reparaturen und Nerven.</p>
-<p><strong>Küche professionell umziehen lassen?</strong> Umzugland.at plant Demontage, Transport und – auf Wunsch – die Abstimmung mit Einbau und Entsorgung alter Teile. <a href="/contacts">Jetzt unverbindlich anfragen</a> – Fixpreis, pünktlich, ohne versteckte Zuschläge.</p>
+<p><strong>Fragen zum Küchenumzug?</strong> Schreiben Sie uns an <a href="mailto:info@umzugland.at">info@umzugland.at</a> – Umzugland.at ist ein Informationsportal und beantwortet gerne inhaltliche Rückfragen.</p>
 HTML,
             ],
             [
@@ -493,7 +488,7 @@ HTML,
 
 <h2>Fazit</h2>
 <p>Eine saubere Wohnungsübergabe in Wien ist vor allem Dokumentation: leer übergeben, alles schriftlich festhalten, Mängel konkret benennen und die Kaution aktiv nachverfolgen. Wer vorbereitet in den Termin geht, steht deutlich besser da.</p>
-<p><strong>Vor der Übergabe noch räumen oder entrümpeln?</strong> Umzugland.at holt Restmöbel, Kellerkram und Sperriges raus – damit Sie besenrein und stressfrei übergeben können. <a href="/contacts">Kontakt aufnehmen</a> und Termin sichern.</p>
+<p><strong>Vor der Übergabe noch Fragen?</strong> Schreiben Sie an <a href="mailto:info@umzugland.at">info@umzugland.at</a>. Umzugland.at bietet Ratgeber – keine Verkaufs- oder Räumungsdienstleistungen.</p>
 HTML,
             ],
             [
@@ -579,7 +574,7 @@ HTML,
 
 <h2>Fazit</h2>
 <p>Günstiger Möbeltransport in Wien heißt nicht automatisch Sprinter-Miete. Firma, Miete und Eigenregie haben klare Einsatzgebiete. Wer Volumen, Zugang und Risiko ehrlich bewertet, spart am Ende Geld – nicht nur am Angebotstext.</p>
-<p><strong>Möbel in Wien sicher transportieren lassen?</strong> Umzugland.at holt einzelne Stücke oder die ganze Wohnung – mit Fixpreis und Wiener Streckenkenntnis. <a href="/contacts">Angebot anfragen</a> und Variante gemeinsam festlegen.</p>
+<p><strong>Fragen zum Möbeltransport?</strong> Inhaltliche Rückfragen gerne an <a href="mailto:info@umzugland.at">info@umzugland.at</a>. Umzugland.at ist ein Ratgeberportal ohne Transportangebot.</p>
 HTML,
             ],
             [
@@ -652,7 +647,7 @@ HTML,
 
 <h2>Fazit</h2>
 <p>Sperrmüll in Wien richtig zu entsorgen heißt: MA-48-Wege nutzen, trennen, nicht illegal abstellen. Selbst zum Mistplatz ist günstig bei kleinem Volumen; bei vollen Kellern und Zeitdruck ist die Abholung die sauberere Lösung – auch für die Kaution bei der Wohnungsübergabe.</p>
-<p><strong>Alte Möbel in Wien abholen lassen?</strong> Umzugland.at räumt Wohnung und Keller, entsorgt Sperrmüll fachgerecht und hinterlässt besenreine Flächen. <a href="/contacts">Jetzt Termin anfragen</a> – transparenter Fixpreis, ohne Chaos vor der Tür.</p>
+<p><strong>Fragen zur Sperrmüllentsorgung?</strong> Schreiben Sie an <a href="mailto:info@umzugland.at">info@umzugland.at</a>. Umzugland.at informiert – wir verkaufen keine Abholservices.</p>
 HTML,
             ],
         ];

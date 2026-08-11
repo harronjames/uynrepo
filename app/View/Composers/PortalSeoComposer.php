@@ -13,7 +13,6 @@ class PortalSeoComposer
 
         $schemas = [
             StructuredData::organization(),
-            StructuredData::localBusiness(),
         ];
 
         if (! empty($view->getData()['breadcrumbs'])) {

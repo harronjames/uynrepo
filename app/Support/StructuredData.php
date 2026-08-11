@@ -28,25 +28,8 @@ class StructuredData
 
     public static function localBusiness(): array
     {
-        $siteUrl = config('seo.site_url');
-
-        return [
-            '@type'       => ['LocalBusiness', 'ProfessionalService'],
-            '@id'         => $siteUrl . '#localbusiness',
-            'name'        => config('seo.organization.name'),
-            'url'         => $siteUrl,
-            'email'       => config('seo.organization.email'),
-            'description' => 'Umzug, Räumung und Entrümpelung in Wien – Ratgeber und Serviceinformationen.',
-            'areaServed'  => [
-                '@type' => 'City',
-                'name'  => 'Wien',
-            ],
-            'address' => [
-                '@type'           => 'PostalAddress',
-                'addressLocality' => 'Wien',
-                'addressCountry'  => 'AT',
-            ],
-        ];
+        // Kept for backwards compatibility; portal is informational only (no service offers).
+        return self::organization();
     }
 
     public static function website(): array

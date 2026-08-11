@@ -6,7 +6,8 @@
                     <span class="portal-brand-title text-white">Umzugland.at</span>
                 </a>
                 <p class="text-secondary mb-0">
-                    Ihr Ratgeber für Umzug, Räumung, Entrümpelung und praktisches Leben in Wien und Österreich.
+                    Unabhängiger Ratgeber für Umzug, Räumung, Entrümpelung und praktisches Leben in Wien und Österreich.
+                    Rein informativ – ohne Verkauf oder Dienstleistungsangebot.
                 </p>
             </div>
 
@@ -34,9 +35,9 @@
             </div>
 
             <div class="col-lg-3">
-                <h2 class="h6 text-white text-uppercase mb-3">Servicegebiet</h2>
-                <p class="text-secondary mb-2">Wien, Niederösterreich und ganz Österreich.</p>
-                <a href="{{ route('contact.index') }}" class="portal-inline-link-light">Jetzt Kontakt aufnehmen</a>
+                <h2 class="h6 text-white text-uppercase mb-3">Fragen?</h2>
+                <p class="text-secondary mb-2">Inhaltliche Rückfragen gerne per E-Mail.</p>
+                <a href="mailto:info@umzugland.at" class="portal-inline-link-light">info@umzugland.at</a>
             </div>
         </div>
 
