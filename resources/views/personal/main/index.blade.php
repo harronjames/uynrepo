@@ -1,4 +1,4 @@
-@extends('layouts.wrapper-personal', ['title' => 'My Personal Blog'])
+@extends('layouts.wrapper-personal', ['title' => 'Umzugland.at'])
 
 @section('content')
     <div class="container-lg mt-5">

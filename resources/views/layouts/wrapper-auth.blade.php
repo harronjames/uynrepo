@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Umzugland.at – Login</title>
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -23,7 +23,7 @@
                 <div class="col-4 text-center">
                     <a class="blog-header-logo text-body-emphasis text-decoration-none" href="{{ route('main.index') }}"
                         style="font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.95rem;">
-                        My Personal Blog
+                        Umzugland.at
                     </a>
                 </div>
                 <div class="col-4 d-flex justify-content-end align-items-center">

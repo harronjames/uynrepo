@@ -104,7 +104,7 @@
                         <svg class="bi">
                             <use xlink:href="#file-earmark-text"/>
                         </svg>
-                        Blog`s Homepage
+                        Homepage
                     </a>
                 </li>
                 <li class="nav-item">
