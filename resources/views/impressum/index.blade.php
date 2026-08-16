@@ -2,19 +2,17 @@
 
 @section('page-content')
     <section class="portal-article-content impressum-legal">
-        <h1 class="portal-post-title display-6 mb-4">{{ $page->title }}</h1>
+        <h1 class="portal-post-title display-6 mb-4">Impressum / Offenlegung gemäß § 25 MedienG</h1>
 
-        <div class="mb-4">
-            <h2 class="h5 mb-3">Medieninhaber</h2>
-            <ul class="list-unstyled mb-0">
-                <li class="mb-2"><strong>Medieninhaber:</strong> Mesut Duman</li>
-                <li class="mb-2"><strong>Wohnort:</strong> Wien, Österreich</li>
-                <li class="mb-0">
-                    <strong>Kontakt:</strong>
-                    <a href="mailto:info@umzugland.at" class="portal-inline-link">info@umzugland.at</a>
-                </li>
-            </ul>
-        </div>
+        <h2 class="h5 mb-3">Medieninhaber und für den Inhalt verantwortlich</h2>
+        <ul class="list-unstyled mb-4">
+            <li class="mb-2">Mesut Duman</li>
+            <li class="mb-2">Wien, Österreich</li>
+            <li class="mb-0">
+                E-Mail:
+                <a href="mailto:info@umzugland.at" class="portal-inline-link">info@umzugland.at</a>
+            </li>
+        </ul>
 
         @if($page->image)
             <figure class="mb-4 text-center">
@@ -28,42 +26,48 @@
             </figure>
         @endif
 
-        <h2 class="h4 mt-4 mb-3">Haftungsausschluss (Disclaimer)</h2>
-
-        <h3 class="h5 mt-4 mb-2">Haftung für Inhalte</h3>
+        <h2 class="h5 mt-4 mb-3">Grundlegende Richtung (Blattlinie)</h2>
         <p>
-            Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt. Für die Richtigkeit,
-            Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen.
-            Als Diensteanbieter sind wir gemäß allgemeinen Gesetzen für eigene Inhalte auf diesen
-            Seiten verantwortlich. Wir sind jedoch nicht verpflichtet, übermittelte oder gespeicherte
-            fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine
-            rechtswidrige Tätigkeit hinweisen.
+            Umzugland.at ist ein unabhängiges, redaktionelles Informations- und Ratgeberportal zu den
+            Themen Umzug, Übersiedlung, Umzugsplanung, Kosten und damit zusammenhängenden Themen.
+        </p>
+        <p>
+            Die Website dient ausschließlich der allgemeinen Information und Orientierung.
         </p>
 
-        <h3 class="h5 mt-4 mb-2">Haftung für Links</h3>
+        <h2 class="h5 mt-4 mb-3">Keine gewerblichen Umzugsleistungen</h2>
         <p>
-            Unser Angebot enthält Links zu externen Webseiten Dritter, auf deren Inhalte wir keinen
-            Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen.
-            Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der
-            Seiten verantwortlich. Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist
-            jedoch ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht zumutbar. Bei Bekanntwerden
-            von Rechtsverletzungen werden wir derartige Links umgehend entfernen.
+            Über Umzugland.at werden keine eigenen Umzugs-, Transport- oder Entrümpelungsleistungen
+            angeboten oder durchgeführt. Die Website nimmt keine Umzugsaufträge entgegen und vermittelt
+            keine Verträge oder verbindlichen Angebote für Umzugsleistungen.
         </p>
 
-        <h3 class="h5 mt-4 mb-2">Urheberrecht</h3>
+        <h2 class="h5 mt-4 mb-3">Rechtliche Hinweise</h2>
+        <p>
+            Die auf dieser Website bereitgestellten Inhalte dienen ausschließlich der allgemeinen
+            Information und Orientierung und stellen keine individuelle Rechts-, Steuer- oder sonstige
+            Fachberatung dar.
+        </p>
+        <p>
+            Informationen zu Preisen, Kosten, Abläufen, gesetzlichen Bestimmungen oder behördlichen
+            Vorgaben werden mit größtmöglicher Sorgfalt erstellt. Dennoch kann keine Gewähr für deren
+            Vollständigkeit, Richtigkeit und Aktualität übernommen werden.
+        </p>
+        <p>
+            Eine Haftung für Schäden aufgrund der Nutzung der bereitgestellten Informationen ist, soweit
+            gesetzlich zulässig, ausgeschlossen.
+        </p>
+        <p>
+            Für Inhalte externer Websites, auf die mittels Links verwiesen wird, sind ausschließlich
+            deren Betreiber verantwortlich. Bei Bekanntwerden rechtswidriger Inhalte werden entsprechende
+            Links entfernt.
+        </p>
+
+        <h2 class="h5 mt-4 mb-3">Urheberrecht</h2>
         <p class="mb-0">
-            Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen
-            dem österreichischen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede
-            Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen
-            Zustimmung des jeweiligen Autors bzw. Erstellers. Downloads und Kopien dieser Seite sind
-            nur für den privaten, nicht kommerziellen Gebrauch gestattet.
-        </p>
-
-        <hr class="my-4">
-
-        <p class="text-muted small mb-0">
-            Umzugland.at ist ein unabhängiges Informations- und Ratgeberportal. Wir bieten keine
-            Verkaufs- oder Dienstleistungsangebote an und vermitteln keine Aufträge.
+            Die auf Umzugland.at veröffentlichten Texte, Grafiken und sonstigen eigenen Inhalte sind
+            urheberrechtlich geschützt. Eine Verwendung außerhalb der gesetzlich zulässigen Grenzen
+            bedarf der vorherigen Zustimmung des jeweiligen Rechteinhabers.
         </p>
     </section>
 @endsection
