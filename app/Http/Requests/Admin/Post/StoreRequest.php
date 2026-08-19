@@ -38,10 +38,12 @@ class StoreRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'preview_image.mimes'     => 'Nur WebP-Dateien sind erlaubt.',
-            'preview_image.mimetypes' => 'Nur WebP-Dateien sind erlaubt.',
-            'main_image.mimes'        => 'Nur WebP-Dateien sind erlaubt.',
-            'main_image.mimetypes'    => 'Nur WebP-Dateien sind erlaubt.',
+            'preview_image.extensions' => 'Nur WebP-Dateien sind erlaubt.',
+            'preview_image.mimes'      => 'Nur WebP-Dateien sind erlaubt.',
+            'preview_image.mimetypes'  => 'Nur WebP-Dateien sind erlaubt.',
+            'main_image.extensions'    => 'Nur WebP-Dateien sind erlaubt.',
+            'main_image.mimes'         => 'Nur WebP-Dateien sind erlaubt.',
+            'main_image.mimetypes'     => 'Nur WebP-Dateien sind erlaubt.',
         ];
     }
 }

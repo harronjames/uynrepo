@@ -25,16 +25,18 @@
             ])
 
             <div class="form-group w-50 mb-3">
-                <label>Preview image <span class="text-muted">(optional, WebP only)</span></label>
-                <input type="file" class="form-control" name="preview_image" accept="{{ \App\Support\WebpImage::ACCEPT }}">
-                @error('preview_image')
+                <label class="form-label">Cover image (detail page) <span class="text-muted">(optional, WebP only)</span></label>
+                <input type="file" class="form-control" name="main_image" accept="{{ \App\Support\WebpImage::ACCEPT }}">
+                <div class="form-text">Shown at the top of the article. Other formats are rejected.</div>
+                @error('main_image')
                 <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
             <div class="form-group w-50 mb-3">
-                <label>Main image <span class="text-muted">(optional, WebP only)</span></label>
-                <input type="file" class="form-control" name="main_image" accept="{{ \App\Support\WebpImage::ACCEPT }}">
-                @error('main_image')
+                <label class="form-label">Small card image <span class="text-muted">(optional, WebP only)</span></label>
+                <input type="file" class="form-control" name="preview_image" accept="{{ \App\Support\WebpImage::ACCEPT }}">
+                <div class="form-text">Used on the homepage and category lists. If empty, the cover image is shown instead.</div>
+                @error('preview_image')
                 <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>

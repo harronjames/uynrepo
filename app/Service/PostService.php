@@ -160,6 +160,13 @@ class PostService
             return null;
         }
 
+        $extension = strtolower((string) $file->getClientOriginalExtension());
+        $mime = strtolower((string) $file->getMimeType());
+
+        if ($extension !== 'webp' || ! in_array($mime, ['image/webp', 'image/x-webp'], true)) {
+            return null;
+        }
+
         $path = $file->store('images', 'public');
 
         return $path ? '/storage/' . ltrim($path, '/') : null;

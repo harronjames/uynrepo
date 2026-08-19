@@ -9,9 +9,9 @@
             @forelse($posts as $post)
                 <div class="col-md-6">
                     <article class="portal-post-card h-100 d-flex flex-column">
-                        @if($post->preview_image)
+                        @if($post->card_image)
                             <a href="{{ route('post.show', $post) }}">
-                                <img src="{{ $post->preview_image }}" alt="{{ $post->title }}" loading="lazy">
+                                <img src="{{ $post->card_image }}" alt="{{ $post->title }}" loading="lazy">
                             </a>
                         @endif
                         <div class="card-body d-flex flex-column">

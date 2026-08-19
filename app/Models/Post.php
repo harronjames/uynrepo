@@ -33,6 +33,7 @@ use Illuminate\Support\Str;
  * @property Carbon|null $deleted_at
  * @property-read Collection<int, Category> $categories
  * @property-read int|null $categories_count
+ * @property-read string|null $card_image
  * @property-read string $human_read_time
  * @property-read Collection<int, Comment> $comments
  * @property-read int|null $comments_count
@@ -118,6 +119,14 @@ class Post extends Model
     public function safeContent(): string
     {
         return HtmlSanitizer::clean((string) $this->content);
+    }
+
+    /**
+     * Small list/card image: dedicated preview if set, otherwise the detail cover.
+     */
+    public function cardImage(): Attribute
+    {
+        return Attribute::get(fn (): ?string => $this->preview_image ?: $this->main_image);
     }
 
     public function getFormattedDate(): string

@@ -22,9 +22,9 @@
                     Artikel lesen
                 </a>
             </div>
-            @if($featuredPost->preview_image)
+            @if($featuredPost->card_image)
                 <div class="col-lg-5">
-                    <img src="{{ $featuredPost->preview_image }}" alt="{{ $featuredPost->title }}" class="img-fluid rounded-4 shadow">
+                    <img src="{{ $featuredPost->card_image }}" alt="{{ $featuredPost->title }}" class="img-fluid rounded-4 shadow">
                 </div>
             @endif
         </div>
@@ -40,9 +40,9 @@
             @foreach($otherPosts as $post)
                 <div class="col-md-6">
                     <article class="portal-post-card d-flex flex-column">
-                        @if($post->preview_image)
+                        @if($post->card_image)
                             <a href="{{ route('post.show', $post) }}">
-                                <img src="{{ $post->preview_image }}" alt="{{ $post->title }}" loading="lazy">
+                                <img src="{{ $post->card_image }}" alt="{{ $post->title }}" loading="lazy">
                             </a>
                         @endif
                         <div class="card-body d-flex flex-column flex-grow-1">

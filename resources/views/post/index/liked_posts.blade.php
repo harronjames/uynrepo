@@ -13,9 +13,9 @@
             @foreach($likedPosts as $likedPost)
                 <div class="col-md-4">
                     <article class="portal-post-card h-100 d-flex flex-column">
-                        @if($likedPost->preview_image)
+                        @if($likedPost->card_image)
                             <a href="{{ route('post.show', $likedPost) }}">
-                                <img src="{{ $likedPost->preview_image }}" alt="{{ $likedPost->title }}" loading="lazy">
+                                <img src="{{ $likedPost->card_image }}" alt="{{ $likedPost->title }}" loading="lazy">
                             </a>
                         @endif
                         <div class="card-body d-flex flex-column">

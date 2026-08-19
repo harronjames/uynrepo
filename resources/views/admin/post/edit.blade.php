@@ -30,38 +30,42 @@
             ])
 
             <div class="form-group w-50 mb-3">
-                <label class="form-label">Preview image <span class="text-muted">(optional, WebP only)</span></label>
-                @if($post->preview_image)
-                    <div class="mb-2">
-                        <img src="{{ $post->preview_image }}" alt="preview_image" class="img-fluid rounded border" style="max-width: 240px;">
-                    </div>
-                    <div class="form-check mb-2">
-                        <input class="form-check-input" type="checkbox" name="remove_preview_image" value="1" id="remove_preview_image">
-                        <label class="form-check-label text-danger" for="remove_preview_image">
-                            Remove preview image
-                        </label>
-                    </div>
-                @endif
-                <input type="file" class="form-control" name="preview_image" accept="{{ \App\Support\WebpImage::ACCEPT }}">
-                @error('preview_image')
-                <div class="text-danger">{{ $message }}</div>
-                @enderror
-            </div>
-            <div class="form-group w-50 mb-3">
-                <label class="form-label">Main image <span class="text-muted">(optional, WebP only)</span></label>
+                <label class="form-label">Cover image (detail page) <span class="text-muted">(optional, WebP only)</span></label>
                 @if($post->main_image)
                     <div class="mb-2">
-                        <img src="{{ $post->main_image }}" alt="main_image" class="img-fluid rounded border" style="max-width: 240px;">
+                        <img src="{{ $post->main_image }}" alt="cover image" class="img-fluid rounded border" style="max-width: 240px;">
                     </div>
                     <div class="form-check mb-2">
                         <input class="form-check-input" type="checkbox" name="remove_main_image" value="1" id="remove_main_image">
                         <label class="form-check-label text-danger" for="remove_main_image">
-                            Remove main image
+                            Remove cover image
                         </label>
                     </div>
                 @endif
                 <input type="file" class="form-control" name="main_image" accept="{{ \App\Support\WebpImage::ACCEPT }}">
+                <div class="form-text">Shown at the top of the article. Other formats are rejected.</div>
                 @error('main_image')
+                <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="form-group w-50 mb-3">
+                <label class="form-label">Small card image <span class="text-muted">(optional, WebP only)</span></label>
+                @if($post->preview_image)
+                    <div class="mb-2">
+                        <img src="{{ $post->preview_image }}" alt="card image" class="img-fluid rounded border" style="max-width: 240px;">
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox" name="remove_preview_image" value="1" id="remove_preview_image">
+                        <label class="form-check-label text-danger" for="remove_preview_image">
+                            Remove small card image
+                        </label>
+                    </div>
+                @else
+                    <div class="form-text mb-2">Currently using the cover image on lists.</div>
+                @endif
+                <input type="file" class="form-control" name="preview_image" accept="{{ \App\Support\WebpImage::ACCEPT }}">
+                <div class="form-text">Used on the homepage and category lists. If empty, the cover image is shown instead.</div>
+                @error('preview_image')
                 <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>

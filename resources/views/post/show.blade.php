@@ -48,9 +48,9 @@
                 @foreach($relatedPosts as $relatedPost)
                     <div class="col-md-4">
                         <article class="portal-post-card h-100">
-                            @if($relatedPost->main_image ?: $relatedPost->preview_image)
+                            @if($relatedPost->card_image)
                                 <a href="{{ route('post.show', $relatedPost) }}">
-                                    <img src="{{ $relatedPost->main_image ?: $relatedPost->preview_image }}" alt="{{ $relatedPost->title }}" loading="lazy">
+                                    <img src="{{ $relatedPost->card_image }}" alt="{{ $relatedPost->title }}" loading="lazy">
                                 </a>
                             @endif
                             <div class="card-body">
