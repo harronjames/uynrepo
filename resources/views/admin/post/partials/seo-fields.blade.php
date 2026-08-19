@@ -66,7 +66,7 @@
                 name="schema_json"
                 data-status="schema_json_status"
                 spellcheck="false"
-                placeholder='{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[]}'
+                placeholder="{{ json_encode(['@context' => 'https://schema.org', '@type' => 'FAQPage', 'mainEntity' => []], JSON_UNESCAPED_SLASHES) }}"
             >{{ $schemaJson }}</textarea>
             <div id="schema_json_status" class="form-text schema-status"></div>
             @error('schema_json')

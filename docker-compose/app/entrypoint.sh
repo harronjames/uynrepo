@@ -4,17 +4,7 @@ set -eu
 cd /var/www
 
 if [ ! -f .env ] && [ -f .env.local ]; then
-    cp .env.local .env
-fi
-
-# Laravel key:generate bazen .env.local'a yazar (dosya var ise).
-# Docker bind-mount yüzünden izinler yanlış gelebilir, bu yüzden
-# .env ve .env.local dosyalarını yazılabilir yapıyoruz.
-if [ -f .env ]; then
-    chmod u+rw .env 2>/dev/null || true
-fi
-if [ -f .env.local ]; then
-    chmod u+rw .env.local 2>/dev/null || true
+    cp .env.local .env || true
 fi
 
 mkdir -p storage/framework/cache storage/framework/sessions storage/framework/views bootstrap/cache
@@ -49,7 +39,15 @@ if [ "${DB_CONNECTION:-}" = "mysql" ] && [ -n "${DB_HOST:-}" ] && [ -n "${DB_POR
     done
 fi
 
-php artisan key:generate --ansi --force
+# APP_KEY already comes from env_file (.env.local). Never rotate it on boot:
+# key:generate --force rewrites the env file and fails with Permission denied
+# when the bind-mount is owned by root (typical after git pull as root).
+if [ -z "${APP_KEY:-}" ]; then
+    php artisan key:generate --ansi --force || echo "APP_KEY missing and key:generate could not write the env file."
+else
+    echo "APP_KEY is set, skipping key:generate."
+fi
+
 php artisan migrate --ansi --force
 php artisan storage:link --ansi || true
 
