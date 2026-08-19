@@ -52,20 +52,10 @@
                 <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
-            <div class="col-12 col-sm-6 mb-3">
-                <div class="form-group">
-                    <label>Select tags</label>
-                    <select class="form-select" multiple size="6" name="tag_ids[]">
-                        @foreach($tags as $tag)
-                            <option
-                                {{ is_array(old('tag_ids')) && in_array($tag->id, old('tag_ids')) ? ' selected' : '' }} value="{{ $tag->id }}">{{ $tag->title }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                @error('tag_ids')
-                <div class="text-danger">{{ $message }}</div>
-                @enderror
-            </div>
+            @include('admin.post.partials.tags', [
+                'tags' => $tags,
+                'selectedTagIds' => old('tag_ids', []),
+            ])
         </div>
         <input type="submit" class="btn btn-primary" value="Create post">
     </form>
