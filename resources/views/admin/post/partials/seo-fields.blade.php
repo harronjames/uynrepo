@@ -29,13 +29,17 @@
                 class="form-control"
                 name="meta_description"
                 rows="3"
-                maxlength="160"
                 data-counter="meta_description_count"
-                placeholder="155–160 Zeichen für die Suchergebnis-Beschreibung"
+                data-recommended="160"
+                data-warn="meta_description_warn"
+                placeholder="155–160 Zeichen empfohlen"
             >{{ $metaDescription }}</textarea>
             <div class="d-flex justify-content-between">
-                <div class="form-text">Ideal 155–160 Zeichen. Wird in <code>&lt;meta name="description"&gt;</code> und Open Graph ausgegeben.</div>
+                <div class="form-text">Empfohlen: 155–160 Zeichen. Längerer Text wird gespeichert, nicht gekürzt.</div>
                 <div class="form-text char-counter" id="meta_description_count">0 / 160</div>
+            </div>
+            <div id="meta_description_warn" class="form-text text-warning d-none">
+                Über 160 Zeichen: Google kürzt in den Suchergebnissen, der Text bleibt aber vollständig erhalten.
             </div>
             @error('meta_description')
                 <div class="text-danger">{{ $message }}</div>

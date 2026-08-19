@@ -37,9 +37,15 @@ trait HasSeoMeta
 
     public function toSeoPayload(?string $canonical = null): array
     {
+        $description = $this->seoDescription();
+
+        if (trim((string) ($this->meta_description ?? '')) === '') {
+            $description = Str::limit($description, 160, '');
+        }
+
         return [
             'title'       => $this->seoTitle(),
-            'description' => Str::limit($this->seoDescription(), 160, ''),
+            'description' => $description,
             'keywords'    => $this->seoKeywords(),
             'canonical'   => $canonical,
         ];

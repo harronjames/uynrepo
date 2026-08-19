@@ -169,26 +169,32 @@
     };
 
     const updateCounter = (field) => {
-        const max = parseInt(field.getAttribute('maxlength') || field.dataset.maxlength || '160', 10);
+        const recommended = parseInt(field.dataset.recommended || '0', 10);
+        const max = parseInt(field.getAttribute('maxlength') || field.dataset.maxlength || String(recommended || 160), 10);
         const value = field.value || '';
         const length = [...value].length;
         const output = document.getElementById(field.dataset.counter);
-        if (!output) {
-            return;
+        const warn = field.dataset.warn ? document.getElementById(field.dataset.warn) : null;
+        const softLimit = recommended || max;
+
+        if (output) {
+            output.textContent = recommended ? `${length} / ${softLimit}` : `${length} / ${max}`;
+            output.classList.remove('text-success', 'text-warning', 'text-danger');
+            if (length > 0) {
+                if (length > softLimit) {
+                    output.classList.add('text-warning');
+                } else if (length >= softLimit - 10) {
+                    output.classList.add('text-success');
+                } else if (length < 80) {
+                    output.classList.add('text-warning');
+                } else {
+                    output.classList.add('text-success');
+                }
+            }
         }
-        output.textContent = `${length} / ${max}`;
-        output.classList.remove('text-success', 'text-warning', 'text-danger');
-        if (length === 0) {
-            return;
-        }
-        if (length > max) {
-            output.classList.add('text-danger');
-        } else if (length >= max - 10) {
-            output.classList.add('text-success');
-        } else if (length < 80) {
-            output.classList.add('text-warning');
-        } else {
-            output.classList.add('text-success');
+
+        if (warn) {
+            warn.classList.toggle('d-none', length <= softLimit);
         }
     };
 

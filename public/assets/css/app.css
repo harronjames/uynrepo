@@ -51,6 +51,18 @@ body.portal-body {
     background: rgba(15, 76, 129, 0.08);
 }
 
+.portal-nav .portal-nav-admin {
+    margin-left: 0.25rem;
+    color: #fff;
+    background: var(--portal-primary);
+}
+
+.portal-nav .portal-nav-admin:hover,
+.portal-nav .portal-nav-admin.active {
+    color: #fff;
+    background: var(--portal-primary-dark);
+}
+
 .portal-shell {
     max-width: 1180px;
 }

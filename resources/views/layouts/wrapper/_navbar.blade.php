@@ -21,6 +21,13 @@
             <a class="nav-link {{ request()->routeIs('category.*') ? 'active' : '' }}" href="{{ route('category.index') }}">Themen</a>
             <a class="nav-link {{ request()->routeIs('about.index') ? 'active' : '' }}" href="{{ route('about.index') }}">Über uns</a>
             <a class="nav-link {{ request()->routeIs('contact.index') ? 'active' : '' }}" href="{{ route('contact.index') }}">Kontakt</a>
+            @auth
+                @if(auth()->user()->isSiteAdmin())
+                    <a class="nav-link portal-nav-admin {{ request()->is('admin') || request()->is('admin/*') ? 'active' : '' }}" href="{{ route('admin.index') }}">
+                        Admin
+                    </a>
+                @endif
+            @endauth
         </nav>
     </header>
 </div>

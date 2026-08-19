@@ -39,9 +39,9 @@
                         </p>
                     </a>
                 </li>
-                @if(auth()->user()->isAdministrator())
+                @if(auth()->user()->isSiteAdmin())
                 <li class="nav-item mt-3">
-                    <a href="{{ route('admin.main.index') }}" class="nav-link">
+                    <a href="{{ route('admin.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-tools"></i>
                         <p>
                             Admin panel

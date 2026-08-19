@@ -11,13 +11,8 @@ class AdminMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         $user = $request->user();
-        $allowedEmail = strtolower((string) config('auth.admin_email'));
 
-        if (
-            ! $user
-            || ! $user->isAdministrator()
-            || strtolower((string) $user->email) !== $allowedEmail
-        ) {
+        if (! $user || ! $user->isSiteAdmin()) {
             abort(404);
         }
 

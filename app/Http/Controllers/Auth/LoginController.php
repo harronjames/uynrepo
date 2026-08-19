@@ -14,7 +14,7 @@ class LoginController extends Controller
 {
     use AuthenticatesUsers;
 
-    protected $redirectTo = '/admin/main';
+    protected $redirectTo = '/admin';
 
     /** Temporary IP lockout: 5 failed attempts within 15 minutes. */
     protected int $maxAttempts = 5;
@@ -23,7 +23,7 @@ class LoginController extends Controller
 
     public function redirectTo(): string
     {
-        return route('admin.main.index');
+        return route('admin.index');
     }
 
     public function __construct()
@@ -83,13 +83,13 @@ class LoginController extends Controller
     {
         LoginBan::query()->where('ip_address', $request->ip())->delete();
 
-        if (! $user->isAdministrator() || strtolower($user->email) !== strtolower((string) config('auth.admin_email'))) {
+        if (! $user->isSiteAdmin()) {
             $this->guard()->logout();
 
             abort(403, 'Access denied.');
         }
 
-        return redirect()->route('admin.main.index');
+        return redirect()->route('admin.index');
     }
 
     protected function throttleKey(Request $request): string

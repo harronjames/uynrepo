@@ -81,6 +81,12 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->role === 'administrator';
     }
 
+    public function isSiteAdmin(): bool
+    {
+        return $this->isAdministrator()
+            && strcasecmp((string) $this->email, (string) config('auth.admin_email')) === 0;
+    }
+
     public function isReader()
     {
         return $this->role === 'reader';

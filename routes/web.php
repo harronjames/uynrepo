@@ -112,6 +112,7 @@ Route::prefix('personal')->middleware(['auth'])->group(function () {
 });
 
 Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
+    Route::get('/', AdminMainIndexController::class)->name('admin.index');
     Route::prefix('main')->group(function () {
         Route::get('/', AdminMainIndexController::class)->name('admin.main.index');
     });

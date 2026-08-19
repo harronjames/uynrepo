@@ -12,11 +12,14 @@
 </div>
 <div class="mb-3">
     <label class="form-label" for="meta_description">Meta Description</label>
-    <textarea id="meta_description" class="form-control" name="meta_description" rows="3" maxlength="160"
-              data-counter="meta_description_count">{{ $metaDescription }}</textarea>
+    <textarea id="meta_description" class="form-control" name="meta_description" rows="3"
+              data-counter="meta_description_count" data-recommended="160" data-warn="meta_description_warn">{{ $metaDescription }}</textarea>
     <div class="d-flex justify-content-between">
-        <div class="form-text">155–160 Zeichen</div>
+        <div class="form-text">Empfohlen: 155–160 Zeichen. Längerer Text wird gespeichert.</div>
         <div class="form-text char-counter" id="meta_description_count">0 / 160</div>
+    </div>
+    <div id="meta_description_warn" class="form-text text-warning d-none">
+        Über 160 Zeichen: Google kürzt in den Suchergebnissen, der Text bleibt aber vollständig erhalten.
     </div>
     @error('meta_description')
         <div class="text-danger">{{ $message }}</div>

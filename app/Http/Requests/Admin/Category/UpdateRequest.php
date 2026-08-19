@@ -29,7 +29,7 @@ class UpdateRequest extends FormRequest
         return [
             'title'            => 'required|string',
             'meta_title'       => 'nullable|string|max:70',
-            'meta_description' => 'nullable|string|max:160',
+            'meta_description' => 'nullable|string|max:10000',
             'meta_keywords'    => 'nullable|string|max:255',
         ];
     }
