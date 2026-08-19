@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Post;
 use App\Support\SeoPayload;
+use App\Support\SchemaMarkup;
 use App\Support\StructuredData;
 use Carbon\Carbon;
 use Illuminate\Contracts\View\Factory as ViewFactory;
@@ -83,17 +84,23 @@ class PostController extends Controller
 
         $seo = SeoPayload::forPost($post);
 
+        $structuredData = [
+            StructuredData::webPage($seo['title'], $seo['description'], $seo['canonical'], 'WebPage'),
+        ];
+
+        if (! SchemaMarkup::containsArticleType($post->schema_json)) {
+            array_unshift($structuredData, StructuredData::article($post));
+        }
+
         return $view_factory->make('post.show', [
-            'post'         => $post,
-            'relatedPosts' => $relatedPosts,
-            'date'         => $date,
-            'tags'         => $tags,
-            'breadcrumbs'  => $breadcrumbs,
-            'seo'          => $seo,
-            'structuredData' => [
-                StructuredData::article($post),
-                StructuredData::webPage($seo['title'], $seo['description'], $seo['canonical'], 'WebPage'),
-            ],
+            'post'           => $post,
+            'relatedPosts'   => $relatedPosts,
+            'date'           => $date,
+            'tags'           => $tags,
+            'breadcrumbs'    => $breadcrumbs,
+            'seo'            => $seo,
+            'structuredData' => $structuredData,
+            'customJsonLd'   => SchemaMarkup::toSafeScript($post->schema_json),
         ]);
     }
 

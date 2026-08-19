@@ -3,6 +3,8 @@
 namespace App\Service;
 
 use App\Models\Post;
+use App\Support\HtmlSanitizer;
+use App\Support\SchemaMarkup;
 use Exception;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
@@ -27,6 +29,8 @@ class PostService
             }
 
             unset($data['remove_preview_image'], $data['remove_main_image']);
+
+            $data = $this->normalizeContentFields($data);
 
             $categoryId = $data['category_id'] ?? null;
             unset($data['category_id']);
@@ -72,6 +76,8 @@ class PostService
 
             $categoryId = $data['category_id'] ?? null;
             unset($data['category_id']);
+
+            $data = $this->normalizeContentFields($data);
 
             $removePreview = (bool) ($data['remove_preview_image'] ?? false);
             $removeMain = (bool) ($data['remove_main_image'] ?? false);
@@ -121,6 +127,31 @@ class PostService
         }
 
         return $post;
+    }
+
+    /**
+     * @param  array<string, mixed>  $data
+     * @return array<string, mixed>
+     */
+    private function normalizeContentFields(array $data): array
+    {
+        if (array_key_exists('content', $data)) {
+            $data['content'] = HtmlSanitizer::clean((string) $data['content']);
+        }
+
+        if (array_key_exists('schema_json', $data)) {
+            $json = trim((string) $data['schema_json']);
+            $data['schema_json'] = $json === '' ? null : SchemaMarkup::toSafeScript($json);
+        }
+
+        foreach (['meta_title', 'meta_description', 'meta_keywords'] as $field) {
+            if (array_key_exists($field, $data)) {
+                $value = trim(strip_tags((string) $data[$field]));
+                $data[$field] = $value === '' ? null : $value;
+            }
+        }
+
+        return $data;
     }
 
     private function storeWebp(mixed $file): ?string

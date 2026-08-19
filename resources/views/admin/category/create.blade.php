@@ -12,6 +12,11 @@
                 <div class="text-danger">{{ $message }}</div>
             @enderror
         </div>
+        @include('admin.category.partials.seo-fields', [
+            'metaTitle' => old('meta_title'),
+            'metaDescription' => old('meta_description'),
+            'metaKeywords' => old('meta_keywords'),
+        ])
         <button type="submit" class="btn btn-primary">Add</button>
     </form>
 @endsection

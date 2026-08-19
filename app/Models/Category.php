@@ -50,7 +50,13 @@ class Category extends Model
 
     protected $table = 'categories';
 
-    protected $guarded = false;
+    protected $fillable = [
+        'title',
+        'slug',
+        'meta_title',
+        'meta_description',
+        'meta_keywords',
+    ];
 
     public function posts(): BelongsToMany
     {

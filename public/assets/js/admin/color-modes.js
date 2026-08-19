@@ -20,11 +20,12 @@
     }
 
     const setTheme = theme => {
+        let resolved = theme
         if (theme === 'auto') {
-            document.documentElement.setAttribute('data-bs-theme', (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'))
-        } else {
-            document.documentElement.setAttribute('data-bs-theme', theme)
+            resolved = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
         }
+        document.documentElement.setAttribute('data-bs-theme', resolved)
+        window.dispatchEvent(new CustomEvent('admin-theme-change', { detail: { theme: resolved } }))
     }
 
     setTheme(getPreferredTheme())

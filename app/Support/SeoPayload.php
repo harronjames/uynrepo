@@ -21,8 +21,11 @@ class SeoPayload
     public static function forPost(Post $post, ?string $canonical = null): array
     {
         return array_merge($post->toSeoPayload($canonical ?? route('post.show', $post)), [
-            'type'  => 'article',
-            'image' => $post->main_image ?: $post->preview_image,
+            'type'            => 'article',
+            'image'           => AbsoluteUrl::from($post->main_image ?: $post->preview_image),
+            'published_time'  => $post->created_at?->toIso8601String(),
+            'modified_time'   => $post->updated_at?->toIso8601String(),
+            'robots'          => 'index, follow',
         ]);
     }
 

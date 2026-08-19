@@ -1,7 +1,7 @@
 @extends('layouts.with-sidebar')
 
 @section('page-content')
-    <article class="portal-article-content" itemscope itemtype="https://schema.org/Article">
+    <article class="portal-article-content" itemscope itemtype="https://schema.org/BlogPosting">
         <header class="mb-4">
             <div class="d-flex flex-wrap gap-2 mb-3">
                 @foreach($post->categories as $category)
@@ -26,7 +26,7 @@
         @endif
 
         <div class="article-body" itemprop="articleBody">
-            {!! $post->content !!}
+            {!! $post->safeContent() !!}
         </div>
 
         @if($tags->isNotEmpty())

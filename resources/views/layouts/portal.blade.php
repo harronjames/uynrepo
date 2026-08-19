@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="de" data-bs-theme="light">
+<html lang="de-AT" data-bs-theme="light">
 
 <head>
         <meta charset="UTF-8">
@@ -29,6 +29,8 @@
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
         <link rel="apple-touch-icon" href="/apple-touch-icon.png">
         <link rel="canonical" href="{{ $canonicalUrl }}">
+        <link rel="alternate" hreflang="de-AT" href="{{ $canonicalUrl }}">
+        <link rel="alternate" hreflang="x-default" href="{{ $canonicalUrl }}">
 
         <meta property="og:locale" content="de_AT">
         <meta property="og:type" content="{{ $ogType }}">
@@ -41,11 +43,22 @@
         @if (!empty($ogImage))
                 <meta property="og:image" content="{{ $ogImage }}">
         @endif
+        @if (($ogType ?? '') === 'article')
+                @if (!empty($seo['published_time']))
+                        <meta property="article:published_time" content="{{ $seo['published_time'] }}">
+                @endif
+                @if (!empty($seo['modified_time']))
+                        <meta property="article:modified_time" content="{{ $seo['modified_time'] }}">
+                @endif
+        @endif
 
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:title" content="{{ $seo['title'] ?? $title ?? 'Umzugland.at' }}">
         @if (!empty($metaDescription))
                 <meta name="twitter:description" content="{{ $metaDescription }}">
+        @endif
+        @if (!empty($ogImage))
+                <meta name="twitter:image" content="{{ $ogImage }}">
         @endif
 
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">

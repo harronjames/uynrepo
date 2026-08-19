@@ -251,6 +251,48 @@ body.portal-body {
     line-height: 1.7;
 }
 
+.article-body {
+    line-height: 1.75;
+    font-size: 1.05rem;
+}
+
+.article-body h2,
+.article-body h3,
+.article-body h4 {
+    margin-top: 1.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.article-body p,
+.article-body ul,
+.article-body ol,
+.article-body table,
+.article-body blockquote {
+    margin-bottom: 1.1rem;
+}
+
+.article-body table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.article-body th,
+.article-body td {
+    border: 1px solid var(--portal-border, #dbe3ee);
+    padding: 0.6rem 0.75rem;
+    vertical-align: top;
+}
+
+.article-body blockquote {
+    border-left: 4px solid var(--portal-primary, #1d4f7a);
+    padding: 0.35rem 0 0.35rem 1rem;
+    color: var(--portal-muted, #4b5b6b);
+}
+
+.article-body a {
+    color: var(--portal-primary, #1d4f7a);
+}
+
 @media (max-width: 991.98px) {
     .portal-header-cta {
         width: 100%;

@@ -11,7 +11,12 @@ class UpdateRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        $user = $this->user();
+        $allowed = strtolower((string) config('auth.admin_email'));
+
+        return $user !== null
+            && $user->isAdministrator()
+            && strtolower((string) $user->email) === $allowed;
     }
 
     /**

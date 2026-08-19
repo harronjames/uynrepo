@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Concerns\HasSeoMeta;
 use App\Models\Concerns\HasUniqueSlug;
+use App\Support\HtmlSanitizer;
 use Carbon\Carbon;
 use Database\Factories\PostFactory;
 use Illuminate\Database\Eloquent\Builder;
@@ -23,6 +24,7 @@ use Illuminate\Support\Str;
  * @property string|null $meta_title
  * @property string|null $meta_description
  * @property string|null $meta_keywords
+ * @property string|null $schema_json
  * @property string      $content
  * @property string|null $preview_image
  * @property string|null $main_image
@@ -68,7 +70,17 @@ class Post extends Model
 
     protected $table = 'posts';
 
-    protected $guarded = false;
+    protected $fillable = [
+        'title',
+        'slug',
+        'content',
+        'meta_title',
+        'meta_description',
+        'meta_keywords',
+        'schema_json',
+        'preview_image',
+        'main_image',
+    ];
 
     protected $withCount = ['likedUsers'];
 
@@ -101,6 +113,11 @@ class Post extends Model
     public function shortBody(int $words = 20): string
     {
         return Str::words(strip_tags((string) $this->content), $words);
+    }
+
+    public function safeContent(): string
+    {
+        return HtmlSanitizer::clean((string) $this->content);
     }
 
     public function getFormattedDate(): string

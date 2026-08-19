@@ -44,11 +44,6 @@ class StructuredData
             'description'     => config('seo.organization.description'),
             'inLanguage'      => config('seo.organization.locale'),
             'publisher'       => ['@id' => $siteUrl . '#organization'],
-            'potentialAction' => [
-                '@type'       => 'SearchAction',
-                'target'      => $siteUrl . '/category?q={search_term_string}',
-                'query-input' => 'required name=search_term_string',
-            ],
         ];
     }
 
@@ -73,7 +68,7 @@ class StructuredData
         $url = route('post.show', $post);
 
         $schema = [
-            '@type'            => 'Article',
+            '@type'            => 'BlogPosting',
             '@id'              => $url . '#article',
             'headline'         => $post->title,
             'description'      => $post->seoDescription(),
@@ -87,7 +82,7 @@ class StructuredData
             'isPartOf'         => ['@id' => config('seo.site_url') . '#website'],
         ];
 
-        if ($image = $post->main_image ?: $post->preview_image) {
+        if ($image = AbsoluteUrl::from($post->main_image ?: $post->preview_image)) {
             $schema['image'] = [$image];
         }
 

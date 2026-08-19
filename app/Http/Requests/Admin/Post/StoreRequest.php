@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Admin\Post;
 
+use App\Rules\ValidJsonLd;
 use App\Support\WebpImage;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -9,17 +10,23 @@ class StoreRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return true;
+        $user = $this->user();
+        $allowed = strtolower((string) config('auth.admin_email'));
+
+        return $user !== null
+            && $user->isAdministrator()
+            && strtolower((string) $user->email) === $allowed;
     }
 
     public function rules(): array
     {
         return [
-            'title'            => 'required|string',
+            'title'            => 'required|string|max:180',
             'content'          => 'required|string',
             'meta_title'       => 'nullable|string|max:70',
             'meta_description' => 'nullable|string|max:160',
             'meta_keywords'    => 'nullable|string|max:255',
+            'schema_json'      => ['nullable', 'string', 'max:32000', new ValidJsonLd()],
             'category_id'      => 'required|integer|exists:categories,id',
             'preview_image'    => WebpImage::RULE,
             'main_image'       => WebpImage::RULE,
