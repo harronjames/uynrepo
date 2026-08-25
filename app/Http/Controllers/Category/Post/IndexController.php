@@ -16,7 +16,7 @@ class IndexController extends Controller
             ->publiclyVisible()
             ->with('categories')
             ->orderByDesc('published_at')
-            ->paginate(6);
+            ->paginate(8);
 
         $seo = SeoPayload::forCategory($category);
 

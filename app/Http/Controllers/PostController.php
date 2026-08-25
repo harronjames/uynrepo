@@ -16,11 +16,13 @@ class PostController extends Controller
 {
     public function showHomepage(ViewFactory $view_factory): View
     {
+        $gridPostsPerPage = 8;
+
         $latest_post = Post::query()
             ->publiclyVisible()
             ->with('categories')
             ->orderByDesc('published_at')
-            ->paginate(6);
+            ->paginate($gridPostsPerPage + 1);
 
         $liked_posts = Post::query()
             ->publiclyVisible()
