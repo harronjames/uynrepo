@@ -3,7 +3,7 @@
 @section('content')
     <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
         <h2 class="mb-0">Posts</h2>
-        <a href="{{ route('admin.post.create') }}" class="btn btn-primary">Yeni yazı</a>
+        <a href="{{ route('admin.post.create') }}" class="btn btn-primary">Neuer Beitrag</a>
     </div>
 
     @if(session('success'))
@@ -12,10 +12,10 @@
 
     <ul class="nav nav-tabs mb-4">
         @foreach([
-            'all' => 'Tümü',
-            'published' => 'Yayında',
-            'scheduled' => 'Zamanlanmış / Kuyruk',
-            'draft' => 'Taslak',
+            'all' => 'Alle',
+            'published' => 'Veröffentlicht',
+            'scheduled' => 'Geplant / Warteschlange',
+            'draft' => 'Entwurf',
         ] as $tab => $label)
             <li class="nav-item">
                 <a
@@ -32,8 +32,8 @@
     @if($queuePosts->isNotEmpty())
         <div class="card mb-4">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <strong>Yayın kuyruğu</strong>
-                <span class="text-muted small">{{ $queuePosts->count() }} yazı bekliyor</span>
+                <strong>Veröffentlichungs-Warteschlange</strong>
+                <span class="text-muted small">{{ $queuePosts->count() }} Beiträge warten</span>
             </div>
             <div class="card-body p-0">
                 <div class="table-responsive">
@@ -41,10 +41,10 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>Başlık</th>
-                            <th>Yayın tarihi</th>
-                            <th>Kalan süre</th>
-                            <th class="text-end">İşlemler</th>
+                            <th>Titel</th>
+                            <th>Veröffentlichungsdatum</th>
+                            <th>Verbleibende Zeit</th>
+                            <th class="text-end">Aktionen</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -61,8 +61,8 @@
                                 <td class="text-end">
                                     <form action="{{ route('admin.post.publish-now', $queuePost) }}" method="post" class="d-inline">
                                         @csrf
-                                        <button type="submit" class="btn btn-sm btn-success" onclick="return confirm('Şimdi yayınlansın mı?')">
-                                            Şimdi Yayınla
+                                        <button type="submit" class="btn btn-sm btn-success" onclick="return confirm('Jetzt veröffentlichen?')">
+                                            Jetzt veröffentlichen
                                         </button>
                                     </form>
                                     <button
@@ -71,7 +71,7 @@
                                         data-bs-toggle="collapse"
                                         data-bs-target="#reschedule-{{ $queuePost->id }}"
                                     >
-                                        Tarihi değiştir
+                                        Datum ändern
                                     </button>
                                 </td>
                             </tr>
@@ -81,7 +81,7 @@
                                         @csrf
                                         @method('patch')
                                         <div class="col-md-4">
-                                            <label class="form-label small mb-0">Yeni tarih</label>
+                                            <label class="form-label small mb-0">Neues Datum</label>
                                             <input
                                                 type="datetime-local"
                                                 name="published_at"
@@ -91,15 +91,15 @@
                                             >
                                         </div>
                                         <div class="col-md-3">
-                                            <label class="form-label small mb-0">Durum</label>
+                                            <label class="form-label small mb-0">Status</label>
                                             <select name="status" class="form-select form-select-sm">
-                                                <option value="scheduled">Zamanlanmış</option>
-                                                <option value="published">Yayında</option>
-                                                <option value="draft">Taslak</option>
+                                                <option value="scheduled">Geplant</option>
+                                                <option value="published">Veröffentlicht</option>
+                                                <option value="draft">Entwurf</option>
                                             </select>
                                         </div>
                                         <div class="col-md-auto">
-                                            <button type="submit" class="btn btn-sm btn-primary">Kaydet</button>
+                                            <button type="submit" class="btn btn-sm btn-primary">Speichern</button>
                                         </div>
                                     </form>
                                 </td>
@@ -117,10 +117,10 @@
             <thead>
             <tr>
                 <th>ID</th>
-                <th>Başlık</th>
-                <th>Durum</th>
-                <th>Yayın</th>
-                <th class="text-end">İşlemler</th>
+                <th>Titel</th>
+                <th>Status</th>
+                <th>Veröffentlichung</th>
+                <th class="text-end">Aktionen</th>
             </tr>
             </thead>
             <tbody>
@@ -149,26 +149,26 @@
                         @endif
                     </td>
                     <td class="text-end">
-                        <a href="{{ route('post.show', $post) }}" class="btn btn-sm btn-outline-primary" target="_blank" rel="noopener">Görüntüle</a>
-                        <a href="{{ route('admin.post.edit', $post) }}" class="btn btn-sm btn-outline-success">Düzenle</a>
+                        <a href="{{ route('post.show', $post) }}" class="btn btn-sm btn-outline-primary" target="_blank" rel="noopener">Ansehen</a>
+                        <a href="{{ route('admin.post.edit', $post) }}" class="btn btn-sm btn-outline-success">Bearbeiten</a>
                         @if($post->status === \App\Models\Post::STATUS_SCHEDULED)
                             <form action="{{ route('admin.post.publish-now', $post) }}" method="post" class="d-inline">
                                 @csrf
-                                <button type="submit" class="btn btn-sm btn-success">Şimdi Yayınla</button>
+                                <button type="submit" class="btn btn-sm btn-success">Jetzt veröffentlichen</button>
                             </form>
                         @endif
                         <form action="{{ route('admin.post.delete', $post) }}" method="post" class="d-inline">
                             @csrf
                             @method('delete')
-                            <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Silinsin mi?')">
-                                Sil
+                            <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Wirklich löschen?')">
+                                Löschen
                             </button>
                         </form>
                     </td>
                 </tr>
             @empty
                 <tr>
-                    <td colspan="5" class="text-center text-muted py-4">Bu filtrede yazı yok.</td>
+                    <td colspan="5" class="text-center text-muted py-4">Keine Beiträge in diesem Filter.</td>
                 </tr>
             @endforelse
             </tbody>

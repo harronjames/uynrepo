@@ -142,9 +142,9 @@ class Post extends Model
     public function statusLabel(): string
     {
         return match ($this->status) {
-            self::STATUS_PUBLISHED => 'Yayında',
-            self::STATUS_SCHEDULED => 'Zamanlanmış',
-            self::STATUS_DRAFT     => 'Taslak',
+            self::STATUS_PUBLISHED => 'Veröffentlicht',
+            self::STATUS_SCHEDULED => 'Geplant',
+            self::STATUS_DRAFT     => 'Entwurf',
             default                => (string) $this->status,
         };
     }
@@ -156,12 +156,12 @@ class Post extends Model
         }
 
         if ($this->published_at->isPast()) {
-            return 'Yayın zamanı geldi (cron bekleniyor)';
+            return 'Veröffentlichungszeit erreicht (Cron ausstehend)';
         }
 
         $when = $this->published_at->copy()->timezone(config('publish_queue.timezone', config('app.timezone')));
 
-        return $when->locale('tr')->translatedFormat('d M Y, H:i') . ' (' . $when->locale('tr')->diffForHumans() . ')';
+        return $when->locale('de')->translatedFormat('d. M Y, H:i') . ' (' . $when->locale('de')->diffForHumans() . ')';
     }
 
     public function tags(): BelongsToMany

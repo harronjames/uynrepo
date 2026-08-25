@@ -12,21 +12,21 @@
 
 <div class="card mb-4 border-secondary">
     <div class="card-header bg-light">
-        <strong>Yayın & Kuyruk</strong>
+        <strong>Veröffentlichung & Warteschlange</strong>
     </div>
     <div class="card-body">
         <div class="row g-3">
             <div class="col-md-4">
-                <label class="form-label" for="status">Durum</label>
+                <label class="form-label" for="status">Status</label>
                 <select name="status" id="status" class="form-select">
                     <option value="{{ Post::STATUS_SCHEDULED }}" @selected($currentStatus === Post::STATUS_SCHEDULED)>
-                        Zamanlanmış / Kuyruk
+                        Geplant / Warteschlange
                     </option>
                     <option value="{{ Post::STATUS_PUBLISHED }}" @selected($currentStatus === Post::STATUS_PUBLISHED)>
-                        Hemen yayınla
+                        Sofort veröffentlichen
                     </option>
                     <option value="{{ Post::STATUS_DRAFT }}" @selected($currentStatus === Post::STATUS_DRAFT)>
-                        Taslak
+                        Entwurf
                     </option>
                 </select>
                 @error('status')
@@ -34,7 +34,7 @@
                 @enderror
             </div>
             <div class="col-md-4">
-                <label class="form-label" for="published_at">Yayın tarihi (opsiyonel)</label>
+                <label class="form-label" for="published_at">Veröffentlichungsdatum (optional)</label>
                 <input
                     type="datetime-local"
                     name="published_at"
@@ -43,7 +43,7 @@
                     value="{{ $publishedAtValue }}"
                 >
                 <div class="form-text">
-                    Boş bırakılırsa otomatik kuyruk slotu atanır (günde {{ config('publish_queue.posts_per_day') }} içerik).
+                    Wenn leer, wird automatisch ein Warteschlangen-Slot zugewiesen ({{ config('publish_queue.posts_per_day') }} Beiträge pro Tag).
                 </div>
                 @error('published_at')
                 <div class="text-danger small">{{ $message }}</div>
@@ -51,7 +51,7 @@
             </div>
             @if(isset($post) && $post->status === Post::STATUS_SCHEDULED && $post->published_at)
                 <div class="col-md-4">
-                    <label class="form-label">Kuyruk bilgisi</label>
+                    <label class="form-label">Warteschlangen-Info</label>
                     <p class="mb-1">
                         <span class="badge bg-info text-dark">{{ $post->published_at->timezone(\App\Support\PublishQueue::timezone())->format('d.m.Y H:i') }}</span>
                     </p>
