@@ -24,6 +24,8 @@
                 'schemaJson' => old('schema_json'),
             ])
 
+            @include('admin.post.partials.publish-fields')
+
             <div class="form-group w-50 mb-3">
                 <label class="form-label">Cover image (detail page) <span class="text-muted">(optional, WebP only)</span></label>
                 <input type="file" class="form-control" name="main_image" accept="{{ \App\Support\WebpImage::ACCEPT }}">

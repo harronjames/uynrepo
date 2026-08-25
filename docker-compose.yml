@@ -61,6 +61,25 @@ services:
         networks:
             - app-network
 
+    scheduler:
+        image: laravel-blog
+        container_name: laravel-blog-scheduler
+        restart: unless-stopped
+        working_dir: /var/www/
+        env_file:
+            - .env.local
+        depends_on:
+            db:
+                condition: service_healthy
+            app:
+                condition: service_started
+        volumes:
+            - ./:/var/www
+            - vendor:/var/www/vendor
+        command: php artisan schedule:work
+        networks:
+            - app-network
+
 volumes:
     dbdata:
     vendor:

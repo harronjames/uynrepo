@@ -19,7 +19,19 @@
                 <td>TODO Show categories</td>
             </tr>
             <tr>
-                <td>Created at</td>
+                <td>Durum</td>
+                <td>{{ $post->statusLabel() }} ({{ $post->status }})</td>
+            </tr>
+            <tr>
+                <td>Yayın tarihi</td>
+                <td>{{ $post->published_at?->timezone(\App\Support\PublishQueue::timezone())->format('d.m.Y H:i') ?? '—' }}</td>
+            </tr>
+            <tr>
+                <td>Kuyruk sırası</td>
+                <td>{{ $post->queue_position ?? '—' }}</td>
+            </tr>
+            <tr>
+                <td>Oluşturulma</td>
                 <td>{{ $post->created_at }}</td>
             </tr>
             <tr>

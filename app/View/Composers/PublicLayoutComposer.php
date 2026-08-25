@@ -10,22 +10,26 @@ class PublicLayoutComposer
 {
     public function compose(View $view): void
     {
+        $publishedScope = fn ($query) => $query->publiclyVisible();
+
         $sidebarCategories = Category::query()
-            ->withCount('posts')
+            ->withCount(['posts' => $publishedScope])
             ->having('posts_count', '>', 0)
             ->orderByDesc('posts_count')
             ->limit(12)
             ->get();
 
         $sidebarPopularPosts = Post::query()
+            ->publiclyVisible()
             ->withCount('likedUsers')
             ->orderByDesc('liked_users_count')
-            ->orderByDesc('created_at')
+            ->orderByDesc('published_at')
             ->limit(5)
             ->get();
 
         $sidebarRecentPosts = Post::query()
-            ->latest()
+            ->publiclyVisible()
+            ->orderByDesc('published_at')
             ->limit(5)
             ->get();
 

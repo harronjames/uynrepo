@@ -34,12 +34,13 @@ class SitemapController extends Controller
             });
 
         Post::query()
-            ->orderByDesc('updated_at')
-            ->get(['id', 'slug', 'updated_at'])
+            ->publiclyVisible()
+            ->orderByDesc('published_at')
+            ->get(['id', 'slug', 'published_at', 'updated_at'])
             ->each(function (Post $post) use (&$urls): void {
                 $urls[] = $this->entry(
                     route('post.show', $post),
-                    $post->updated_at,
+                    $post->published_at ?? $post->updated_at,
                     'weekly',
                     '0.8'
                 );

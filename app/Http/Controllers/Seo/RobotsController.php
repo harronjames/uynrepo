@@ -24,6 +24,7 @@ class RobotsController extends Controller
             'Disallow: /placeholder',
             '',
             'Sitemap: ' . $sitemapUrl,
+            'Sitemap: ' . config('seo.site_url') . '/feed.xml',
         ];
 
         return response(implode(PHP_EOL, $lines), 200)

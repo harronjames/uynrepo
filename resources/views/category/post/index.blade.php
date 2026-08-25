@@ -18,7 +18,7 @@
                             <h2 class="h5 portal-post-title">
                                 <a href="{{ route('post.show', $post) }}">{{ $post->title }}</a>
                             </h2>
-                            <p class="portal-meta mb-2">{{ $post->created_at->translatedFormat('d. F Y') }}</p>
+                            <p class="portal-meta mb-2">{{ $post->displayDate()->translatedFormat('d. F Y') }}</p>
                             <p class="mb-3">{{ $post->shortBody(20) }}</p>
                             <a href="{{ route('post.show', $post) }}" class="portal-inline-link mt-auto">
                                 Zum Artikel <i class="bi bi-arrow-right-short"></i>

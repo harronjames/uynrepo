@@ -32,6 +32,8 @@ class StoreRequest extends FormRequest
             'main_image'       => WebpImage::RULE,
             'tag_ids'          => 'nullable|array',
             'tag_ids.*'        => 'nullable|integer|exists:tags,id',
+            'status'           => 'nullable|in:published,scheduled,draft',
+            'published_at'     => 'nullable|date',
         ];
     }
 

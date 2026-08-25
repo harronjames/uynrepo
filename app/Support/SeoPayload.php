@@ -23,8 +23,8 @@ class SeoPayload
         return array_merge($post->toSeoPayload($canonical ?? route('post.show', $post)), [
             'type'            => 'article',
             'image'           => AbsoluteUrl::from($post->main_image ?: $post->preview_image),
-            'published_time'  => $post->created_at?->toIso8601String(),
-            'modified_time'   => $post->updated_at?->toIso8601String(),
+            'published_time'  => ($post->published_at ?? $post->created_at)?->toIso8601String(),
+            'modified_time'   => ($post->updated_at ?? $post->published_at ?? $post->created_at)?->toIso8601String(),
             'robots'          => 'index, follow',
         ]);
     }

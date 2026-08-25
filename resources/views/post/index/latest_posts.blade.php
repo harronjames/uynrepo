@@ -60,7 +60,7 @@
 
                             <p class="portal-meta mb-2">
                                 <i class="bi bi-calendar3 me-1"></i>
-                                {{ $post->created_at->translatedFormat('d. F Y') }}
+                                {{ $post->displayDate()->translatedFormat('d. F Y') }}
                             </p>
 
                             <p class="mb-3">{{ $post->shortBody(22) }}</p>

@@ -12,7 +12,11 @@ class IndexController extends Controller
 {
     public function __invoke(Category $category, ViewFactory $view_factory)
     {
-        $posts = $category->posts()->with('categories')->paginate(6);
+        $posts = $category->posts()
+            ->publiclyVisible()
+            ->with('categories')
+            ->orderByDesc('published_at')
+            ->paginate(6);
 
         $seo = SeoPayload::forCategory($category);
 

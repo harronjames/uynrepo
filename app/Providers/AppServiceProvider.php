@@ -2,11 +2,13 @@
 
 namespace App\Providers;
 
+use App\Models\Post;
 use App\View\Composers\PortalSeoComposer;
 use App\View\Composers\PublicLayoutComposer;
 use App\Support\SiteMode;
 use Carbon\Carbon;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -53,5 +55,22 @@ class AppServiceProvider extends ServiceProvider
         View::composer([
             'layouts.with-sidebar',
         ], PortalSeoComposer::class);
+
+        Route::bind('post', function (string $value) {
+            $query = Post::query();
+
+            if (ctype_digit($value)) {
+                $query->where('id', (int) $value);
+            } else {
+                $query->where('slug', $value);
+            }
+
+            $user = auth()->user();
+            if (! $user || ! $user->isSiteAdmin()) {
+                $query->publiclyVisible();
+            }
+
+            return $query->firstOrFail();
+        });
     }
 }

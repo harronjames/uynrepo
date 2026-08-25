@@ -28,6 +28,9 @@ use Illuminate\Support\Str;
  * @property string      $content
  * @property string|null $preview_image
  * @property string|null $main_image
+ * @property string      $status
+ * @property Carbon|null $published_at
+ * @property int|null    $queue_position
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property Carbon|null $deleted_at
@@ -69,6 +72,12 @@ class Post extends Model
     use HasUniqueSlug;
     use SoftDeletes;
 
+    public const STATUS_PUBLISHED = 'published';
+
+    public const STATUS_SCHEDULED = 'scheduled';
+
+    public const STATUS_DRAFT = 'draft';
+
     protected $table = 'posts';
 
     protected $fillable = [
@@ -81,15 +90,79 @@ class Post extends Model
         'schema_json',
         'preview_image',
         'main_image',
+        'status',
+        'published_at',
+        'queue_position',
     ];
 
     protected $withCount = ['likedUsers'];
 
     protected $casts = [
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime',
-        'deleted_at' => 'datetime',
+        'created_at'     => 'datetime',
+        'updated_at'     => 'datetime',
+        'deleted_at'     => 'datetime',
+        'published_at'   => 'datetime',
+        'queue_position' => 'integer',
     ];
+
+    public function scopePubliclyVisible(Builder $query): Builder
+    {
+        return $query
+            ->where('status', self::STATUS_PUBLISHED)
+            ->where('published_at', '<=', now());
+    }
+
+    public function scopeScheduled(Builder $query): Builder
+    {
+        return $query->where('status', self::STATUS_SCHEDULED);
+    }
+
+    public function scopeDraft(Builder $query): Builder
+    {
+        return $query->where('status', self::STATUS_DRAFT);
+    }
+
+    public function scopePublishedStatus(Builder $query): Builder
+    {
+        return $query->where('status', self::STATUS_PUBLISHED);
+    }
+
+    public function isPubliclyVisible(): bool
+    {
+        return $this->status === self::STATUS_PUBLISHED
+            && $this->published_at !== null
+            && $this->published_at->lessThanOrEqualTo(now());
+    }
+
+    public function displayDate(): Carbon
+    {
+        return $this->published_at ?? $this->created_at ?? now();
+    }
+
+    public function statusLabel(): string
+    {
+        return match ($this->status) {
+            self::STATUS_PUBLISHED => 'Yayında',
+            self::STATUS_SCHEDULED => 'Zamanlanmış',
+            self::STATUS_DRAFT     => 'Taslak',
+            default                => (string) $this->status,
+        };
+    }
+
+    public function publishCountdown(): ?string
+    {
+        if ($this->status !== self::STATUS_SCHEDULED || $this->published_at === null) {
+            return null;
+        }
+
+        if ($this->published_at->isPast()) {
+            return 'Yayın zamanı geldi (cron bekleniyor)';
+        }
+
+        $when = $this->published_at->copy()->timezone(config('publish_queue.timezone', config('app.timezone')));
+
+        return $when->locale('tr')->translatedFormat('d M Y, H:i') . ' (' . $when->locale('tr')->diffForHumans() . ')';
+    }
 
     public function tags(): BelongsToMany
     {
@@ -131,7 +204,7 @@ class Post extends Model
 
     public function getFormattedDate(): string
     {
-        return $this->created_at->format('F jS Y');
+        return $this->displayDate()->format('F jS Y');
     }
 
     public function humanReadTime(): Attribute

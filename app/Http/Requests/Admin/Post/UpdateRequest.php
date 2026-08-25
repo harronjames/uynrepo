@@ -43,6 +43,8 @@ class UpdateRequest extends FormRequest
             'remove_main_image'    => 'sometimes|boolean',
             'tag_ids'              => 'nullable|array',
             'tag_ids.*'            => 'nullable|integer|exists:tags,id',
+            'status'               => 'nullable|in:published,scheduled,draft',
+            'published_at'         => 'nullable|date',
         ];
     }
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Seo\RssController;
 use App\Http\Controllers\Seo\RobotsController;
 use App\Http\Controllers\Seo\SitemapController;
 use App\Http\Controllers\AboutController;
@@ -14,6 +15,8 @@ use App\Http\Controllers\Admin\Category\ShowController as AdminCategoryShowContr
 use App\Http\Controllers\Admin\Category\StoreController as AdminCategoryStoreController;
 use App\Http\Controllers\Admin\Category\UpdateController as AdminCategoryUpdateController;
 use App\Http\Controllers\Admin\Main\IndexController as AdminMainIndexController;
+use App\Http\Controllers\Admin\Post\PublishNowController as AdminPostPublishNowController;
+use App\Http\Controllers\Admin\Post\RescheduleController as AdminPostRescheduleController;
 use App\Http\Controllers\Admin\Post\CreateController as AdminPostCreateController;
 use App\Http\Controllers\Admin\Post\DeleteController as AdminPostDeleteController;
 use App\Http\Controllers\Admin\Post\EditController as AdminPostEditController;
@@ -59,6 +62,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [PostController::class, 'showHomepage'])->name('main.index');
 
 Route::get('/sitemap.xml', SitemapController::class)->name('seo.sitemap');
+Route::get('/feed.xml', RssController::class)->name('seo.rss');
 Route::get('/robots.txt', RobotsController::class)->name('seo.robots');
 
 // Placeholder image generation
@@ -146,5 +150,7 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
         Route::get('/{post}/edit', AdminPostEditController::class)->name('admin.post.edit');
         Route::patch('/{post}', AdminPostUpdateController::class)->name('admin.post.update');
         Route::delete('/{post}', AdminPostDeleteController::class)->name('admin.post.delete');
+        Route::post('/{post}/publish-now', AdminPostPublishNowController::class)->name('admin.post.publish-now');
+        Route::patch('/{post}/reschedule', AdminPostRescheduleController::class)->name('admin.post.reschedule');
     });
 });

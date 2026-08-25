@@ -16,12 +16,20 @@ class PostController extends Controller
 {
     public function showHomepage(ViewFactory $view_factory): View
     {
-        /** @phpstan-ignore-next-line */
-        $latest_post = Post::with('categories')->paginate(6);
-        /** @phpstan-ignore-next-line */
-        $liked_posts = Post::with('categories')->withCount('likedUsers')->orderBy('liked_users_count', 'desc')->get()->take(3);
+        $latest_post = Post::query()
+            ->publiclyVisible()
+            ->with('categories')
+            ->orderByDesc('published_at')
+            ->paginate(6);
 
-        // todo Show recent categories with their latest posts
+        $liked_posts = Post::query()
+            ->publiclyVisible()
+            ->with('categories')
+            ->withCount('likedUsers')
+            ->orderByDesc('liked_users_count')
+            ->orderByDesc('published_at')
+            ->limit(3)
+            ->get();
 
         $seo = SeoPayload::forHomepage();
 
@@ -50,12 +58,13 @@ class PostController extends Controller
     {
         $post->load(['categories', 'tags']);
 
-        $date = Carbon::parse($post->created_at);
+        $date = Carbon::parse($post->displayDate());
         $tags = $post->tags;
 
         $categoryIds = $post->categories->pluck('id');
 
         $relatedPosts = Post::query()
+            ->publiclyVisible()
             ->with('categories')
             ->where('id', '!=', $post->id)
             ->when(
@@ -65,7 +74,7 @@ class PostController extends Controller
                     fn ($categoryQuery) => $categoryQuery->whereIn('categories.id', $categoryIds)
                 )
             )
-            ->latest()
+            ->orderByDesc('published_at')
             ->limit(3)
             ->get();
 
@@ -107,10 +116,10 @@ class PostController extends Controller
     public function byCategory(Category $category, ViewFactory $view_factory)
     {
         $posts = Post::query()
-            ->join('category_post', 'posts.id', '=', 'category_post.post_id')
-            ->where('category_post.category_id', '=', $category->id)
-            ->whereDate('published_at', '<=', Carbon::now())
-            ->orderBy('published_at', 'desc')
+            ->publiclyVisible()
+            ->with('categories')
+            ->whereHas('categories', fn ($query) => $query->where('categories.id', $category->id))
+            ->orderByDesc('published_at')
             ->paginate(10);
 
         return $view_factory->make('post.index', ['posts' => $posts, 'category' => $category]);
@@ -121,11 +130,11 @@ class PostController extends Controller
         $q = $request->get('q');
 
         $posts = Post::query()
-            ->whereDate('published_at', '<=', Carbon::now())
-            ->orderBy('published_at', 'desc')
+            ->publiclyVisible()
+            ->orderByDesc('published_at')
             ->where(function ($query) use ($q) {
                 $query->where('title', 'like', "%{$q}%")
-                    ->orWhere('body', 'like', "%{$q}%");
+                    ->orWhere('content', 'like', "%{$q}%");
             })
             ->paginate(10);
 

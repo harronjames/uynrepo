@@ -29,6 +29,8 @@
                 'schemaJson' => old('schema_json', $post->schema_json),
             ])
 
+            @include('admin.post.partials.publish-fields', ['post' => $post])
+
             <div class="form-group w-50 mb-3">
                 <label class="form-label">Cover image (detail page) <span class="text-muted">(optional, WebP only)</span></label>
                 @if($post->main_image)

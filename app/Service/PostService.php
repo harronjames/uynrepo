@@ -4,6 +4,7 @@ namespace App\Service;
 
 use App\Models\Post;
 use App\Support\HtmlSanitizer;
+use App\Support\PublishQueue;
 use App\Support\SchemaMarkup;
 use Exception;
 use Illuminate\Http\UploadedFile;
@@ -30,7 +31,7 @@ class PostService
 
             unset($data['remove_preview_image'], $data['remove_main_image']);
 
-            $data = $this->normalizeContentFields($data);
+            $data = $this->normalizeContentFields($data, null);
 
             $categoryId = $data['category_id'] ?? null;
             unset($data['category_id']);
@@ -77,7 +78,7 @@ class PostService
             $categoryId = $data['category_id'] ?? null;
             unset($data['category_id']);
 
-            $data = $this->normalizeContentFields($data);
+            $data = $this->normalizeContentFields($data, $post);
 
             $removePreview = (bool) ($data['remove_preview_image'] ?? false);
             $removeMain = (bool) ($data['remove_main_image'] ?? false);
@@ -133,7 +134,7 @@ class PostService
      * @param  array<string, mixed>  $data
      * @return array<string, mixed>
      */
-    private function normalizeContentFields(array $data): array
+    private function normalizeContentFields(array $data, ?Post $existing = null): array
     {
         if (array_key_exists('content', $data)) {
             $data['content'] = HtmlSanitizer::clean((string) $data['content']);
@@ -151,7 +152,7 @@ class PostService
             }
         }
 
-        return $data;
+        return PublishQueue::applyPublishingRules($data, $existing);
     }
 
     private function storeWebp(mixed $file): ?string
