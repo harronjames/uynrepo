@@ -26,6 +26,14 @@ class PublishQueue
         return (string) config('publish_queue.timezone', config('app.timezone', 'UTC'));
     }
 
+    /**
+     * Liste/sorgu ve kayıt için tek referans zaman (yayın kuyruğu saat dilimi).
+     */
+    public static function publicationCutoff(): Carbon
+    {
+        return Carbon::now(self::timezone());
+    }
+
     public static function isExcluded(Post $post): bool
     {
         $ids = config('publish_queue.excluded_ids', []);
@@ -180,7 +188,7 @@ class PublishQueue
             $data['status'] = Post::STATUS_PUBLISHED;
             $data['published_at'] = $manualAt !== ''
                 ? Carbon::parse($manualAt, self::timezone())
-                : now(self::timezone());
+                : self::publicationCutoff();
             $data['queue_position'] = null;
 
             return $data;
@@ -207,7 +215,7 @@ class PublishQueue
     public static function publishNow(Post $post): Post
     {
         $post->status = Post::STATUS_PUBLISHED;
-        $post->published_at = now(self::timezone());
+        $post->published_at = self::publicationCutoff();
         $post->queue_position = null;
         $post->save();
 

@@ -20,7 +20,7 @@ class RescheduleController extends BaseController
         $at = Carbon::parse($validated['published_at'], PublishQueue::timezone());
         $status = $validated['status'] ?? Post::STATUS_SCHEDULED;
 
-        if ($status === Post::STATUS_PUBLISHED || $at->lessThanOrEqualTo(now())) {
+        if ($status === Post::STATUS_PUBLISHED || $at->lessThanOrEqualTo(PublishQueue::publicationCutoff())) {
             $post->status = Post::STATUS_PUBLISHED;
             $post->published_at = $at;
             $post->queue_position = null;

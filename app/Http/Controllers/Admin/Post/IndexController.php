@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Post;
 
 use App\Models\Post;
+use App\Support\PublishQueue;
 use Illuminate\Contracts\View\Factory as ViewFactory;
 use Illuminate\Http\Request;
 
@@ -28,7 +29,7 @@ class IndexController extends BaseController
 
         $queuePosts = Post::query()
             ->scheduled()
-            ->where('published_at', '>', now())
+            ->where('published_at', '>', PublishQueue::publicationCutoff())
             ->orderBy('published_at')
             ->get();
 

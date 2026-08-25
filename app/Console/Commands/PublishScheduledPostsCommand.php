@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Post;
+use App\Support\PublishQueue;
 use Illuminate\Console\Command;
 
 class PublishScheduledPostsCommand extends Command
@@ -15,7 +16,7 @@ class PublishScheduledPostsCommand extends Command
     {
         $posts = Post::query()
             ->scheduled()
-            ->where('published_at', '<=', now())
+            ->where('published_at', '<=', PublishQueue::publicationCutoff())
             ->orderBy('published_at')
             ->get();
 

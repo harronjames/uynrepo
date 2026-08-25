@@ -109,7 +109,15 @@ class Post extends Model
     {
         return $query
             ->where('status', self::STATUS_PUBLISHED)
-            ->where('published_at', '<=', now());
+            ->whereNotNull('published_at')
+            ->where('published_at', '<=', \App\Support\PublishQueue::publicationCutoff());
+    }
+
+    public function isPubliclyVisible(): bool
+    {
+        return $this->status === self::STATUS_PUBLISHED
+            && $this->published_at !== null
+            && $this->published_at->lessThanOrEqualTo(\App\Support\PublishQueue::publicationCutoff());
     }
 
     public function scopeScheduled(Builder $query): Builder
@@ -125,13 +133,6 @@ class Post extends Model
     public function scopePublishedStatus(Builder $query): Builder
     {
         return $query->where('status', self::STATUS_PUBLISHED);
-    }
-
-    public function isPubliclyVisible(): bool
-    {
-        return $this->status === self::STATUS_PUBLISHED
-            && $this->published_at !== null
-            && $this->published_at->lessThanOrEqualTo(now());
     }
 
     public function displayDate(): Carbon
