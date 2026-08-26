@@ -50,5 +50,6 @@ fi
 
 php artisan migrate --ansi --force
 php artisan storage:link --ansi || true
+php artisan optimize:clear --ansi || true
 
 exec "$@"
