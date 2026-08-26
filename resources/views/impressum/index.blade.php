@@ -5,17 +5,10 @@
         <h1 class="portal-post-title display-6 mb-4">Impressum / Offenlegung gemäß § 25 MedienG</h1>
 
         <h2 class="h5 mb-3">Medieninhaber und für den Inhalt verantwortlich</h2>
-        <ul class="list-unstyled mb-4">
-            <li class="mb-2">Mesut Duman</li>
-            <li class="mb-2">Wien, Österreich</li>
-            <li class="mb-0">
-                E-Mail:
-                <a href="mailto:info@umzugland.at" class="portal-inline-link">info@umzugland.at</a>
-            </li>
-        </ul>
+        @include('partials.organization-contact')
 
         @if($page->image)
-            <figure class="mb-4 text-center">
+            <figure class="mb-4 mt-4 text-center">
                 <img
                     src="{{ route('impressum.image') }}"
                     alt=""

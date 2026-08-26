@@ -19,6 +19,7 @@ class SitemapController extends Controller
             $this->entry(route('about.index'), now()->subWeek(), 'monthly', '0.6'),
             $this->entry(route('contact.index'), now()->subWeek(), 'monthly', '0.7'),
             $this->entry(route('impressum.index'), now()->subWeek(), 'yearly', '0.3'),
+            $this->entry(route('datenschutz.index'), now()->subWeek(), 'yearly', '0.3'),
         ];
 
         Category::query()

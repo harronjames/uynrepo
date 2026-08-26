@@ -37,7 +37,7 @@
             <div class="col-lg-3">
                 <h2 class="h6 text-white text-uppercase mb-3">Fragen?</h2>
                 <p class="text-secondary mb-2">Inhaltliche Rückfragen gerne per E-Mail.</p>
-                <a href="mailto:info@umzugland.at" class="portal-inline-link-light">info@umzugland.at</a>
+                <a href="mailto:{{ config('seo.organization.email') }}" class="portal-inline-link-light">{{ config('seo.organization.email') }}</a>
             </div>
         </div>
 
@@ -45,6 +45,8 @@
             © {{ date('Y') }} Umzugland.at. Alle Rechte vorbehalten.
             <span class="mx-2">·</span>
             <a href="{{ route('impressum.index') }}" class="portal-inline-link-light">Impressum</a>
+            <span class="mx-2">·</span>
+            <a href="{{ route('datenschutz.index') }}" class="portal-inline-link-light">Datenschutz</a>
             <span class="mx-2">·</span>
             <a href="{{ route('seo.sitemap') }}" class="portal-inline-link-light">Sitemap</a>
         </div>

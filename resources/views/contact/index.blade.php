@@ -12,7 +12,7 @@
             <div class="col-md-6">
                 <div class="portal-card h-100">
                     <h2 class="h6 text-uppercase text-muted mb-3">E-Mail für Fragen</h2>
-                    <a href="mailto:info@umzugland.at" class="portal-inline-link">info@umzugland.at</a>
+                    <a href="mailto:{{ config('seo.organization.email') }}" class="portal-inline-link">{{ config('seo.organization.email') }}</a>
                     <p class="text-muted small mt-3 mb-0">
                         Bitte beachten Sie: Umzugland.at ist ein Informationsportal und bietet keine
                         kostenpflichtigen Dienstleistungen oder Verkaufsangebote an.

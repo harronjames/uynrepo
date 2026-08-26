@@ -94,7 +94,7 @@ class UmzuglandContentSeeder extends Seeder
 <h2>Über Umzugland.at</h2>
 <p>Umzugland.at ist ein redaktionelles Informationsportal. Wir erklären Themen rund um Wohnungswechsel, Entrümpelung, Sperrmüll und praktische Fragen des Lebens in Wien und Österreich – verständlich, strukturiert und mit lokalem Fokus.</p>
 <p>Wir verkaufen keine Dienstleistungen und nehmen keine Aufträge entgegen. Unser Ziel ist Orientierung: Checklisten, Kostenfaktoren, Behördenwege und typische Fallstricke, damit Sie fundierte Entscheidungen treffen können.</p>
-<p>Haben Sie Rückfragen zu einem Artikel? Schreiben Sie an <a href="mailto:info@umzugland.at">info@umzugland.at</a>.</p>
+<p>Haben Sie Rückfragen zu einem Artikel? Schreiben Sie an <a href="mailto:office@umzugland.at">office@umzugland.at</a>.</p>
 
 <h2>Was Sie hier finden</h2>
 <ul>
@@ -123,8 +123,8 @@ HTML,
                 'content'          => '',
                 'image'            => null,
                 'meta_title'       => 'Impressum – Umzugland.at',
-                'meta_description' => 'Impressum und Haftungsausschluss von Umzugland.at – Medieninhaber Mesut Duman, Wien.',
-                'meta_keywords'    => 'Impressum, Umzugland.at, Haftungsausschluss',
+                'meta_description' => 'Impressum von Umzugland.at – Mesut Duman, Heigerleinstraße 23, 1160 Wien. Kontakt: office@umzugland.at',
+                'meta_keywords'    => 'Impressum, Umzugland.at, Mesut Duman, Wien',
             ]
         );
     }
@@ -414,7 +414,7 @@ HTML,
 
 <h2>Fazit</h2>
 <p>Eine Küche umzuziehen ist in Wien planbar – wenn Maße, Anschlüsse und Transportwege vor der ersten Schraube klar sind. Wer Demontage, Sicherung und Einbau als eigenen Projektblock behandelt, spart Reparaturen und Nerven.</p>
-<p><strong>Fragen zum Küchenumzug?</strong> Schreiben Sie uns an <a href="mailto:info@umzugland.at">info@umzugland.at</a> – Umzugland.at ist ein Informationsportal und beantwortet gerne inhaltliche Rückfragen.</p>
+<p><strong>Fragen zum Küchenumzug?</strong> Schreiben Sie uns an <a href="mailto:office@umzugland.at">office@umzugland.at</a> – Umzugland.at ist ein Informationsportal und beantwortet gerne inhaltliche Rückfragen.</p>
 HTML,
             ],
             [
@@ -488,7 +488,7 @@ HTML,
 
 <h2>Fazit</h2>
 <p>Eine saubere Wohnungsübergabe in Wien ist vor allem Dokumentation: leer übergeben, alles schriftlich festhalten, Mängel konkret benennen und die Kaution aktiv nachverfolgen. Wer vorbereitet in den Termin geht, steht deutlich besser da.</p>
-<p><strong>Vor der Übergabe noch Fragen?</strong> Schreiben Sie an <a href="mailto:info@umzugland.at">info@umzugland.at</a>. Umzugland.at bietet Ratgeber – keine Verkaufs- oder Räumungsdienstleistungen.</p>
+<p><strong>Vor der Übergabe noch Fragen?</strong> Schreiben Sie an <a href="mailto:office@umzugland.at">office@umzugland.at</a>. Umzugland.at bietet Ratgeber – keine Verkaufs- oder Räumungsdienstleistungen.</p>
 HTML,
             ],
             [
@@ -574,7 +574,7 @@ HTML,
 
 <h2>Fazit</h2>
 <p>Günstiger Möbeltransport in Wien heißt nicht automatisch Sprinter-Miete. Firma, Miete und Eigenregie haben klare Einsatzgebiete. Wer Volumen, Zugang und Risiko ehrlich bewertet, spart am Ende Geld – nicht nur am Angebotstext.</p>
-<p><strong>Fragen zum Möbeltransport?</strong> Inhaltliche Rückfragen gerne an <a href="mailto:info@umzugland.at">info@umzugland.at</a>. Umzugland.at ist ein Ratgeberportal ohne Transportangebot.</p>
+<p><strong>Fragen zum Möbeltransport?</strong> Inhaltliche Rückfragen gerne an <a href="mailto:office@umzugland.at">office@umzugland.at</a>. Umzugland.at ist ein Ratgeberportal ohne Transportangebot.</p>
 HTML,
             ],
             [
@@ -647,7 +647,7 @@ HTML,
 
 <h2>Fazit</h2>
 <p>Sperrmüll in Wien richtig zu entsorgen heißt: MA-48-Wege nutzen, trennen, nicht illegal abstellen. Selbst zum Mistplatz ist günstig bei kleinem Volumen; bei vollen Kellern und Zeitdruck ist die Abholung die sauberere Lösung – auch für die Kaution bei der Wohnungsübergabe.</p>
-<p><strong>Fragen zur Sperrmüllentsorgung?</strong> Schreiben Sie an <a href="mailto:info@umzugland.at">info@umzugland.at</a>. Umzugland.at informiert – wir verkaufen keine Abholservices.</p>
+<p><strong>Fragen zur Sperrmüllentsorgung?</strong> Schreiben Sie an <a href="mailto:office@umzugland.at">office@umzugland.at</a>. Umzugland.at informiert – wir verkaufen keine Abholservices.</p>
 HTML,
             ],
         ];

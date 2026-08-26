@@ -5,6 +5,7 @@ use App\Http\Controllers\Seo\RobotsController;
 use App\Http\Controllers\Seo\SitemapController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ImpressumController;
+use App\Http\Controllers\DatenschutzController;
 use App\Http\Controllers\Admin\Page\EditImpressumController;
 use App\Http\Controllers\Admin\Page\UpdateImpressumController;
 use App\Http\Controllers\Admin\Category\CreateController as AdminCategoryCreateController;
@@ -84,6 +85,7 @@ Route::prefix('about')->group(function () {
 
 Route::get('/impressum', ImpressumController::class)->name('impressum.index');
 Route::get('/impressum/media', [ImpressumController::class, 'image'])->name('impressum.image');
+Route::get('/datenschutz', DatenschutzController::class)->name('datenschutz.index');
 
 Route::prefix('themen')->group(function () {
     Route::get('/', CategoryIndexController::class)->name('category.index');

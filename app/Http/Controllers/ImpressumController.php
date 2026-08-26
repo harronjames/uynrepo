@@ -4,30 +4,31 @@ namespace App\Http\Controllers;
 
 use App\Models\Page;
 use App\Support\SeoPayload;
-use Symfony\Component\HttpFoundation\Response;
+use App\Support\StructuredData;
 use Illuminate\Contracts\View\Factory as ViewFactory;
+use Illuminate\Contracts\View\View;
 
 class ImpressumController extends Controller
 {
-    public function __invoke(ViewFactory $view_factory): Response
+    public function __invoke(ViewFactory $view_factory): View
     {
         $page = Page::query()->where('slug', 'impressum')->firstOrFail();
         $seo = SeoPayload::forPage($page);
 
-        $html = $view_factory->make('impressum.index', [
+        return $view_factory->make('impressum.index', [
             'page'        => $page,
             'seo'         => $seo,
             'breadcrumbs' => [
                 ['label' => 'Startseite', 'url' => route('main.index')],
                 ['label' => $page->title, 'url' => null],
             ],
-        ])->render();
-
-        return response($html, 200)
-            ->header('Content-Type', 'text/html; charset=UTF-8');
+            'structuredData' => [
+                StructuredData::webPage($seo['title'], $seo['description'], $seo['canonical'], 'WebPage'),
+            ],
+        ]);
     }
 
-    public function image(): Response
+    public function image(): \Symfony\Component\HttpFoundation\Response
     {
         $page = Page::query()->where('slug', 'impressum')->firstOrFail();
 
@@ -35,8 +36,6 @@ class ImpressumController extends Controller
             abort(404);
         }
 
-        // $page->image genelde "/storage/..." olarak saklanıyor; bazen de tam URL olabiliyor.
-        // parse_url() relative path için null döndürebileceğinden daha güvenli normalize ediyoruz.
         $stored = (string) $page->image;
         $path = $stored;
 
@@ -44,7 +43,7 @@ class ImpressumController extends Controller
             $path = (string) (parse_url($path, PHP_URL_PATH) ?? '');
         }
 
-        $path = ltrim($path, '/'); // storage/... şekline getir
+        $path = ltrim($path, '/');
 
         if (str_starts_with($path, 'storage/')) {
             $path = substr($path, strlen('storage/'));

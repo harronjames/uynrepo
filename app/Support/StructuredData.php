@@ -11,19 +11,43 @@ class StructuredData
     public static function organization(): array
     {
         $siteUrl = config('seo.site_url');
+        $org = config('seo.organization');
 
-        return [
+        $schema = [
             '@type'       => 'Organization',
             '@id'         => $siteUrl . '#organization',
-            'name'        => config('seo.organization.name'),
+            'name'        => $org['name'],
             'url'         => $siteUrl,
-            'email'       => config('seo.organization.email'),
-            'description' => config('seo.organization.description'),
+            'email'       => $org['email'],
+            'description' => $org['description'],
             'areaServed'  => [
                 '@type' => 'Country',
                 'name'  => 'Österreich',
             ],
         ];
+
+        if (! empty($org['telephone'])) {
+            $schema['telephone'] = $org['telephone'];
+        }
+
+        if (! empty($org['address'])) {
+            $schema['address'] = [
+                '@type'           => 'PostalAddress',
+                'streetAddress'   => $org['address']['street'],
+                'postalCode'      => $org['address']['postal_code'],
+                'addressLocality' => $org['address']['locality'],
+                'addressCountry'  => $org['address']['country'],
+            ];
+        }
+
+        if (! empty($org['owner'])) {
+            $schema['founder'] = [
+                '@type' => 'Person',
+                'name'  => $org['owner'],
+            ];
+        }
+
+        return $schema;
     }
 
     public static function localBusiness(): array

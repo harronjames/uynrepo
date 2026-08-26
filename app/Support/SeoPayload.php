@@ -74,9 +74,10 @@ class SeoPayload
     public static function forPage(Page $page, ?string $canonical = null): array
     {
         $canonical ??= match ($page->slug) {
-            'about'     => route('about.index'),
-            'impressum' => route('impressum.index'),
-            default     => url('/' . ltrim($page->slug, '/')),
+            'about'       => route('about.index'),
+            'impressum'   => route('impressum.index'),
+            'datenschutz' => route('datenschutz.index'),
+            default       => url('/' . ltrim($page->slug, '/')),
         };
 
         $payload = $page->toSeoPayload($canonical);
@@ -90,11 +91,23 @@ class SeoPayload
 
     public static function forContact(): array
     {
+        $email = config('seo.organization.email', 'office@umzugland.at');
+
         return [
             'title'       => 'Kontakt – Umzugland.at',
-            'description' => 'Fragen zu unseren Ratgebern? Schreiben Sie an info@umzugland.at. Umzugland.at ist ein Informationsportal ohne Verkauf oder Dienstleistungen.',
-            'keywords'    => 'Kontakt Umzugland, info@umzugland.at, Ratgeber Wien Fragen',
+            'description' => "Fragen zu unseren Ratgebern? Schreiben Sie an {$email}. Umzugland.at ist ein Informationsportal ohne Verkauf oder Dienstleistungen.",
+            'keywords'    => 'Kontakt Umzugland, office@umzugland.at, Ratgeber Wien Fragen',
             'canonical'   => route('contact.index'),
+        ];
+    }
+
+    public static function forDatenschutz(): array
+    {
+        return [
+            'title'       => 'Datenschutzerklärung – Umzugland.at',
+            'description' => 'Datenschutzerklärung von Umzugland.at: Informationen zur Verarbeitung personenbezogener Daten gemäß DSGVO.',
+            'keywords'    => 'Datenschutz, DSGVO, Umzugland.at, Datenschutzerklärung',
+            'canonical'   => route('datenschutz.index'),
         ];
     }
 }

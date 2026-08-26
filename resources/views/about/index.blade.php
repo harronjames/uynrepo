@@ -21,7 +21,7 @@
         </p>
         <p>
             Haben Sie Rückfragen zu einem Artikel? Schreiben Sie an
-            <a href="mailto:info@umzugland.at" class="portal-inline-link">info@umzugland.at</a>.
+            <a href="mailto:{{ config('seo.organization.email') }}" class="portal-inline-link">{{ config('seo.organization.email') }}</a>.
         </p>
 
         <h2>Was Sie hier finden</h2>

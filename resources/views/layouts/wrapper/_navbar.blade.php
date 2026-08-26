@@ -10,8 +10,8 @@
             </div>
 
             <div class="portal-header-cta text-md-end">
-                <a href="mailto:info@umzugland.at" class="btn btn-primary rounded-pill px-4">
-                    Fragen an info@umzugland.at
+                <a href="mailto:{{ config('seo.organization.email') }}" class="btn btn-primary rounded-pill px-4">
+                    Fragen an {{ config('seo.organization.email') }}
                 </a>
             </div>
         </div>
