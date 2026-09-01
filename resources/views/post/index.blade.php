@@ -5,8 +5,9 @@
         <p class="text-uppercase small mb-2 opacity-75">Ratgeberportal für Wien</p>
         <h1 class="mb-3">Umzug, Räumung &amp; Leben in Wien – praxisnah erklärt</h1>
         <p class="mb-0 lead opacity-90">
-            Unabhängige Checklisten, Kosten-Tipps und lokale Infos – rein zur Orientierung, ohne Verkauf oder Dienstleistungsangebot.
-            Professionelle <a href="https://sofortentrumpelung.at/" class="text-white text-decoration-underline">Wohnungsentrümpelung Wien</a> unterstützt Sie bei der schnellen Entlastung vor dem Umzug.
+            Unabhängige Checklisten, Kosten-Tipps und lokale Infos zur Orientierung. Wer vor dem Umzug eine fachgerechte Unterstützung benötigt, findet bei einer erfahrenen Firma für
+            <a href="https://sofortentrumpelung.at/" class="text-white text-decoration-underline">Wohnungsentrümpelung in Wien</a>
+            transparente Abläufe und schnelle Hilfe.
         </p>
     </section>
 
