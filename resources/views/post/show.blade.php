@@ -26,8 +26,28 @@
         @endif
 
         <div class="article-body" itemprop="articleBody">
-            {!! $post->safeContent() !!}
+            {!! $post->linkedContent() !!}
         </div>
+
+        @if($post->categories->isNotEmpty())
+            <nav class="mt-4 pt-4 border-top" aria-label="Themen-Übersicht">
+                <h2 class="h6 text-uppercase text-muted mb-3">Weiterführende Themen</h2>
+                <ul class="list-unstyled mb-0">
+                    @foreach($post->categories as $category)
+                        <li class="mb-2">
+                            <a href="{{ route('category.post.index', $category) }}" class="portal-inline-link">
+                                Alle Ratgeber zu {{ $category->title }} <i class="bi bi-arrow-right-short"></i>
+                            </a>
+                        </li>
+                    @endforeach
+                    <li>
+                        <a href="{{ route('category.index') }}" class="portal-inline-link">
+                            Alle Themen auf Umzugland.at <i class="bi bi-arrow-right-short"></i>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        @endif
 
         @if($tags->isNotEmpty())
             <footer class="mt-4 pt-4 border-top">

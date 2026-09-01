@@ -64,20 +64,40 @@ class PostController extends Controller
         $tags = $post->tags;
 
         $categoryIds = $post->categories->pluck('id');
+        $tagIds = $post->tags->pluck('id');
 
         $relatedPosts = Post::query()
             ->publiclyVisible()
             ->with('categories')
             ->where('id', '!=', $post->id)
             ->when(
-                $categoryIds->isNotEmpty(),
-                fn ($query) => $query->whereHas(
-                    'categories',
-                    fn ($categoryQuery) => $categoryQuery->whereIn('categories.id', $categoryIds)
-                )
+                $tagIds->isNotEmpty() || $categoryIds->isNotEmpty(),
+                function ($query) use ($tagIds, $categoryIds): void {
+                    $query->where(function ($inner) use ($tagIds, $categoryIds): void {
+                        if ($categoryIds->isNotEmpty()) {
+                            $inner->whereHas(
+                                'categories',
+                                fn ($categoryQuery) => $categoryQuery->whereIn('categories.id', $categoryIds)
+                            );
+                        }
+
+                        if ($tagIds->isNotEmpty()) {
+                            $inner->orWhereHas(
+                                'tags',
+                                fn ($tagQuery) => $tagQuery->whereIn('tags.id', $tagIds)
+                            );
+                        }
+                    });
+                }
             )
+            ->withCount([
+                'tags as shared_tags_count' => fn ($query) => $query->whereIn('tags.id', $tagIds),
+                'categories as shared_categories_count' => fn ($query) => $query->whereIn('categories.id', $categoryIds),
+            ])
+            ->orderByDesc('shared_tags_count')
+            ->orderByDesc('shared_categories_count')
             ->orderByDesc('published_at')
-            ->limit(3)
+            ->limit(6)
             ->get();
 
         $breadcrumbs = [

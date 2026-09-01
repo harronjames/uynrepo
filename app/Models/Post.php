@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Concerns\HasSeoMeta;
 use App\Models\Concerns\HasUniqueSlug;
 use App\Support\HtmlSanitizer;
+use App\Support\InternalLinker;
 use Carbon\Carbon;
 use Database\Factories\PostFactory;
 use Illuminate\Database\Eloquent\Builder;
@@ -193,6 +194,11 @@ class Post extends Model
     public function safeContent(): string
     {
         return HtmlSanitizer::clean((string) $this->content);
+    }
+
+    public function linkedContent(): string
+    {
+        return InternalLinker::enrich($this->safeContent(), $this);
     }
 
     /**
