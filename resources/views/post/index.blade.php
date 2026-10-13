@@ -11,6 +11,26 @@
         </p>
     </section>
 
+    <section class="portal-card mt-4 mb-4" aria-labelledby="messie-raeumung-heading">
+        <h2 id="messie-raeumung-heading" class="h5 portal-post-title mb-3">Messie-Wohnung räumen: Mit Fachwissen, Diskretion und Geduld</h2>
+        <p>
+            Eine Messie-Wohnung zu räumen ist weit mehr als eine gewöhnliche Entrümpelung. Hinter überfüllten Räumen stehen oft
+            persönliche Schicksale – und gleichzeitig drohen Schimmel, Ungeziefer und Geruchsbelastung, die Bausubstanz und
+            Nachbarschaft belasten. Entscheidend ist deshalb ein Vorgehen, das Respekt vor den Betroffenen mit klarer Organisation verbindet.
+        </p>
+        <p>
+            Spezialisierte Anbieter für
+            <a href="https://objektraeumung.at/services/messie-entruempelung" class="portal-inline-link">Messie Räumung Wien</a>
+            arbeiten diskret und in nachvollziehbaren Schritten: Zuerst werden Dokumente, Wertgegenstände und Erinnerungsstücke
+            gesichert, danach wird der Hausrat sortiert und fachgerecht über Mistplätze und Recyclingbetriebe entsorgt. Erst wenn
+            die Räume leer sind, folgen Desinfektion und Geruchsneutralisierung.
+        </p>
+        <p class="mb-0">
+            Für Angehörige, Vermieter und Hausverwaltungen lohnt es sich, vorab eine Besichtigung mit Fixpreis zu vereinbaren.
+            So bleiben Kosten und Zeitplan überschaubar, und die Wohnung kann zügig wieder bewohnt, übergeben oder renoviert werden.
+        </p>
+    </section>
+
     @include('post.index.latest_posts')
     @include('post.index.liked_posts')
 @endsection
