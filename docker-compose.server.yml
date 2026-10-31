@@ -1,0 +1,99 @@
+# ==============================================================================
+# COPYRIGHT & PROPRIETARY NOTICE
+# ==============================================================================
+# Author & Sole Developer: İsmail İşler
+# Copyright (c) 2026 İsmail İşler. All Rights Reserved.
+#
+# NOTICE: All Docker images, compiled binaries, backend logic, and application
+# architectures on this server are the proprietary intellectual property of İsmail İşler.
+#
+# RESTRICTIONS:
+# Unauthorized copying, cloning, reverse engineering, redistribution, or
+# deployment of these assets on any other system or domain is strictly prohibited.
+# Any unauthorized use or commercial exploitation will result in direct legal action.
+# ==============================================================================
+#
+
+name: umzugland
+
+services:
+  app:
+    image: umzugland-client:latest
+    container_name: umzugland
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "8000:80"
+    environment:
+      APP_ENV: production
+      APP_DEBUG: "false"
+      RUN_MIGRATIONS: "1"
+      DB_HOST: db
+      DB_PORT: "3306"
+      DB_CONNECTION: mysql
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - umzugland_storage:/var/www/storage
+      - umzugland_bootstrap_cache:/var/www/bootstrap/cache
+    networks:
+      - umzugland
+
+  db:
+    image: mysql:9.1
+    container_name: umzugland-db
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: ${DB_USERNAME}
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -u$$MYSQL_USER -p$$MYSQL_PASSWORD --silent"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    ports:
+      - "3306:3306"
+    volumes:
+      - umzugland_dbdata:/var/lib/mysql
+    networks:
+      - umzugland
+
+  scheduler:
+    image: umzugland-client:latest
+    container_name: umzugland-scheduler
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      APP_ENV: production
+      APP_DEBUG: "false"
+      RUN_MIGRATIONS: "0"
+      DB_HOST: db
+      DB_PORT: "3306"
+      DB_CONNECTION: mysql
+    depends_on:
+      db:
+        condition: service_healthy
+      app:
+        condition: service_started
+    command: ["php", "artisan", "schedule:work"]
+    volumes:
+      - umzugland_storage:/var/www/storage
+      - umzugland_bootstrap_cache:/var/www/bootstrap/cache
+    networks:
+      - umzugland
+
+volumes:
+  umzugland_dbdata:
+  umzugland_storage:
+  umzugland_bootstrap_cache:
+
+networks:
+  umzugland:
+    driver: bridge
